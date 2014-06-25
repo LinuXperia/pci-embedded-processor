@@ -1,7 +1,7 @@
-Embedded Processor (PCI 2014.1 - POLI/UPE)
+Embedded Processor 
 ======================
 
-Embedded Processor implementation on FPGA
+(PCI 2014.1 - POLI/UPE)
 
 ### Machine code instruction set
 
