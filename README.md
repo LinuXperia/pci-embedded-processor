@@ -1,7 +1,7 @@
 Embedded Processor 
 ======================
 
-(PCI 2014.1 - POLI/UPE)
+PCI 2014.1 - POLI/UPE
 
 ### Machine code instruction set
 
@@ -18,6 +18,7 @@ Embedded Processor
 | SUB arg 		| 	1000 			|
 | BRANCH arg 	| 	1001 			|
 
+![Structural Model of the Microprocessor](/structural-model.png?raw=true "Structural Model of the Microprocessor")
 
 ### Processor functions package
 
