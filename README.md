@@ -3,6 +3,8 @@ Embedded Processor
 
 PCI 2014.1 - POLI/UPE
 
+> Based on: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) 
+
 ### Machine code instruction set
 
 |Command 		| Opcode (Binary) 	|
