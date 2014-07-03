@@ -1,27 +1,26 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use work.processor_functions.all;
-entity memory is
-    Port (
-        Clk : IN std_logic;
-        Nrst : IN std_logic;
-        MDR_load : IN std_logic;
-        MAR_load : IN std_logic;
-        MAR_valid : IN std_logic;
-        M_en : IN std_logic;
-        M_rw : IN std_logic;
-        MEM_bus : INOUT std_logic_vector(n-1
-        downto 0)
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE work.processor_functions.all;
+ENTITY memory IS
+    PORT (
+        Clk : IN STD_LOGIC;
+        Nrst : IN STD_LOGIC;
+        MDR_load : IN STD_LOGIC;
+        MAR_load : IN STD_LOGIC;
+        MAR_valid : IN STD_LOGIC;
+        M_en : IN STD_LOGIC;
+        M_rw : IN STD_LOGIC;
+        MEM_bus : INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
     );
-End entity memory;
+END ENTITY memory;
 
-architecture RTL of memory is
-    signal mdr : std_logic_vector(wordlen-1 downto 0);
-    signal mar : unsigned(wordlen-oplen-1 downto 0);
-begin
+ARCHITECTURE RTL OF memory IS
+    SIGNAL mdr : STD_LOGIC_VECTOR(wordlen-1 DOWNTO 0);
+    SIGNAL mar : UNSIGNED(wordlen-oplen-1 DOWNTO 0);
+BEGIN
     MEM_bus <= mdr
-    when MEM_valid = '1' else (others => 'Z');
-    process (clk, nrst) is
+    WHEN MEM_valid = '1' ELSE (others => 'Z');
+    process (clk, nrst) IS
         variable contents : memory_array;
         constant program : contents :=
         (
@@ -33,23 +32,23 @@ begin
         5 => "0000000000000000" ,
         Others => (others => '0')
         );
-    begin
-        if nrst = '0' then
+    BEGIN
+        IF nrst = '0' THEN
             mdr <= (others => '0');
             mdr <= (others => '0');
             contents := program;
-        elsif rising_edge(clk) then
-            if MAR_load = '1' then
-                mar <= unsigned(MEM_bus(n-oplen-1 downto 0));
-            elsif MDR_load = '1' then
+        ELSIF rising_edge(clk) THEN
+            IF MAR_load = '1' THEN
+                mar <= UNSIGNED(MEM_bus(n-oplen-1 DOWNTO 0));
+            ELSIF MDR_load = '1' THEN
                 mdr <= MEM_bus;
-            elsif MEM_en = '1' then
-                if MEM_rw = '0' then
+            ELSIF MEM_en = '1' THEN
+                IF MEM_rw = '0' THEN
                     mdr <= contents(to_integer(mar));
-                else
+                ELSE
                     mem(to_integer(mar)) := mdr;
-                end if;
-            end if;
-        end if;
-    end process;
-end architecture RTL;
+                END IF;
+            END IF;
+        END IF;
+    END process;
+END ARCHITECTURE RTL;
