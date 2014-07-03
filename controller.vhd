@@ -31,6 +31,7 @@ architecture RTL of controller is
     signal current_state, next_state : states;
 begin
     state_sequence: process (clk, nrst) is
+	 begin
         if nrst = '0' then
             current_state <= s0;
         else
@@ -41,8 +42,7 @@ begin
     end process state_sequence;
 
     state_machine : process ( present_state, opcode ) is
-
-    begin
+	 begin
         -- Reset all the control signals
         IR_load <= '0';
         IR_valid <= '0';

@@ -16,8 +16,8 @@ architecture RTL of ALU is
     signal ACC : std_logic_vector (n-1 downto 0);
 begin
     ALU_bus <= ACC
-        when ACC_valid  '1' else (others => 'Z');
-    ALU_zero <= '1' when acc  reg_zero else '0';
+        when ACC_valid = '1' else 'Z';
+    ALU_zero <= '1' when acc = reg_zero else '0';
     process (clk, nrst) is
     begin
         if nrst = '0' then
@@ -40,6 +40,7 @@ begin
             When "110" => ACC <= ACC + 1;
             -- Store the ACC value
             When "111" => ALU_bus <= ACC;
+				end case;
         end if;
     end process;
 end architecture RTL;

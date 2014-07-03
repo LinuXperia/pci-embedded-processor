@@ -14,9 +14,8 @@ End entity PC;
 architecture RTL of PC is
     signal counter : unsigned (n-1 downto 0);
 begin
-    PC_bus <= std_logic_vector(counter)
-                when PC_valid = '1' else (others => 
-                    'Z');
+    PC_bus <= std_logic_vector(counter) when PC_valid = '1' else 
+	 'Z';
     process (clk, nrst) is
     begin
         if nrst = '0' then
