@@ -1,32 +1,31 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use work.processor_functions.all;
-entity ir is
-    Port (
-        Clk : IN std_logic;
-        Nrst : IN std_logic;
-        IR_load : IN std_logic;
-        IR_valid : IN std_logic;
-        IR_address : IN std_logic;
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+ENTITY ir IS
+    PORT (
+        Clk : IN STD_LOGIC;
+        Nrst : IN STD_LOGIC;
+        IR_load : IN STD_LOGIC;
+        IR_valid : IN STD_LOGIC;
+        IR_address : IN STD_LOGIC;
         IR_opcode : OUT opcode;
-        IR_bus : INOUT std_logic_vector(n-1 downto 0)
+        IR_bus : INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
     );
-End entity IR;
+END ENTITY IR;
 
-architecture RTL of IR is
-    signal IR_internal : std_logic_vector (n-1 downto 0);
-begin
+ARCHITECTURE RTL OF IR IS
+    SIGNAL IR_internal : STD_LOGIC_VECTOR (n-1 DOWNTO 0);
+BEGIN
     IR_bus <= IR_internal
-        when IR_valid = '1' else (others => 'Z');
+        WHEN IR_valid = '1' ELSE (OTHERS => 'Z');
     IR_opcode <= Decode(IR_internal);
-    process (clk, nrst) is
-    begin
-        if nrst = '0' then
-            IR_internal <= (others => '0');
-        elsif rising_edge(clk) then
-            if IR_load = '1' then
+    PROCESS (clk, nrst) IS
+    BEGIN
+        IF nrst = '0' THEN
+            IR_internal <= (OTHERS => '0');
+        ELSIF rising_edge(clk) THEN
+            IF IR_load = '1' THEN
                 IR_internal <= IR_bus;
-            end if;
-        end if;
-    end process;
-end architecture RTL;
+            END IF;
+        END IF;
+    END PROCESS;
+END ARCHITECTURE RTL;
