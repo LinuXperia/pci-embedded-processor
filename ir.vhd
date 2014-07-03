@@ -1,5 +1,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+USE work.processor_functions.all;
 ENTITY ir IS
     PORT (
         Clk : IN STD_LOGIC;
