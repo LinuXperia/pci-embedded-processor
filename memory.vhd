@@ -22,7 +22,7 @@ BEGIN
     MEM_bus <= mdr WHEN MEM_valid = '1' ELSE (others => 'Z');
     process (clk, nrst) IS
         variable contents : memory_array;
-        constant program : contents :=
+        constant program : memory_array :=
         (
         0 => "0000000000000011",
         1 => "0010000000000100",
