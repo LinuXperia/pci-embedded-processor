@@ -64,7 +64,7 @@ BEGIN
             M_en <='1'; M_rw <= '1';
             Next_state <= s2;
         WHEN s2 =>
-            MDR_valid <= '1'; IR_load <= '1';
+            MDR_load <= '1'; IR_load <= '1';
             Next_state <= s3;
         WHEN s3 =>
             MAR_load <= '1'; IR_address <= '1';
