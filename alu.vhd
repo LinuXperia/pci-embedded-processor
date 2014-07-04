@@ -1,5 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
+USE ieee.std_logic_signed.all;	
 USE work.processor_functions.all;
 ENTITY alu IS
     PORT (
@@ -16,7 +18,7 @@ ARCHITECTURE RTL OF ALU IS
     SIGNAL ACC : std_logic_vector (n-1 DOWNTO 0);
 BEGIN
     ALU_bus <= ACC WHEN ALU_valid = '1' ELSE (others => 'Z');
-    ALU_zero <= '1' WHEN acc = reg_zero ELSE '0';
+    ALU_zero <= '1' WHEN unsigned(ACC) = reg_zero ELSE '0';
     PROCESS (clk, nrst) IS
     BEGIN
         IF nrst = '0' THEN
