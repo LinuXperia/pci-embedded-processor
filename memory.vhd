@@ -8,7 +8,7 @@ ENTITY memory IS
         Nrst : IN STD_LOGIC;
         MDR_load : IN STD_LOGIC;
         MAR_load : IN STD_LOGIC;
-        MAR_valid : IN STD_LOGIC;
+        MEM_valid : IN STD_LOGIC;
         M_en : IN STD_LOGIC;
         M_rw : IN STD_LOGIC;
         MEM_bus : INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
