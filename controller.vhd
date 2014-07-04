@@ -78,10 +78,10 @@ BEGIN
             MDR_load <= '1'; ALU_valid <= '1';
             Next_state <= s5;
         WHEN s5 =>
-            M_en <= '1';
+            MEM_en <= '1';
             Next_state <= s0;
         WHEN s6 =>
-            M_en <= '1'; M_rw <= '1';
+            MEM_en <= '1'; MEM_rw <= '1';
             If opcode = LOAD THEN
                 Next_state <= s7;
             ELSE
@@ -91,7 +91,7 @@ BEGIN
             MDR_valid <= '1'; ACC_load <= '1';
             Next_state <= s0;
         WHEN s8 =>
-            M_en<='1'; M_rw <= '1';
+            MEM_en<='1'; MEM_rw <= '1';
             If opcode = ADD THEN
                 Next_state <= s9;
             ELSE
