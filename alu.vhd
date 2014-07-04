@@ -15,7 +15,7 @@ END ENTITY alu;
 ARCHITECTURE RTL OF ALU IS
     SIGNAL ACC : std_logic_vector (n-1 DOWNTO 0);
 BEGIN
-    ALU_bus <= ACC WHEN ACC_valid = '1' ELSE (others => 'Z');
+    ALU_bus <= ACC WHEN ALU_valid = '1' ELSE (others => 'Z');
     ALU_zero <= '1' WHEN acc = reg_zero ELSE '0';
     PROCESS (clk, nrst) IS
     BEGIN
