@@ -1,5 +1,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
 USE work.processor_functions.all;
 ENTITY memory IS
     PORT (
@@ -18,8 +19,7 @@ ARCHITECTURE RTL OF memory IS
     SIGNAL mdr : STD_LOGIC_VECTOR(wordlen-1 DOWNTO 0);
     SIGNAL mar : UNSIGNED(wordlen-oplen-1 DOWNTO 0);
 BEGIN
-    MEM_bus <= mdr
-    WHEN MEM_valid = '1' ELSE (others => 'Z');
+    MEM_bus <= mdr WHEN MEM_valid = '1' ELSE (others => 'Z');
     process (clk, nrst) IS
         variable contents : memory_array;
         constant program : contents :=

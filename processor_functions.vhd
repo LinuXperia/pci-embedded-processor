@@ -6,6 +6,7 @@ PACKAGE processor_functions IS
     TYPE opcode IS (load, store, add, nott, andd, orr, xorr, inc, sub, branch);
     FUNCTION Decode (word: STD_LOGIC_VECTOR) RETURN opcode;
     CONSTANT n: integer := 16;
+	 CONSTANT wordlen: integer := 16;
     CONSTANT oplen: integer := 4;
     TYPE memory_array IS ARRAY (0 to 2**(n-oplen-1)) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
     CONSTANT reg_zero: unsigned (n-1 DOWNTO 0) := (OTHERS => '0');
