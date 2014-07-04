@@ -24,7 +24,7 @@ BEGIN
         IF nrst = '0' THEN
             ACC <= (others => '0');
         ELSIF rising_edge(clk) THEN
-            CASE ACC_cmd IS
+            CASE ALU_cmd IS
 					-- Load the Bus value into the accumulator
 					WHEN "000" => ACC <= ALU_bus;
 					-- Add the ACC to the Bus value
