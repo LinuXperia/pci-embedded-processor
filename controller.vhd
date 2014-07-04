@@ -20,6 +20,7 @@ ENTITY controller IS
         MAR_valid: OUT std_logic;
         MEM_en: OUT std_logic;
         MEM_rw: OUT std_logic;
+		  ALU_valid : OUT std_logic;
         ALU_cmd: OUT std_logic_vector(2 DOWNTO 0);
         CONTROL_bus: INOUT std_logic_vector(n-1 
         DOWNTO 0)
@@ -74,7 +75,7 @@ BEGIN
                 Next_state <= s6;
             END IF;
         WHEN s4 =>
-            MDR_load <= '1'; ACC_valid <= '1';
+            MDR_load <= '1'; ALU_valid <= '1';
             Next_state <= s5;
         WHEN s5 =>
             M_en <= '1';
