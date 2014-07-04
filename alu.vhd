@@ -28,7 +28,7 @@ BEGIN
 					-- Load the Bus value into the accumulator
 					WHEN "000" => ACC <= ALU_bus;
 					-- Add the ACC to the Bus value
-					WHEN "001" => ACC <= add(ACC,ALU_bus);
+					WHEN "001" => ACC <= std_logic_vector(unsigned(ACC) + unsigned(ALU_bus));
 					-- NOT the Bus value
 					WHEN "010" => ACC <= NOT ALU_bus;
 					-- OR the ACC to the Bus value
