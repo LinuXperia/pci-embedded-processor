@@ -8,6 +8,7 @@ ENTITY controller IS
     PORT (
         Clk: IN std_logic;
         Nrst: IN std_logic;
+		  opcode: IN opcode;
         IR_load: OUT std_logic;
         IR_valid: OUT std_logic;
         IR_address: OUT std_logic;
@@ -41,7 +42,6 @@ BEGIN
     END PROCESS state_sequence;
 
     state_machine: PROCESS ( current_state, opcode ) IS
-
     begin
         -- Reset all the control SIGNALs
         IR_load <= '0';
@@ -53,8 +53,8 @@ BEGIN
         MDR_load <= '0';
         MAR_load <= '0';
         MAR_valid <= '0';
-        M_en <= '0';
-        M_rw <= '0';
+        MEM_en <= '0';
+        MEM_rw <= '0';
         Case current_state IS
         WHEN s0 =>
             PC_valid <= '1'; MAR_load <= '1';
@@ -68,10 +68,10 @@ BEGIN
             Next_state <= s3;
         WHEN s3 =>
             MAR_load <= '1'; IR_address <= '1';
-            If opcode = STORE THEN
+            If (opcode = store) THEN
                 Next_state <= s4;
             ELSE
-                Next_state <=s6;
+                Next_state <= s6;
             END IF;
         WHEN s4 =>
             MDR_load <= '1'; ACC_valid <= '1';
