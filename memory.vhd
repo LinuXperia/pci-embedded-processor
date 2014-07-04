@@ -46,7 +46,7 @@ BEGIN
                 IF MEM_rw = '0' THEN
                     mdr <= contents(to_integer(mar));
                 ELSE
-                    mem(to_integer(mar)) := mdr;
+                    contents(to_integer(mar)) := mdr;
                 END IF;
             END IF;
         END IF;
