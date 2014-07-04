@@ -40,7 +40,7 @@ BEGIN
         END IF;
     END PROCESS state_sequence;
 
-    state_machine: PROCESS ( present_state, opcode ) IS
+    state_machine: PROCESS ( current_state, opcode ) IS
 
     begin
         -- Reset all the control SIGNALs
