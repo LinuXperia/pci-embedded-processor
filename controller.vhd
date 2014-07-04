@@ -16,11 +16,13 @@ ENTITY controller IS
         PC_load: OUT std_logic;
         PC_valid: OUT std_logic;
         MDR_load: OUT std_logic;
+		  MDR_valid: OUT std_logic;
         MAR_load: OUT std_logic;
         MAR_valid: OUT std_logic;
         MEM_en: OUT std_logic;
         MEM_rw: OUT std_logic;
 		  ALU_valid : OUT std_logic;
+		  ALU_load : OUT std_logic;
         ALU_cmd: OUT std_logic_vector(2 DOWNTO 0);
         CONTROL_bus: INOUT std_logic_vector(n-1 
         DOWNTO 0)
@@ -52,6 +54,7 @@ BEGIN
         PC_load <= '0';
         PC_valid <= '0';
         MDR_load <= '0';
+		  MDR_valid <= '0';
         MAR_load <= '0';
         MAR_valid <= '0';
         MEM_en <= '0';
@@ -88,7 +91,7 @@ BEGIN
                 Next_state <= s8;
             END IF;
         WHEN s7 =>
-            MDR_valid <= '1'; ACC_load <= '1';
+            MDR_valid <= '1'; ALU_load <= '1';
             Next_state <= s0;
         WHEN s8 =>
             MEM_en<='1'; MEM_rw <= '1';
