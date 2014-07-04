@@ -1,37 +1,36 @@
-Library ieee;
-Use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.numeric_std.all;
+USE ieee.std_logic_1164.all;
 
-Package processor_functions is
-    Type opcode is (load, store, add, nott, andd, orr, 
+PACKAGE processor_functions IS
+    TYPE opcode IS (load, store, add, nott, andd, orr, 
         xorr, inc, sub, branch);
-    Function Decode (word : std_logic_vector) return 
-        opcode;
-    Constant n : integer := 16;
-    Constant oplen : integer := 4;
-    Type memory_array is array (0 to 2**(n-oplen-1) )
-        of Std_logic_vector(n-1 downto 0);
-    Constant reg_zero : unsigned (n-1 downto 0) :=
-        (others => '0');
-End package processor_functions;
+    FUNCTION Decode (word: std_logic_vector) RETURN opcode;
+    CONSTANT n: integer := 16;
+    CONSTANT oplen: integer := 4;
+    TYPE memory_array IS ARRAY (0 to 2**(n-oplen-1) )
+        of Std_logic_vector(n-1 DOWNTO 0);
+    CONSTANT reg_zero: unsigned (n-1 DOWNTO 0) :=
+        (OTHERS => '0');
+END PACKAGE processor_functions;
 
-Package body processor_functions is
-    Function Decode (word : std_logic_vector) return 
-        opcode is
-            Variable opcode_out : opcode;
-    Begin
-        Case word(n-1 downto n-oplen-1) is
-            When "0000" => opcode_out := load;
-            When "0001" => opcode_out := store;
-            When "0010" => opcode_out := add;
-            When "0011" => opcode_out := nott;
-            When "0100" => opcode_out := andd;
-            When "0101" => opcode_out := orr;
-            When "0110" => opcode_out := xorr;
-            When "0111" => opcode_out := inc;
-            When "1000" => opcode_out := sub;
-            When "1001" => opcode_out := branch;
-            When others => null;
-        End case;
-        Return opcode_out;
-    End function decode;
-End package body processor_functions;
+PACKAGE BODY processor_functions IS
+    FUNCTION Decode (word: std_logic_vector) return opcode IS
+        VARIABLE opcode_out: opcode;
+    BEGIN
+        CASE word(n-1 DOWNTO n-oplen-1) IS
+            WHEN "0000" => opcode_out := load;
+            WHEN "0001" => opcode_out := store;
+            WHEN "0010" => opcode_out := add;
+            WHEN "0011" => opcode_out := nott;
+            WHEN "0100" => opcode_out := andd;
+            WHEN "0101" => opcode_out := orr;
+            WHEN "0110" => opcode_out := xorr;
+            WHEN "0111" => opcode_out := inc;
+            WHEN "1000" => opcode_out := sub;
+            WHEN "1001" => opcode_out := branch;
+            WHEN OTHERS => null;
+        END CASE;
+        RETURN opcode_out;
+    END FUNCTION decode;
+END PACKAGE BODY processor_functions;
