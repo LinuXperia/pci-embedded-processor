@@ -1,6 +1,19 @@
 Embedded Processor 
 ======================
 
+------
+
+Simulações:
+
+ * PC: Ok!
+ * IR: Pendente.
+ * ALU: Pendente.
+ * RAM: Pendente.
+ * UC: Pendente.
+ * CPU: Pendente.
+
+-------
+
 PCI 2014.1 - POLI/UPE
 
 > Based on: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) 
