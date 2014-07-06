@@ -41,3 +41,23 @@ Todos devem ser std logic, com exceção do PC_bus, que é std logic vector.
 Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser colocada em Z imediatamente. Se reset for para 0, o valor do PC deve ir para 0.
 
 Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem de precedência. Isto é, se inc estiver em nível alto, não importa se load também está, deve ser realizado o incremento. Se inc estiver em nível baixo, verifica-se se load está em nível alto. Se estiver, carrega-se o valor do bus no PC. 
+
+
+### IR
+
+TODO
+
+
+### ALU
+
+TODO
+
+
+### Memória
+
+TODO
+
+
+### Unidade de Controle
+
+TODO
