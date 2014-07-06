@@ -45,3 +45,4 @@ timing/
 testbench/
 *_sim/
 *.bak
+*.temp
