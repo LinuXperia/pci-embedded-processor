@@ -110,26 +110,40 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 
 * Clock;
 * Reset ativo em 0;
-* Opcode
-* IR_load
-* IR_valid
-* IR_address
-* PC_inc
-* PC_load
-* PC_valid
-* MDR_load
-* MDR_valid
-* MAR_load
-* MAR_valid
-* MEM_en
-* MEM_rw
-* ALU_valid
-* ALU_load
-* ALU_cmd
-* CONTROL_bus
+* Opcode;
+* IR_load;
+* IR_valid;
+* IR_address;
+* PC_inc;
+* PC_load;
+* PC_valid;
+* MDR_load;
+* MDR_valid;
+* MAR_load;
+* MAR_valid;
+* MEM_en;
+* MEM_rw;
+* ALU_valid;
+* ALU_load;
+* ALU_cmd;
+* CONTROL_bus;
 
 A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.
 
 ![Basic Processor Controller State Machine](/controller-state-machine.png?raw=true "Basic Processor Controller State Machine")
+
+| Estado 		| Descrição |
+|-------------|----------|
+| s0 | Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento no MAR. |
+| s1 | Busca de instrução: ativa memória para R/W e configura para escrita. |
+| s2 | Busca de instrução/Decodificação: Valor do barramento é armazenado no IR e  MDR. |
+| s3 | Reset das flags MAR e IR?? |
+| s4 | Se a instrução for de STORE,  |
+| s5 |  |
+| s6 |  |
+| s7 | Se a instrução for de LOAD, |
+| s8 |  |
+| s9 | Se a instrução for de ADD, |
+| s10 | Se a instrução for de SUB, |
 
 
