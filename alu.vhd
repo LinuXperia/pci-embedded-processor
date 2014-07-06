@@ -57,7 +57,7 @@ BEGIN
 				WHEN "110" => ACC <= ACC + 1;
 				
 				-- Armazena o valor do ACC no barramento (BUS = ACC). TODO/FIXME PRECISA?
-				WHEN "111" => ALU_bus <= ACC;
+				WHEN "111" => ACC <= ACC;
 			END CASE;
 		END IF;
 	END PROCESS;
