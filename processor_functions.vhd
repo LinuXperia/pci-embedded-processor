@@ -16,7 +16,7 @@ PACKAGE BODY processor_functions IS
     FUNCTION Decode (word: STD_LOGIC_VECTOR) return opcode IS
         VARIABLE opcode_out: opcode;
     BEGIN
-        CASE word(n-1 DOWNTO n-oplen-1) IS
+        CASE word(n-1 DOWNTO n-oplen) IS
             WHEN "0000" => opcode_out := load;
             WHEN "0001" => opcode_out := store;
             WHEN "0010" => opcode_out := add;
