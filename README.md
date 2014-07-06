@@ -49,9 +49,9 @@ O módulo do PC deve conter 7 'pinos':
 * Clock;
 * Reset;
 * IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);
-* IR_valid
+* IR_valid (flag que indica se o IR está em operação);
 * IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);
-* IR_opcode
+* IR_opcode (saída com o opcode decodificado);
 * IR_bus (interface para o barramento interno);
 
 A função do IR é decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
