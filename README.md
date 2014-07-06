@@ -45,8 +45,20 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 ### IR
 
-TODO
+O módulo do PC deve conter 7 'pinos':
+* Clock;
+* Reset;
+* IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);
+* IR_valid
+* IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);
+* IR_opcode
+* IR_bus (interface para o barramento interno);
 
+A função do IR é decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
+
+Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser colocada em Z imediatamente. Se reset for para 0, o valor do registrador interno deve ir para 0s.
+
+Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para o registrador interno e o opcode de saída deve ser decodificado assincronamente quando o valor no IR mudar.
 
 ### ALU
 
