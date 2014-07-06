@@ -23,7 +23,6 @@ BEGIN
 	
 	PROCESS (clk, nrst) IS
 	BEGIN
-	
 		-- De forma assincrona, se o reset ficar em ni­vel 0, volta o contador pra 0
 		IF nrst = '0' THEN
 			counter <= 0;
