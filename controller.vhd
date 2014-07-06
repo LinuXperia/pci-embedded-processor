@@ -34,16 +34,20 @@ ARCHITECTURE RTL OF controller IS
         (s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10);
     SIGNAL current_state, next_state: states;
 BEGIN
+	-- processo que gerencia a transição do current_state para o next_state
+	--  e a confição de reset
     state_sequence: PROCESS (clk, nrst) BEGIN
-        IF nrst = '0' THEN
+        IF nrst = '0' THEN -- reset assíncrono
             current_state <= s0;
         ELSE
-            IF rising_edge(clk) THEN
+            IF rising_edge(clk) THEN -- mudança de estado é síncrona
                 current_state <= next_state;
             END IF;
         END IF;
     END PROCESS state_sequence;
 
+	 -- espera a mudança de estado ou opcode
+	 -- processo que de fato mudam os sinais de controle conforme a transição
     state_machine: PROCESS ( current_state, opcode ) IS
     begin
         -- Reset all the control SIGNALs

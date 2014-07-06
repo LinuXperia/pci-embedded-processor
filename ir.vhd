@@ -7,7 +7,7 @@ ENTITY ir IS
         Nrst : IN STD_LOGIC; -- reset ativo em zero
         IR_load : IN STD_LOGIC; -- indica se o IR está no modo load
         IR_valid : IN STD_LOGIC; -- indica se o IR está ativo
-        IR_address : IN STD_LOGIC; -- indica se o IR está no modo address
+        IR_address : IN STD_LOGIC; -- indica se o IR está no modo address (não utilizado pois é o modo padrao)
         IR_opcode : OUT opcode; -- sinal de saida com o opcode decodificado
         IR_bus : INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0) -- acesso ao barramento externo
     );

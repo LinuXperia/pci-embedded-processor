@@ -22,10 +22,6 @@ PCI 2014.1 - POLI/UPE
 
 ![Structural Model of the Microprocessor](/structural-model.png?raw=true "Structural Model of the Microprocessor")
 
-### Controller machine state
-
-![Basic Processor Controller State Machine](/controller-state-machine.png?raw=true "Basic Processor Controller State Machine")
-
 ### PC
 
 O módulo do PC deve conter 6 'pinos':
@@ -96,4 +92,31 @@ TODO
 
 ### Unidade de Controle
 
-TODO
+A função da Unidade de Controle é acessar o PC, pegar a instrução da memória, mover os dados quando necessário, configurando todos os sinais de controle no momento certo e com os valores corretos.
+Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o barramento global e saídas com todos sinais de controle:
+
+* Clock;
+* Reset ativo em 0;
+* Opcode
+* IR_load
+* IR_valid
+* IR_address
+* PC_inc
+* PC_load
+* PC_valid
+* MDR_load
+* MDR_valid
+* MAR_load
+* MAR_valid
+* MEM_en
+* MEM_rw
+* ALU_valid
+* ALU_load
+* ALU_cmd
+* CONTROL_bus
+
+A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.
+
+![Basic Processor Controller State Machine](/controller-state-machine.png?raw=true "Basic Processor Controller State Machine")
+
+
