@@ -5,8 +5,8 @@ Embedded Processor
 
 Simulações:
 
- * PC: Ok!
- * IR: Pendente.
+ * PC: OK!
+ * IR: OK!
  * ALU: Pendente.
  * RAM: Pendente.
  * UC: Pendente.
