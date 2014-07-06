@@ -91,8 +91,21 @@ _Qual a necessidade do comando 111?_
 
 ### Memória
 
-TODO
+O módulo de ALU deve conter 8 'pinos':
+* Clock;
+* Reset ativo em 0;
+* Ativação de carregamento do registrador MDR (MDR_load, MDR = Memory Data Register);
+* Ativação de carregamento do registrador MAR (MAR_load, MAR = Memory Address Register);
+* Ler (MEM_valid, manda o valor lido na memória (registrador MDR) para o MEM_bus quando ativo, ou Z quando inativo);
+* Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);
+* Flag de ativação da memória (MEM_en);
+* Flag de indicação de escrita ou leituar (MEM_rw, onde '0' indica leitura e '1' escrita);
 
+O bloco de memória tem 3 partes:
+* Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);
+* Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;
+* Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.
+ 
 
 ### Unidade de Controle
 
