@@ -1,8 +1,10 @@
+---- Program Counter ---------------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.numeric_std.all;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_signed.all;	
 USE work.processor_functions.all;
+------------------------------------------------------------------------------------------------------------------
 ENTITY pc IS
 	PORT (clk, nrst: IN STD_LOGIC; -- reset ativo em zero
 				PC_inc: IN STD_LOGIC; -- sinal que indica que o PC deve ser incrementado
@@ -10,7 +12,7 @@ ENTITY pc IS
 				PC_valid: IN STD_LOGIC; -- sinal que indica que o valor de PC deve ser colocado em PC_bus (ou Z se 0)
 				PC_bus: INOUT STD_LOGIC_VECTOR(n-1  DOWNTO 0)); -- barramento de entrada/saida
 END ENTITY pc;
-
+------------------------------------------------------------------------------------------------------------------
 ARCHITECTURE rtl OF pc IS
 	SIGNAL counter: INTEGER RANGE 0 to 2**n -1; -- contador em si
 BEGIN
@@ -37,3 +39,4 @@ BEGIN
 		END IF;
 	END PROCESS;
 END ARCHITECTURE rtl;
+------------------------------------------------------------------------------------------------------------------
