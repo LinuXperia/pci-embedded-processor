@@ -41,7 +41,7 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 ### IR
 
-O módulo do PC deve conter 7 'pinos':
+O módulo do IR deve conter 7 'pinos':
 * Clock;
 * Reset;
 * IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);
@@ -87,7 +87,7 @@ _Qual a necessidade do comando 111?_
 
 ### Memória
 
-O módulo de ALU deve conter 8 'pinos':
+O módulo de memória deve conter 8 'pinos':
 * Clock;
 * Reset ativo em 0;
 * Ativação de carregamento do registrador MDR (MDR_load, MDR = Memory Data Register);
