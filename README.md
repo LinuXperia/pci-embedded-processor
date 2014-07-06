@@ -135,7 +135,7 @@ A Unidade de controle pode ser implementada por uma máquina de estado que contr
 | Estado 		| Descrição |
 |-------------|----------|
 | s0 | Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR. |
-| s1 | Busca de instrução: ativa memória para R/W e configura para escrita. |
+| s1 | Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR). |
 | s2 | Busca de instrução/Decodificação: Valor do barramento (valor do PC/MAR) é armazenado no IR e  MDR. |
 | s3 | Reset das flags MAR e IR?? |
 | s4 | Se a instrução for de STORE,  |
