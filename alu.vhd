@@ -1,4 +1,4 @@
----- Arithmetic Logic Unit ------------------------------------------------------------------------
+---- Arithmetic Logic Unit ---------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.numeric_std.all;
 USE ieee.std_logic_1164.all;
