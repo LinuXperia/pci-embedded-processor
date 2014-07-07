@@ -145,18 +145,19 @@ A Unidade de controle pode ser implementada por uma máquina de estado que contr
 
 ![Basic Processor Controller State Machine](/controller-state-machine.png?raw=true "Basic Processor Controller State Machine")
 
-| Estado 		| Descrição |
-|-------------|----------|
-| s0 | Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR. |
-| s1 | Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR). |
-| s2 | Busca de instrução/Decodificação: Valor do barramento (valor do PC/MAR) é armazenado no IR e  MDR. |
-| s3 | Reset das flags MAR e IR?? |
-| s4 | Se a instrução for de STORE,  |
-| s5 |  |
-| s6 |  |
-| s7 | Se a instrução for de LOAD, |
-| s8 |  |
-| s9 | Se a instrução for de ADD, |
-| s10 | Se a instrução for de SUB, |
+*Acreditamos que a imagem está repleta de erros. Segue uma tabela do que seriam os sinais corretamente ativos em cada estado.*
 
+| Estado 		| Descrição | Sinais Ativos |
+|---|---|---|
+| s0 | Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR. | MAR_load, PC_valid, PC_inc |
+| s1 | Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada). | MEM_en |
+| s2 | Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR | MEM_valid, IR_load |
+| s3 | Envio do valor armazenado em IR para o barramento, carregando no MAR | IR_valid, MAR_load |
+| s4 | Se a instrução for de STORE, armazena o valor do acumulador no MDR | ALU_valid, MDR_load |
+| s5 | Escreve o valor armazenado no MDR na posição de memória armazenada na MAR | MEM_en, MEM_rw |
+| s6 | Se a instrução for diferente de STORE, carrega para MDR o valor da posição de memória armazenado na MAR | MEM_en |
+
+Os estados s7, s8, s9 e s10 estão incorretos. Após o s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado na MDR para o barramento, e setando o comando da ALU para a operação correspondente. 
+
+Isto é, para o estado de LOAD, ativa-se MDR_valid e define-se ALU_cmd <= 000. Para ADD, ativa-se MDR_valid e define-se ALU_cmd <= 001. Assim sucessivamente.
 
