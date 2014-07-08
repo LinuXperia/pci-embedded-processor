@@ -1,5 +1,5 @@
 EDA Netlist Writer report for memory
-Mon Jul 07 12:25:17 2014
+Tue Jul 08 16:38:06 2014
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Mon Jul 07 12:25:17 2014 ;
+; EDA Netlist Writer Status ; Successful - Tue Jul 08 16:38:06 2014 ;
 ; Revision Name             ; memory                                ;
 ; Top-level Entity Name     ; memory                                ;
 ; Family                    ; Cyclone II                            ;
@@ -65,13 +65,13 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                         ;
-+--------------------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                                    ;
-+--------------------------------------------------------------------------------------------------------------------+
-; D:/Documentos/UPE/2014.1/Prototipação de CIs/Embbeded_Processor/trunk/testes_memoria/simulation/modelsim/memory.vo ;
-+--------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                                                ;
++---------------------------------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                                           ;
++---------------------------------------------------------------------------------------------------------------------------+
+; D:/Documentos/UPE/2014.1/Prototipação de CIs/Embbeded_Processor/trunk/testes_memoria_16bits/simulation/modelsim/memory.vo ;
++---------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -80,13 +80,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit EDA Netlist Writer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Jul 07 12:25:14 2014
-Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off memory -c memory
-Info (204019): Generated file memory.vo in folder "D:/Documentos/UPE/2014.1/Prototipação de CIs/Embbeded_Processor/trunk/testes_memoria/simulation/modelsim/" for EDA simulation tool
+    Info: Processing started: Tue Jul 08 16:38:04 2014
+Info: Command: quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog memory_16bits -c memory
+Info (204019): Generated file memory.vo in folder "D:/Documentos/UPE/2014.1/Prototipação de CIs/Embbeded_Processor/trunk/testes_memoria_16bits/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 389 megabytes
-    Info: Processing ended: Mon Jul 07 12:25:17 2014
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 382 megabytes
+    Info: Processing ended: Tue Jul 08 16:38:06 2014
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:03
 
 

@@ -16,7 +16,7 @@
 // PROGRAM "Quartus II 64-Bit"
 // VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition"
 
-// DATE "07/07/2014 12:25:17"
+// DATE "07/08/2014 16:38:06"
 
 // 
 // Device: Altera EP2C35F672C6 Package FBGA672
@@ -165,8 +165,8 @@ wire \mdr[14]~15_combout ;
 wire \dataIn[15]~feeder_combout ;
 wire \mem1|ram_block_rtl_0|auto_generated|ram_block1a15~portbdataout ;
 wire \mdr[15]~16_combout ;
-wire [15:0] mdr;
 wire [11:0] mar;
+wire [15:0] mdr;
 wire [15:0] dataIn;
 
 wire [0:0] \mem1|ram_block_rtl_0|auto_generated|ram_block1a0_PORTBDATAOUT_bus ;

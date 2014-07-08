@@ -1,0 +1,556 @@
+Simulator report for memory
+Tue Jul 08 16:47:12 2014
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ALTSYNCRAM
+  6. Coverage Summary
+  7. Complete 1/0-Value Coverage
+  8. Missing 1-Value Coverage
+  9. Missing 0-Value Coverage
+ 10. Simulator INI Usage
+ 11. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 1.0 us       ;
+; Simulation Netlist Size     ; 227 nodes    ;
+; Simulation Coverage         ;      17.28 % ;
+; Total Number of Transitions ; 522          ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone II   ;
++-----------------------------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                                                                                                                    ;
++--------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+---------------+
+; Option                                                                                     ; Setting                                                                                                  ; Default Value ;
++--------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+---------------+
+; Simulation mode                                                                            ; Functional                                                                                               ; Timing        ;
+; Start time                                                                                 ; 0 ns                                                                                                     ; 0 ns          ;
+; Simulation results format                                                                  ; VWF                                                                                                      ;               ;
+; Vector input source                                                                        ; D:/Documentos/UPE/2014.1/Prototipação de CIs/Embbeded_Processor/trunk/testes_memoria_16bits/Waveform.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On                                                                                                       ; On            ;
+; Check outputs                                                                              ; Off                                                                                                      ; Off           ;
+; Report simulation coverage                                                                 ; On                                                                                                       ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On                                                                                                       ; On            ;
+; Display missing 1-value coverage report                                                    ; On                                                                                                       ; On            ;
+; Display missing 0-value coverage report                                                    ; On                                                                                                       ; On            ;
+; Detect setup and hold time violations                                                      ; Off                                                                                                      ; Off           ;
+; Detect glitches                                                                            ; Off                                                                                                      ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off                                                                                                      ; Off           ;
+; Generate Signal Activity File                                                              ; Off                                                                                                      ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off                                                                                                      ; Off           ;
+; Group bus channels in simulation results                                                   ; Off                                                                                                      ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On                                                                                                       ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE                                                                                               ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off                                                                                                      ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off                                                                                                      ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto                                                                                                     ; Auto          ;
++--------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II 64-Bit to view the waveform report data.
+
+
++---------------------------------------------------------------------------------------------+
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ALTSYNCRAM ;
++---------------------------------------------------------------------------------------------+
+Please refer to fitter text-based report (*.fit.rpt) to view logical memory report content in ASCII.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      17.28 % ;
+; Total nodes checked                                 ; 227          ;
+; Total output ports checked                          ; 243          ;
+; Total output ports with complete 1/0-value coverage ; 42           ;
+; Total output ports with no 1/0-value coverage       ; 136          ;
+; Total output ports with no 1-value coverage         ; 200          ;
+; Total output ports with no 0-value coverage         ; 137          ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++--------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                              ;
++---------------------------+---------------------------+------------------+
+; Node Name                 ; Output Port Name          ; Output Port Type ;
++---------------------------+---------------------------+------------------+
+; |memory|MEM_bus[0]~0      ; |memory|MEM_bus[0]~0      ; out              ;
+; |memory|MEM_bus[0]~direct ; |memory|MEM_bus[0]~direct ; out0             ;
+; |memory|MEM_bus[1]~direct ; |memory|MEM_bus[1]~direct ; out0             ;
+; |memory|MEM_bus[2]~direct ; |memory|MEM_bus[2]~direct ; out0             ;
+; |memory|MEM_bus[5]~direct ; |memory|MEM_bus[5]~direct ; out0             ;
+; |memory|MEM_bus[7]~direct ; |memory|MEM_bus[7]~direct ; out0             ;
+; |memory|mdr~24            ; |memory|mdr~24            ; out              ;
+; |memory|mdr~26            ; |memory|mdr~26            ; out              ;
+; |memory|mdr~29            ; |memory|mdr~29            ; out              ;
+; |memory|mdr~31            ; |memory|mdr~31            ; out              ;
+; |memory|mdr~40            ; |memory|mdr~40            ; out              ;
+; |memory|mdr~42            ; |memory|mdr~42            ; out              ;
+; |memory|mdr~45            ; |memory|mdr~45            ; out              ;
+; |memory|mdr~47            ; |memory|mdr~47            ; out              ;
+; |memory|mdr[7]            ; |memory|mdr[7]            ; regout           ;
+; |memory|mdr[5]            ; |memory|mdr[5]            ; regout           ;
+; |memory|mdr[2]            ; |memory|mdr[2]            ; regout           ;
+; |memory|mdr[0]            ; |memory|mdr[0]            ; regout           ;
+; |memory|MEM_bus[2]~2      ; |memory|MEM_bus[2]~2      ; out              ;
+; |memory|MEM_bus[5]~5      ; |memory|MEM_bus[5]~5      ; out              ;
+; |memory|MEM_bus[7]~7      ; |memory|MEM_bus[7]~7      ; out              ;
+; |memory|clk               ; |memory|clk               ; out              ;
+; |memory|nrst              ; |memory|nrst              ; out              ;
+; |memory|MDR_load          ; |memory|MDR_load          ; out              ;
+; |memory|MAR_load          ; |memory|MAR_load          ; out              ;
+; |memory|MEM_valid         ; |memory|MEM_valid         ; out              ;
+; |memory|MEM_en            ; |memory|MEM_en            ; out              ;
+; |memory|MEM_bus[0]        ; |memory|MEM_bus[0]        ; out              ;
+; |memory|MEM_bus[0]        ; |memory|MEM_bus[0]~result ; pin_out          ;
+; |memory|MEM_bus[1]        ; |memory|MEM_bus[1]        ; out              ;
+; |memory|MEM_bus[1]        ; |memory|MEM_bus[1]~result ; pin_out          ;
+; |memory|MEM_bus[2]        ; |memory|MEM_bus[2]        ; out              ;
+; |memory|MEM_bus[2]        ; |memory|MEM_bus[2]~result ; pin_out          ;
+; |memory|MEM_bus[5]        ; |memory|MEM_bus[5]        ; out              ;
+; |memory|MEM_bus[5]        ; |memory|MEM_bus[5]~result ; pin_out          ;
+; |memory|MEM_bus[7]        ; |memory|MEM_bus[7]        ; out              ;
+; |memory|MEM_bus[7]        ; |memory|MEM_bus[7]~result ; pin_out          ;
+; |memory|MEM_bus[7]~24     ; |memory|MEM_bus[7]~24     ; out0             ;
+; |memory|MEM_bus[5]~26     ; |memory|MEM_bus[5]~26     ; out0             ;
+; |memory|MEM_bus[2]~29     ; |memory|MEM_bus[2]~29     ; out0             ;
+; |memory|MEM_bus[1]~30     ; |memory|MEM_bus[1]~30     ; out0             ;
+; |memory|MEM_bus[0]~31     ; |memory|MEM_bus[0]~31     ; out0             ;
++---------------------------+---------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                                                                                                           ;
++------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                      ; Output Port Name                                                                               ; Output Port Type ;
++------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+------------------+
+; |memory|MEM_bus[3]~direct                                                                      ; |memory|MEM_bus[3]~direct                                                                      ; out0             ;
+; |memory|MEM_bus[4]~direct                                                                      ; |memory|MEM_bus[4]~direct                                                                      ; out0             ;
+; |memory|MEM_bus[6]~direct                                                                      ; |memory|MEM_bus[6]~direct                                                                      ; out0             ;
+; |memory|MEM_bus[8]~direct                                                                      ; |memory|MEM_bus[8]~direct                                                                      ; out0             ;
+; |memory|MEM_bus[9]~direct                                                                      ; |memory|MEM_bus[9]~direct                                                                      ; out0             ;
+; |memory|MEM_bus[10]~direct                                                                     ; |memory|MEM_bus[10]~direct                                                                     ; out0             ;
+; |memory|MEM_bus[11]~direct                                                                     ; |memory|MEM_bus[11]~direct                                                                     ; out0             ;
+; |memory|MEM_bus[12]~direct                                                                     ; |memory|MEM_bus[12]~direct                                                                     ; out0             ;
+; |memory|MEM_bus[13]~direct                                                                     ; |memory|MEM_bus[13]~direct                                                                     ; out0             ;
+; |memory|MEM_bus[14]~direct                                                                     ; |memory|MEM_bus[14]~direct                                                                     ; out0             ;
+; |memory|MEM_bus[15]~direct                                                                     ; |memory|MEM_bus[15]~direct                                                                     ; out0             ;
+; |memory|mdr~0                                                                                  ; |memory|mdr~0                                                                                  ; out              ;
+; |memory|mdr~1                                                                                  ; |memory|mdr~1                                                                                  ; out              ;
+; |memory|mdr~2                                                                                  ; |memory|mdr~2                                                                                  ; out              ;
+; |memory|mdr~3                                                                                  ; |memory|mdr~3                                                                                  ; out              ;
+; |memory|mdr~4                                                                                  ; |memory|mdr~4                                                                                  ; out              ;
+; |memory|mdr~5                                                                                  ; |memory|mdr~5                                                                                  ; out              ;
+; |memory|mdr~6                                                                                  ; |memory|mdr~6                                                                                  ; out              ;
+; |memory|mdr~7                                                                                  ; |memory|mdr~7                                                                                  ; out              ;
+; |memory|mdr~8                                                                                  ; |memory|mdr~8                                                                                  ; out              ;
+; |memory|mdr~9                                                                                  ; |memory|mdr~9                                                                                  ; out              ;
+; |memory|mdr~10                                                                                 ; |memory|mdr~10                                                                                 ; out              ;
+; |memory|mdr~11                                                                                 ; |memory|mdr~11                                                                                 ; out              ;
+; |memory|mdr~12                                                                                 ; |memory|mdr~12                                                                                 ; out              ;
+; |memory|mdr~13                                                                                 ; |memory|mdr~13                                                                                 ; out              ;
+; |memory|mdr~14                                                                                 ; |memory|mdr~14                                                                                 ; out              ;
+; |memory|mdr~15                                                                                 ; |memory|mdr~15                                                                                 ; out              ;
+; |memory|dataIn~0                                                                               ; |memory|dataIn~0                                                                               ; out              ;
+; |memory|dataIn~1                                                                               ; |memory|dataIn~1                                                                               ; out              ;
+; |memory|dataIn~2                                                                               ; |memory|dataIn~2                                                                               ; out              ;
+; |memory|dataIn~3                                                                               ; |memory|dataIn~3                                                                               ; out              ;
+; |memory|dataIn~4                                                                               ; |memory|dataIn~4                                                                               ; out              ;
+; |memory|dataIn~5                                                                               ; |memory|dataIn~5                                                                               ; out              ;
+; |memory|dataIn~6                                                                               ; |memory|dataIn~6                                                                               ; out              ;
+; |memory|dataIn~7                                                                               ; |memory|dataIn~7                                                                               ; out              ;
+; |memory|dataIn~8                                                                               ; |memory|dataIn~8                                                                               ; out              ;
+; |memory|dataIn~9                                                                               ; |memory|dataIn~9                                                                               ; out              ;
+; |memory|dataIn~10                                                                              ; |memory|dataIn~10                                                                              ; out              ;
+; |memory|dataIn~11                                                                              ; |memory|dataIn~11                                                                              ; out              ;
+; |memory|dataIn~12                                                                              ; |memory|dataIn~12                                                                              ; out              ;
+; |memory|dataIn~13                                                                              ; |memory|dataIn~13                                                                              ; out              ;
+; |memory|dataIn~14                                                                              ; |memory|dataIn~14                                                                              ; out              ;
+; |memory|dataIn~15                                                                              ; |memory|dataIn~15                                                                              ; out              ;
+; |memory|mdr~16                                                                                 ; |memory|mdr~16                                                                                 ; out              ;
+; |memory|mdr~17                                                                                 ; |memory|mdr~17                                                                                 ; out              ;
+; |memory|mdr~18                                                                                 ; |memory|mdr~18                                                                                 ; out              ;
+; |memory|mdr~19                                                                                 ; |memory|mdr~19                                                                                 ; out              ;
+; |memory|mdr~20                                                                                 ; |memory|mdr~20                                                                                 ; out              ;
+; |memory|mdr~21                                                                                 ; |memory|mdr~21                                                                                 ; out              ;
+; |memory|mdr~22                                                                                 ; |memory|mdr~22                                                                                 ; out              ;
+; |memory|mdr~23                                                                                 ; |memory|mdr~23                                                                                 ; out              ;
+; |memory|mdr~25                                                                                 ; |memory|mdr~25                                                                                 ; out              ;
+; |memory|mdr~27                                                                                 ; |memory|mdr~27                                                                                 ; out              ;
+; |memory|mdr~28                                                                                 ; |memory|mdr~28                                                                                 ; out              ;
+; |memory|mdr~30                                                                                 ; |memory|mdr~30                                                                                 ; out              ;
+; |memory|mdr~32                                                                                 ; |memory|mdr~32                                                                                 ; out              ;
+; |memory|mdr~33                                                                                 ; |memory|mdr~33                                                                                 ; out              ;
+; |memory|mdr~34                                                                                 ; |memory|mdr~34                                                                                 ; out              ;
+; |memory|mdr~35                                                                                 ; |memory|mdr~35                                                                                 ; out              ;
+; |memory|mdr~36                                                                                 ; |memory|mdr~36                                                                                 ; out              ;
+; |memory|mdr~37                                                                                 ; |memory|mdr~37                                                                                 ; out              ;
+; |memory|mdr~38                                                                                 ; |memory|mdr~38                                                                                 ; out              ;
+; |memory|mdr~39                                                                                 ; |memory|mdr~39                                                                                 ; out              ;
+; |memory|mdr~41                                                                                 ; |memory|mdr~41                                                                                 ; out              ;
+; |memory|mdr~43                                                                                 ; |memory|mdr~43                                                                                 ; out              ;
+; |memory|mdr~44                                                                                 ; |memory|mdr~44                                                                                 ; out              ;
+; |memory|mdr~46                                                                                 ; |memory|mdr~46                                                                                 ; out              ;
+; |memory|dataIn~16                                                                              ; |memory|dataIn~16                                                                              ; out              ;
+; |memory|dataIn~17                                                                              ; |memory|dataIn~17                                                                              ; out              ;
+; |memory|dataIn~18                                                                              ; |memory|dataIn~18                                                                              ; out              ;
+; |memory|dataIn~19                                                                              ; |memory|dataIn~19                                                                              ; out              ;
+; |memory|dataIn~20                                                                              ; |memory|dataIn~20                                                                              ; out              ;
+; |memory|dataIn~21                                                                              ; |memory|dataIn~21                                                                              ; out              ;
+; |memory|dataIn~22                                                                              ; |memory|dataIn~22                                                                              ; out              ;
+; |memory|dataIn~23                                                                              ; |memory|dataIn~23                                                                              ; out              ;
+; |memory|dataIn~24                                                                              ; |memory|dataIn~24                                                                              ; out              ;
+; |memory|dataIn~25                                                                              ; |memory|dataIn~25                                                                              ; out              ;
+; |memory|dataIn~26                                                                              ; |memory|dataIn~26                                                                              ; out              ;
+; |memory|dataIn~27                                                                              ; |memory|dataIn~27                                                                              ; out              ;
+; |memory|dataIn~28                                                                              ; |memory|dataIn~28                                                                              ; out              ;
+; |memory|dataIn~29                                                                              ; |memory|dataIn~29                                                                              ; out              ;
+; |memory|dataIn~30                                                                              ; |memory|dataIn~30                                                                              ; out              ;
+; |memory|dataIn~31                                                                              ; |memory|dataIn~31                                                                              ; out              ;
+; |memory|dataIn~32                                                                              ; |memory|dataIn~32                                                                              ; out              ;
+; |memory|dataIn~33                                                                              ; |memory|dataIn~33                                                                              ; out              ;
+; |memory|dataIn~34                                                                              ; |memory|dataIn~34                                                                              ; out              ;
+; |memory|dataIn~35                                                                              ; |memory|dataIn~35                                                                              ; out              ;
+; |memory|dataIn~36                                                                              ; |memory|dataIn~36                                                                              ; out              ;
+; |memory|dataIn~37                                                                              ; |memory|dataIn~37                                                                              ; out              ;
+; |memory|dataIn~38                                                                              ; |memory|dataIn~38                                                                              ; out              ;
+; |memory|dataIn~39                                                                              ; |memory|dataIn~39                                                                              ; out              ;
+; |memory|dataIn~40                                                                              ; |memory|dataIn~40                                                                              ; out              ;
+; |memory|dataIn~41                                                                              ; |memory|dataIn~41                                                                              ; out              ;
+; |memory|dataIn~42                                                                              ; |memory|dataIn~42                                                                              ; out              ;
+; |memory|dataIn~43                                                                              ; |memory|dataIn~43                                                                              ; out              ;
+; |memory|dataIn~44                                                                              ; |memory|dataIn~44                                                                              ; out              ;
+; |memory|dataIn~45                                                                              ; |memory|dataIn~45                                                                              ; out              ;
+; |memory|dataIn~46                                                                              ; |memory|dataIn~46                                                                              ; out              ;
+; |memory|dataIn~47                                                                              ; |memory|dataIn~47                                                                              ; out              ;
+; |memory|MEM_bus[1]~1                                                                           ; |memory|MEM_bus[1]~1                                                                           ; out              ;
+; |memory|mdr[15]                                                                                ; |memory|mdr[15]                                                                                ; regout           ;
+; |memory|mdr[14]                                                                                ; |memory|mdr[14]                                                                                ; regout           ;
+; |memory|mdr[13]                                                                                ; |memory|mdr[13]                                                                                ; regout           ;
+; |memory|mdr[12]                                                                                ; |memory|mdr[12]                                                                                ; regout           ;
+; |memory|mdr[11]                                                                                ; |memory|mdr[11]                                                                                ; regout           ;
+; |memory|mdr[10]                                                                                ; |memory|mdr[10]                                                                                ; regout           ;
+; |memory|mdr[9]                                                                                 ; |memory|mdr[9]                                                                                 ; regout           ;
+; |memory|mdr[8]                                                                                 ; |memory|mdr[8]                                                                                 ; regout           ;
+; |memory|mdr[6]                                                                                 ; |memory|mdr[6]                                                                                 ; regout           ;
+; |memory|mdr[4]                                                                                 ; |memory|mdr[4]                                                                                 ; regout           ;
+; |memory|mdr[3]                                                                                 ; |memory|mdr[3]                                                                                 ; regout           ;
+; |memory|mdr[1]                                                                                 ; |memory|mdr[1]                                                                                 ; regout           ;
+; |memory|mar[11]                                                                                ; |memory|mar[11]                                                                                ; regout           ;
+; |memory|mar[10]                                                                                ; |memory|mar[10]                                                                                ; regout           ;
+; |memory|mar[9]                                                                                 ; |memory|mar[9]                                                                                 ; regout           ;
+; |memory|mar[8]                                                                                 ; |memory|mar[8]                                                                                 ; regout           ;
+; |memory|mar[7]                                                                                 ; |memory|mar[7]                                                                                 ; regout           ;
+; |memory|mar[6]                                                                                 ; |memory|mar[6]                                                                                 ; regout           ;
+; |memory|mar[5]                                                                                 ; |memory|mar[5]                                                                                 ; regout           ;
+; |memory|mar[4]                                                                                 ; |memory|mar[4]                                                                                 ; regout           ;
+; |memory|mar[3]                                                                                 ; |memory|mar[3]                                                                                 ; regout           ;
+; |memory|mar[2]                                                                                 ; |memory|mar[2]                                                                                 ; regout           ;
+; |memory|mar[0]                                                                                 ; |memory|mar[0]                                                                                 ; regout           ;
+; |memory|dataIn[15]                                                                             ; |memory|dataIn[15]                                                                             ; regout           ;
+; |memory|dataIn[14]                                                                             ; |memory|dataIn[14]                                                                             ; regout           ;
+; |memory|dataIn[13]                                                                             ; |memory|dataIn[13]                                                                             ; regout           ;
+; |memory|dataIn[12]                                                                             ; |memory|dataIn[12]                                                                             ; regout           ;
+; |memory|dataIn[11]                                                                             ; |memory|dataIn[11]                                                                             ; regout           ;
+; |memory|dataIn[10]                                                                             ; |memory|dataIn[10]                                                                             ; regout           ;
+; |memory|dataIn[9]                                                                              ; |memory|dataIn[9]                                                                              ; regout           ;
+; |memory|dataIn[8]                                                                              ; |memory|dataIn[8]                                                                              ; regout           ;
+; |memory|dataIn[7]                                                                              ; |memory|dataIn[7]                                                                              ; regout           ;
+; |memory|dataIn[6]                                                                              ; |memory|dataIn[6]                                                                              ; regout           ;
+; |memory|dataIn[5]                                                                              ; |memory|dataIn[5]                                                                              ; regout           ;
+; |memory|dataIn[4]                                                                              ; |memory|dataIn[4]                                                                              ; regout           ;
+; |memory|dataIn[3]                                                                              ; |memory|dataIn[3]                                                                              ; regout           ;
+; |memory|dataIn[2]                                                                              ; |memory|dataIn[2]                                                                              ; regout           ;
+; |memory|dataIn[1]                                                                              ; |memory|dataIn[1]                                                                              ; regout           ;
+; |memory|dataIn[0]                                                                              ; |memory|dataIn[0]                                                                              ; regout           ;
+; |memory|MEM_bus[3]~3                                                                           ; |memory|MEM_bus[3]~3                                                                           ; out              ;
+; |memory|MEM_bus[4]~4                                                                           ; |memory|MEM_bus[4]~4                                                                           ; out              ;
+; |memory|MEM_bus[6]~6                                                                           ; |memory|MEM_bus[6]~6                                                                           ; out              ;
+; |memory|MEM_bus[8]~8                                                                           ; |memory|MEM_bus[8]~8                                                                           ; out              ;
+; |memory|MEM_bus[9]~9                                                                           ; |memory|MEM_bus[9]~9                                                                           ; out              ;
+; |memory|MEM_bus[10]~10                                                                         ; |memory|MEM_bus[10]~10                                                                         ; out              ;
+; |memory|MEM_bus[11]~11                                                                         ; |memory|MEM_bus[11]~11                                                                         ; out              ;
+; |memory|MEM_bus[12]~12                                                                         ; |memory|MEM_bus[12]~12                                                                         ; out              ;
+; |memory|MEM_bus[13]~13                                                                         ; |memory|MEM_bus[13]~13                                                                         ; out              ;
+; |memory|MEM_bus[14]~14                                                                         ; |memory|MEM_bus[14]~14                                                                         ; out              ;
+; |memory|MEM_bus[15]~15                                                                         ; |memory|MEM_bus[15]~15                                                                         ; out              ;
+; |memory|MEM_rw                                                                                 ; |memory|MEM_rw                                                                                 ; out              ;
+; |memory|MEM_bus[3]                                                                             ; |memory|MEM_bus[3]                                                                             ; out              ;
+; |memory|MEM_bus[3]                                                                             ; |memory|MEM_bus[3]~result                                                                      ; pin_out          ;
+; |memory|MEM_bus[4]                                                                             ; |memory|MEM_bus[4]                                                                             ; out              ;
+; |memory|MEM_bus[4]                                                                             ; |memory|MEM_bus[4]~result                                                                      ; pin_out          ;
+; |memory|MEM_bus[6]                                                                             ; |memory|MEM_bus[6]                                                                             ; out              ;
+; |memory|MEM_bus[6]                                                                             ; |memory|MEM_bus[6]~result                                                                      ; pin_out          ;
+; |memory|MEM_bus[8]                                                                             ; |memory|MEM_bus[8]                                                                             ; out              ;
+; |memory|MEM_bus[8]                                                                             ; |memory|MEM_bus[8]~result                                                                      ; pin_out          ;
+; |memory|MEM_bus[9]                                                                             ; |memory|MEM_bus[9]                                                                             ; out              ;
+; |memory|MEM_bus[9]                                                                             ; |memory|MEM_bus[9]~result                                                                      ; pin_out          ;
+; |memory|MEM_bus[10]                                                                            ; |memory|MEM_bus[10]                                                                            ; out              ;
+; |memory|MEM_bus[10]                                                                            ; |memory|MEM_bus[10]~result                                                                     ; pin_out          ;
+; |memory|MEM_bus[11]                                                                            ; |memory|MEM_bus[11]                                                                            ; out              ;
+; |memory|MEM_bus[11]                                                                            ; |memory|MEM_bus[11]~result                                                                     ; pin_out          ;
+; |memory|MEM_bus[12]                                                                            ; |memory|MEM_bus[12]                                                                            ; out              ;
+; |memory|MEM_bus[12]                                                                            ; |memory|MEM_bus[12]~result                                                                     ; pin_out          ;
+; |memory|MEM_bus[13]                                                                            ; |memory|MEM_bus[13]                                                                            ; out              ;
+; |memory|MEM_bus[13]                                                                            ; |memory|MEM_bus[13]~result                                                                     ; pin_out          ;
+; |memory|MEM_bus[14]                                                                            ; |memory|MEM_bus[14]                                                                            ; out              ;
+; |memory|MEM_bus[14]                                                                            ; |memory|MEM_bus[14]~result                                                                     ; pin_out          ;
+; |memory|MEM_bus[15]                                                                            ; |memory|MEM_bus[15]                                                                            ; out              ;
+; |memory|MEM_bus[15]                                                                            ; |memory|MEM_bus[15]~result                                                                     ; pin_out          ;
+; |memory|MEM_bus[15]~16                                                                         ; |memory|MEM_bus[15]~16                                                                         ; out0             ;
+; |memory|MEM_bus[14]~17                                                                         ; |memory|MEM_bus[14]~17                                                                         ; out0             ;
+; |memory|MEM_bus[13]~18                                                                         ; |memory|MEM_bus[13]~18                                                                         ; out0             ;
+; |memory|MEM_bus[12]~19                                                                         ; |memory|MEM_bus[12]~19                                                                         ; out0             ;
+; |memory|MEM_bus[11]~20                                                                         ; |memory|MEM_bus[11]~20                                                                         ; out0             ;
+; |memory|MEM_bus[10]~21                                                                         ; |memory|MEM_bus[10]~21                                                                         ; out0             ;
+; |memory|MEM_bus[9]~22                                                                          ; |memory|MEM_bus[9]~22                                                                          ; out0             ;
+; |memory|MEM_bus[8]~23                                                                          ; |memory|MEM_bus[8]~23                                                                          ; out0             ;
+; |memory|MEM_bus[6]~25                                                                          ; |memory|MEM_bus[6]~25                                                                          ; out0             ;
+; |memory|MEM_bus[4]~27                                                                          ; |memory|MEM_bus[4]~27                                                                          ; out0             ;
+; |memory|MEM_bus[3]~28                                                                          ; |memory|MEM_bus[3]~28                                                                          ; out0             ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a0  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a0  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a1  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a1  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a2  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a2  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a3  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a3  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a4  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a4  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a5  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a5  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a6  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a6  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a7  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a7  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a8  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a8  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a9  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a9  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a10 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a10 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a11 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a11 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a12 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a12 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a13 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a13 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a14 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a14 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a15 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a15 ; portbdataout0    ;
++------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                                                                                                                           ;
++------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                      ; Output Port Name                                                                               ; Output Port Type ;
++------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+------------------+
+; |memory|mdr~0                                                                                  ; |memory|mdr~0                                                                                  ; out              ;
+; |memory|mdr~1                                                                                  ; |memory|mdr~1                                                                                  ; out              ;
+; |memory|mdr~2                                                                                  ; |memory|mdr~2                                                                                  ; out              ;
+; |memory|mdr~3                                                                                  ; |memory|mdr~3                                                                                  ; out              ;
+; |memory|mdr~4                                                                                  ; |memory|mdr~4                                                                                  ; out              ;
+; |memory|mdr~5                                                                                  ; |memory|mdr~5                                                                                  ; out              ;
+; |memory|mdr~6                                                                                  ; |memory|mdr~6                                                                                  ; out              ;
+; |memory|mdr~7                                                                                  ; |memory|mdr~7                                                                                  ; out              ;
+; |memory|mdr~8                                                                                  ; |memory|mdr~8                                                                                  ; out              ;
+; |memory|mdr~9                                                                                  ; |memory|mdr~9                                                                                  ; out              ;
+; |memory|mdr~10                                                                                 ; |memory|mdr~10                                                                                 ; out              ;
+; |memory|mdr~11                                                                                 ; |memory|mdr~11                                                                                 ; out              ;
+; |memory|mdr~12                                                                                 ; |memory|mdr~12                                                                                 ; out              ;
+; |memory|mdr~13                                                                                 ; |memory|mdr~13                                                                                 ; out              ;
+; |memory|mdr~14                                                                                 ; |memory|mdr~14                                                                                 ; out              ;
+; |memory|mdr~15                                                                                 ; |memory|mdr~15                                                                                 ; out              ;
+; |memory|dataIn~0                                                                               ; |memory|dataIn~0                                                                               ; out              ;
+; |memory|dataIn~1                                                                               ; |memory|dataIn~1                                                                               ; out              ;
+; |memory|dataIn~2                                                                               ; |memory|dataIn~2                                                                               ; out              ;
+; |memory|dataIn~3                                                                               ; |memory|dataIn~3                                                                               ; out              ;
+; |memory|dataIn~4                                                                               ; |memory|dataIn~4                                                                               ; out              ;
+; |memory|dataIn~5                                                                               ; |memory|dataIn~5                                                                               ; out              ;
+; |memory|dataIn~6                                                                               ; |memory|dataIn~6                                                                               ; out              ;
+; |memory|dataIn~7                                                                               ; |memory|dataIn~7                                                                               ; out              ;
+; |memory|dataIn~8                                                                               ; |memory|dataIn~8                                                                               ; out              ;
+; |memory|dataIn~9                                                                               ; |memory|dataIn~9                                                                               ; out              ;
+; |memory|dataIn~10                                                                              ; |memory|dataIn~10                                                                              ; out              ;
+; |memory|dataIn~11                                                                              ; |memory|dataIn~11                                                                              ; out              ;
+; |memory|dataIn~12                                                                              ; |memory|dataIn~12                                                                              ; out              ;
+; |memory|dataIn~13                                                                              ; |memory|dataIn~13                                                                              ; out              ;
+; |memory|dataIn~14                                                                              ; |memory|dataIn~14                                                                              ; out              ;
+; |memory|dataIn~15                                                                              ; |memory|dataIn~15                                                                              ; out              ;
+; |memory|mdr~20                                                                                 ; |memory|mdr~20                                                                                 ; out              ;
+; |memory|mdr~21                                                                                 ; |memory|mdr~21                                                                                 ; out              ;
+; |memory|mdr~22                                                                                 ; |memory|mdr~22                                                                                 ; out              ;
+; |memory|mdr~23                                                                                 ; |memory|mdr~23                                                                                 ; out              ;
+; |memory|mdr~25                                                                                 ; |memory|mdr~25                                                                                 ; out              ;
+; |memory|mdr~27                                                                                 ; |memory|mdr~27                                                                                 ; out              ;
+; |memory|mdr~28                                                                                 ; |memory|mdr~28                                                                                 ; out              ;
+; |memory|mdr~30                                                                                 ; |memory|mdr~30                                                                                 ; out              ;
+; |memory|mdr~36                                                                                 ; |memory|mdr~36                                                                                 ; out              ;
+; |memory|mdr~37                                                                                 ; |memory|mdr~37                                                                                 ; out              ;
+; |memory|mdr~38                                                                                 ; |memory|mdr~38                                                                                 ; out              ;
+; |memory|mdr~39                                                                                 ; |memory|mdr~39                                                                                 ; out              ;
+; |memory|mdr~41                                                                                 ; |memory|mdr~41                                                                                 ; out              ;
+; |memory|mdr~43                                                                                 ; |memory|mdr~43                                                                                 ; out              ;
+; |memory|mdr~44                                                                                 ; |memory|mdr~44                                                                                 ; out              ;
+; |memory|mdr~46                                                                                 ; |memory|mdr~46                                                                                 ; out              ;
+; |memory|dataIn~16                                                                              ; |memory|dataIn~16                                                                              ; out              ;
+; |memory|dataIn~17                                                                              ; |memory|dataIn~17                                                                              ; out              ;
+; |memory|dataIn~18                                                                              ; |memory|dataIn~18                                                                              ; out              ;
+; |memory|dataIn~19                                                                              ; |memory|dataIn~19                                                                              ; out              ;
+; |memory|dataIn~20                                                                              ; |memory|dataIn~20                                                                              ; out              ;
+; |memory|dataIn~21                                                                              ; |memory|dataIn~21                                                                              ; out              ;
+; |memory|dataIn~22                                                                              ; |memory|dataIn~22                                                                              ; out              ;
+; |memory|dataIn~23                                                                              ; |memory|dataIn~23                                                                              ; out              ;
+; |memory|dataIn~24                                                                              ; |memory|dataIn~24                                                                              ; out              ;
+; |memory|dataIn~25                                                                              ; |memory|dataIn~25                                                                              ; out              ;
+; |memory|dataIn~26                                                                              ; |memory|dataIn~26                                                                              ; out              ;
+; |memory|dataIn~27                                                                              ; |memory|dataIn~27                                                                              ; out              ;
+; |memory|dataIn~28                                                                              ; |memory|dataIn~28                                                                              ; out              ;
+; |memory|dataIn~29                                                                              ; |memory|dataIn~29                                                                              ; out              ;
+; |memory|dataIn~30                                                                              ; |memory|dataIn~30                                                                              ; out              ;
+; |memory|dataIn~31                                                                              ; |memory|dataIn~31                                                                              ; out              ;
+; |memory|dataIn~32                                                                              ; |memory|dataIn~32                                                                              ; out              ;
+; |memory|dataIn~33                                                                              ; |memory|dataIn~33                                                                              ; out              ;
+; |memory|dataIn~34                                                                              ; |memory|dataIn~34                                                                              ; out              ;
+; |memory|dataIn~35                                                                              ; |memory|dataIn~35                                                                              ; out              ;
+; |memory|dataIn~36                                                                              ; |memory|dataIn~36                                                                              ; out              ;
+; |memory|dataIn~37                                                                              ; |memory|dataIn~37                                                                              ; out              ;
+; |memory|dataIn~38                                                                              ; |memory|dataIn~38                                                                              ; out              ;
+; |memory|dataIn~39                                                                              ; |memory|dataIn~39                                                                              ; out              ;
+; |memory|dataIn~40                                                                              ; |memory|dataIn~40                                                                              ; out              ;
+; |memory|dataIn~41                                                                              ; |memory|dataIn~41                                                                              ; out              ;
+; |memory|dataIn~42                                                                              ; |memory|dataIn~42                                                                              ; out              ;
+; |memory|dataIn~43                                                                              ; |memory|dataIn~43                                                                              ; out              ;
+; |memory|dataIn~44                                                                              ; |memory|dataIn~44                                                                              ; out              ;
+; |memory|dataIn~45                                                                              ; |memory|dataIn~45                                                                              ; out              ;
+; |memory|dataIn~46                                                                              ; |memory|dataIn~46                                                                              ; out              ;
+; |memory|dataIn~47                                                                              ; |memory|dataIn~47                                                                              ; out              ;
+; |memory|mdr[11]                                                                                ; |memory|mdr[11]                                                                                ; regout           ;
+; |memory|mdr[10]                                                                                ; |memory|mdr[10]                                                                                ; regout           ;
+; |memory|mdr[9]                                                                                 ; |memory|mdr[9]                                                                                 ; regout           ;
+; |memory|mdr[8]                                                                                 ; |memory|mdr[8]                                                                                 ; regout           ;
+; |memory|mdr[6]                                                                                 ; |memory|mdr[6]                                                                                 ; regout           ;
+; |memory|mdr[4]                                                                                 ; |memory|mdr[4]                                                                                 ; regout           ;
+; |memory|mdr[3]                                                                                 ; |memory|mdr[3]                                                                                 ; regout           ;
+; |memory|mdr[1]                                                                                 ; |memory|mdr[1]                                                                                 ; regout           ;
+; |memory|mar[11]                                                                                ; |memory|mar[11]                                                                                ; regout           ;
+; |memory|mar[10]                                                                                ; |memory|mar[10]                                                                                ; regout           ;
+; |memory|mar[9]                                                                                 ; |memory|mar[9]                                                                                 ; regout           ;
+; |memory|mar[8]                                                                                 ; |memory|mar[8]                                                                                 ; regout           ;
+; |memory|mar[7]                                                                                 ; |memory|mar[7]                                                                                 ; regout           ;
+; |memory|mar[6]                                                                                 ; |memory|mar[6]                                                                                 ; regout           ;
+; |memory|mar[5]                                                                                 ; |memory|mar[5]                                                                                 ; regout           ;
+; |memory|mar[4]                                                                                 ; |memory|mar[4]                                                                                 ; regout           ;
+; |memory|mar[3]                                                                                 ; |memory|mar[3]                                                                                 ; regout           ;
+; |memory|mar[2]                                                                                 ; |memory|mar[2]                                                                                 ; regout           ;
+; |memory|mar[1]                                                                                 ; |memory|mar[1]                                                                                 ; regout           ;
+; |memory|mar[0]                                                                                 ; |memory|mar[0]                                                                                 ; regout           ;
+; |memory|dataIn[15]                                                                             ; |memory|dataIn[15]                                                                             ; regout           ;
+; |memory|dataIn[14]                                                                             ; |memory|dataIn[14]                                                                             ; regout           ;
+; |memory|dataIn[13]                                                                             ; |memory|dataIn[13]                                                                             ; regout           ;
+; |memory|dataIn[12]                                                                             ; |memory|dataIn[12]                                                                             ; regout           ;
+; |memory|dataIn[11]                                                                             ; |memory|dataIn[11]                                                                             ; regout           ;
+; |memory|dataIn[10]                                                                             ; |memory|dataIn[10]                                                                             ; regout           ;
+; |memory|dataIn[9]                                                                              ; |memory|dataIn[9]                                                                              ; regout           ;
+; |memory|dataIn[8]                                                                              ; |memory|dataIn[8]                                                                              ; regout           ;
+; |memory|dataIn[7]                                                                              ; |memory|dataIn[7]                                                                              ; regout           ;
+; |memory|dataIn[6]                                                                              ; |memory|dataIn[6]                                                                              ; regout           ;
+; |memory|dataIn[5]                                                                              ; |memory|dataIn[5]                                                                              ; regout           ;
+; |memory|dataIn[4]                                                                              ; |memory|dataIn[4]                                                                              ; regout           ;
+; |memory|dataIn[3]                                                                              ; |memory|dataIn[3]                                                                              ; regout           ;
+; |memory|dataIn[2]                                                                              ; |memory|dataIn[2]                                                                              ; regout           ;
+; |memory|dataIn[1]                                                                              ; |memory|dataIn[1]                                                                              ; regout           ;
+; |memory|dataIn[0]                                                                              ; |memory|dataIn[0]                                                                              ; regout           ;
+; |memory|MEM_rw                                                                                 ; |memory|MEM_rw                                                                                 ; out              ;
+; |memory|MEM_bus[12]                                                                            ; |memory|MEM_bus[12]                                                                            ; out              ;
+; |memory|MEM_bus[13]                                                                            ; |memory|MEM_bus[13]                                                                            ; out              ;
+; |memory|MEM_bus[14]                                                                            ; |memory|MEM_bus[14]                                                                            ; out              ;
+; |memory|MEM_bus[15]                                                                            ; |memory|MEM_bus[15]                                                                            ; out              ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a0  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a0  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a1  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a1  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a2  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a2  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a3  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a3  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a4  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a4  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a5  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a5  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a6  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a6  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a7  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a7  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a8  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a8  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a9  ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a9  ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a10 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a10 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a11 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a11 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a12 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a12 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a13 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a13 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a14 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a14 ; portbdataout0    ;
+; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a15 ; |memory|ram_infer:mem1|altsyncram:ram_block_rtl_0|altsyncram_g1h1:auto_generated|ram_block1a15 ; portbdataout0    ;
++------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Simulator
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Jul 08 16:47:11 2014
+Info: Command: quartus_sim --simulation_results_format=VWF memory_16bits -c memory
+Info (324025): Using vector source file "D:/Documentos/UPE/2014.1/Prototipação de CIs/Embbeded_Processor/trunk/testes_memoria_16bits/Waveform.vwf"
+Info (310003): Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info (310004): Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[15]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[14]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[13]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[12]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[7]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[5]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[2]"
+Warning (324036): Found clock-sensitive change during active clock edge at time 100.0 ns on register "|memory|mdr[0]"
+Info (310002): Simulation partitioned into 1 sub-simulations
+Info (328053): Simulation coverage is      17.28 %
+Info (328052): Number of transitions in simulation is 522
+Info (324045): Vector file memory.sim.vwf is saved in VWF text format. You can compress it into CVWF format in order to reduce file size. For more details please refer to the Quartus II Help.
+Info: Quartus II 64-Bit Simulator was successful. 0 errors, 8 warnings
+    Info: Peak virtual memory: 316 megabytes
+    Info: Processing ended: Tue Jul 08 16:47:13 2014
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+
