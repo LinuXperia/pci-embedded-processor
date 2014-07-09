@@ -58,8 +58,8 @@ BEGIN
 					-- Incrementa o ACC (ACC = ACC + 1)
 					WHEN "110" => ACC <= ACC + 1;
 					
-					-- Armazena o valor do ACC no barramento (BUS = ACC). TODO/FIXME PRECISA?
-					WHEN "111" => ACC <= ACC;
+					-- Subtracao
+					WHEN "111" => ACC <= ACC - ALU_bus;
 				END CASE;
 			END IF;
 		END IF;
