@@ -33,7 +33,8 @@ BEGIN
 				counter <= counter + 1;
 			-- Caso contrario, verifica se eh pra carregar o valor do bus.
 			ELSIF PC_load = '1' THEN
-					counter <= to_integer(unsigned(PC_bus)); -- Cast de STD_LOGIC_VECTOR pra INTEGER
+				-- O PC_load deve carregar apenas o endereco, desconsiderando o OPCODE
+				counter <= TO_INTEGER(UNSIGNED(PC_bus(n-oplen-1 DOWNTO 0))); -- Cast de STD_LOGIC_VECTOR pra INTEGER
 			END IF;
 		END IF;
 	END PROCESS;
