@@ -1,9 +1,9 @@
----- Controller --------------------------------------------------------------------------------------------------
+---- Controller_simplified --------------------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE work.processor_functions.all;
 ------------------------------------------------------------------------------------------------------------------
-ENTITY controller IS
+ENTITY controller_simplified IS
 	PORT (clk, nrst: IN std_logic;
 			CONTROL_bus: INOUT std_logic_vector(n-1 DOWNTO 0);
 
@@ -29,10 +29,10 @@ ENTITY controller IS
 			ALU_valid: OUT std_logic;
 			ALU_enable: OUT std_logic;
 			ALU_cmd: OUT std_logic_vector(2 DOWNTO 0));
-END ENTITY controller;
+END ENTITY controller_simplified;
 ------------------------------------------------------------------------------------------------------------------
-ARCHITECTURE RTL OF controller IS
-	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16);
+ARCHITECTURE RTL OF controller_simplified IS
+	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
 	SIGNAL current_state, next_state: states;
 BEGIN
 	-- Processo que gerencia a transicao do current_state para o next_state
@@ -81,11 +81,11 @@ BEGIN
 				MEM_valid <= '1';
 				IR_load <= '1';
 				IF (IR_opcode = INC) THEN
-					next_state <= s13;
+					next_state <= s8;
 				ELSIF (IR_opcode = JUMP) THEN
-					next_state <= s15;
+					next_state <= s10;
 				ELSIF (IR_opcode = JZERO) THEN
-					next_state <= s14;
+					next_state <= s9;
 				ELSE
 					next_state <= s3;
 				END IF;
@@ -111,79 +111,24 @@ BEGIN
 
 			WHEN s6 =>
 				MEM_en <= '1';
-				If (IR_opcode = LOAD) THEN
-					next_state <= s7;
-				ELSIF (IR_opcode = ADD) THEN
-					next_state <= s8;
-				ELSIF (IR_opcode = SUB) THEN
-					next_state <= s16;
-				ELSIF (IR_opcode = NOTT) THEN
-					next_state <= s9;
-				ELSIF (IR_opcode = ORR) THEN
-					next_state <= s10;
-				ELSIF (IR_opcode = ANDD) THEN
-					next_state <= s11;
-				ELSIF (IR_opcode = XORR) THEN
-					next_state <= s12;
-				END IF;
+				next_state <= s7;
 
 			WHEN s7 =>
 				MEM_valid <= '1';
 				ALU_enable <= '1';
-				ALU_cmd <= "000";
-				next_state <= s0;
-
-			WHEN s8 =>
-				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= "001";
+				ALU_cmd <= cmdDecode(IR_opcode);
 				next_state <= s0;
 
 			WHEN s9 =>
-				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= "010";
-				next_state <= s0;
-			
-			WHEN s10 =>
-				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= "011";
-				next_state <= s0;
-
-			WHEN s11 =>
-				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= "100";
-				next_state <= s0;
-
-			WHEN s12 =>
-				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= "101";
-				next_state <= s0;
-
-			WHEN s13 =>
-				ALU_enable <= '1';
-				ALU_cmd <= "110";
-				next_state <= s0;
-
-			WHEN s14 =>
 				IF (ALU_zero = '1') THEN
-					next_state <= s15;
+					next_state <= s10;
 				ELSE
 					next_state <= s0;
 				END IF;
 
-			WHEN s15 =>
+			WHEN s10 =>
 				PC_load <= '1';
 				IR_valid <= '1';
-				next_state <= s0;
-
-			WHEN s16 =>
-				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= "111";
 				next_state <= s0;
 				
 		END CASE;

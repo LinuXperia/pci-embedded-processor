@@ -5,6 +5,7 @@ USE ieee.std_logic_1164.all;
 PACKAGE processor_functions IS
 	TYPE opcode IS (LOAD, STORE, ADD, NOTT, ANDD, ORR, XORR, INC, SUB, JUMP, JZERO);
 	FUNCTION decode (word: STD_LOGIC_VECTOR) RETURN opcode;
+	FUNCTION cmdDecode (op: opcode) RETURN STD_LOGIC_VECTOR;
 	CONSTANT n: integer := 12;
 	CONSTANT wordlen: integer := 12;
 	CONSTANT oplen: integer := 4;
@@ -13,7 +14,7 @@ PACKAGE processor_functions IS
 END PACKAGE processor_functions;
 
 PACKAGE BODY processor_functions IS
-	FUNCTION decode (word: STD_LOGIC_VECTOR) return opcode IS
+	FUNCTION decode (word: STD_LOGIC_VECTOR) RETURN opcode IS
 		VARIABLE opcode_out: opcode;
 	BEGIN
 		CASE word(n-1 DOWNTO n-oplen) IS
@@ -28,8 +29,25 @@ PACKAGE BODY processor_functions IS
 			WHEN "1000" => opcode_out := SUB;
 			WHEN "1001" => opcode_out := JUMP;
 			WHEN "1010" => opcode_out := JZERO;
-			WHEN OTHERS => null;
+			WHEN OTHERS => NULL;
 		END CASE;
 		RETURN opcode_out;
 	END FUNCTION decode;
+
+	FUNCTION cmdDecode (op: opcode) RETURN STD_LOGIC_VECTOR IS
+		VARIABLE cmd_out: STD_LOGIC_VECTOR(2 DOWNTO 0);
+	BEGIN
+		CASE op IS
+			WHEN LOAD => cmd_out := "000";
+			WHEN ADD => cmd_out := "001";
+			WHEN NOTT => cmd_out := "010";
+			WHEN ORR => cmd_out := "011";
+			WHEN ANDD => cmd_out := "100";
+			WHEN XORR => cmd_out := "101";
+			WHEN INC => cmd_out := "110";
+			WHEN SUB => cmd_out := "111";
+			WHEN OTHERS => NULL;
+		END CASE;
+		RETURN cmd_out;
+	END FUNCTION cmdDecode;
 END PACKAGE BODY processor_functions;
