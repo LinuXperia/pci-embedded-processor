@@ -7,11 +7,11 @@ USE work.processor_functions.all;
 ------------------------------------------------------------------------------------------------------------------
 ENTITY alu IS
 	PORT (clk, nrst: IN STD_LOGIC; -- reset ativo em zero
-				ALU_cmd: IN STD_LOGIC_VECTOR(2 DOWNTO 0); -- 3 bits que indicam a operacao a ser executada pela alu
-				ALU_zero: OUT STD_LOGIC; -- flag que indica se o resultado da alu foi zero
-				ALU_valid: IN STD_LOGIC; -- sinal que indica que o resultado da ALU deve ser colocado em ALU_bus (ou Z se 0)
-				ALU_enable: IN STD_LOGIC; -- sinal que indica se a ALU deve realizar alguma operacao
-				ALU_bus: INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)); -- barramento de entrada/saida
+			ALU_cmd: IN STD_LOGIC_VECTOR(2 DOWNTO 0); -- 3 bits que indicam a operacao a ser executada pela alu
+			ALU_zero: OUT STD_LOGIC; -- flag que indica se o resultado da alu foi zero
+			ALU_valid: IN STD_LOGIC; -- sinal que indica que o resultado da ALU deve ser colocado em ALU_bus (ou Z se 0)
+			ALU_enable: IN STD_LOGIC; -- sinal que indica se a ALU deve realizar alguma operacao
+			ALU_bus: INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)); -- barramento de entrada/saida
 END ENTITY alu;
 ------------------------------------------------------------------------------------------------------------------
 ARCHITECTURE rtl OF alu IS
