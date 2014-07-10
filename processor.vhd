@@ -35,7 +35,9 @@ ARCHITECTURE processor OF processor IS
 	SIGNAL ALU_enable: std_logic;
 	SIGNAL ALU_cmd: std_logic_vector(2 DOWNTO 0);
 BEGIN
-	controller : entity work.controller port map(clk, nrst, CONTROL_bus, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_enable, ALU_cmd); 
+	controller : entity work.controller_simplified port map(clk, nrst, CONTROL_bus, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_enable, ALU_cmd); 
 	memory : entity work.memory port map(clk, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, MEM_bus);
 	alu : entity work.alu port map(clk, nrst, ALU_cmd, ALU_zero, ALU_valid, ALU_enable, ALU_bus);
+	ir : entity work.ir port map(clk, nrst, IR_load, IR_valid, IR_address, IR_opcode, IR_bus);
+	pc : entity work.pc port map(clk, nrst, PC_inc, PC_load, PC_valid, PC_bus);
 END ARCHITECTURE;
