@@ -1,14 +1,22 @@
-uPOLIEmbedded Processor em FPGA
+µPCI
 ======================
-
-PCI 2014.1 - POLI/UPE
 
 > Inspiração: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) 
 
+Projeto final da cadeira Prototipação de Circuitos Integrados. POLI/UPE, 2014-1.
+
+## Introdução
+
+TODO
+
+## Implementação
+### Modelo Estrutural
+
+TODO
+
 ### Conjunto de Instruções
 
-|-------------------|-------------------|
-| Comando			| Opcode (Binary)	|
+| Comando			| Opcode (Binário)	|
 |-------------------|-------------------|
 | LOAD endereço		| 0000				|
 | STORE endereço	| 0001				|
@@ -26,7 +34,6 @@ PCI 2014.1 - POLI/UPE
 | BL endereço		| 1101				|
 | WAIT				| 1110				|
 | NOP				| 1111				|
-|-------------------|-------------------|
 
 ![Structural Model of the Microprocessor](/structural-model.png?raw=true "Structural Model of the Microprocessor")
 
@@ -80,18 +87,17 @@ Na borda de subida do clock, decodifica-se o valor do comando e realiza-se a ope
 
 Os comandos possíveis são:
 
-|-----------|-----------------------------------------------------------|
 | Comando	| Operação 													|
 |-----------|-----------------------------------------------------------|
-| 000 		| Carrega o valor do barramento no ACC (ACC = 0 + BUS) 		|
-| 001 		| Soma o valor do barramento ao ACC (ACC = ACC + BUS) 		|
-| 010 		| NOT do valor do barramento (ACC = not BUS) 				|
-| 011 		| OR do valor do barramento com o ACC (ACC = ACC or BUS) 	|
-| 100 		| AND do valor do barramento com o ACC (ACC = ACC and BUS) 	|
-| 101 		| XOR do valor do barramento com o ACC (ACC = ACC xor BUS) 	|
-| 110 		| Incrementa o ACC (ACC = ACC + 1) 							|
-| 111 		| Armazena o valor do ACC no barramento (BUS = ACC) 		|
-|-----------|-----------------------------------------------------------|
+| 0000 		| LOAD - Carrega o valor do barramento no ACC (ACC = 0 + BUS) 		|
+| 0001 		| ADD - Soma o valor do barramento ao ACC (ACC = ACC + BUS) 		|
+| 0010 		| NOT - Carrega no ACC a negação do valor do barramento (ACC = not BUS) 				|
+| 0011 		| OR - 'Ou' do valor do barramento com o ACC (ACC = ACC or BUS) 	|
+| 0100 		| AND - 'E' do valor do barramento com o ACC (ACC = ACC and BUS) 	|
+| 0101 		| XOR - 'Ou exclusivo' valor do barramento com o ACC (ACC = ACC xor BUS) 	|
+| 0110 		| INC - Incrementa o ACC (ACC = ACC + 1) 							|
+| 0111 		| SUB - Subtrai o valor do barramento do ACC (ACC = ACC - BUS) 		|
+| 1000		| DEC - Decrementa o ACC (ACC = ACC - 1)
 
 ### Memória de Programa/Dados
 
