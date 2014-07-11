@@ -9,7 +9,7 @@ ENTITY memory IS
 				MDR_load: IN STD_LOGIC; -- sinal de carregamento do BUS para MDR
 				MAR_load: IN STD_LOGIC; -- sinal de carregamento do BUS para MAR
 				MEM_valid: IN STD_LOGIC; -- sinal que indica que o resultado da MDR deve ser colocado em MEM_bus (ou Z se 0)
-				MEM_en: IN STD_LOGIC; -- ativacao da memorica para operacoes de leitura e escrita
+				MEM_en: IN STD_LOGIC; -- ativacao da memoria para operacoes de leitura e escrita
 				MEM_rw: IN STD_LOGIC; -- flag que indica se a operacao a ser realizada eh de leitura ou escrita
 				MEM_bus: INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)); -- barramento de entrada/saida
 END ENTITY memory;
