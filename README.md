@@ -8,7 +8,7 @@ Simulações:
  * PC: OK!
  * IR: OK!
  * ALU: OK!
- * RAM: Pendente.
+ * RAM: OK!
  * UC: Pendente.
  * CPU: Pendente.
 
