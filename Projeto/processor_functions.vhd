@@ -3,7 +3,7 @@ USE ieee.numeric_std.all;
 USE ieee.std_logic_1164.all;
 
 PACKAGE processor_functions IS
-	TYPE opcode IS (LOAD, STORE, ADD, NOTT, ANDD, ORR, XORR, INC, SUB, JUMP, JZERO);
+	TYPE opcode IS (LOAD, STORE, ADD, NOTT, ANDD, ORR, XORR, INC, SUB, JUMP, BZERO, BGREATER, BLESS);
 	FUNCTION decode (word: STD_LOGIC_VECTOR) RETURN opcode;
 	FUNCTION cmdDecode (op: opcode) RETURN STD_LOGIC_VECTOR;
 	CONSTANT n: integer := 12;
@@ -28,7 +28,9 @@ PACKAGE BODY processor_functions IS
 			WHEN "0111" => opcode_out := INC;
 			WHEN "1000" => opcode_out := SUB;
 			WHEN "1001" => opcode_out := JUMP;
-			WHEN "1010" => opcode_out := JZERO;
+			WHEN "1010" => opcode_out := BZERO;
+			WHEN "1011" => opcode_out := BGREATER;
+			WHEN "1100" => opcode_out := BLESS;
 			WHEN OTHERS => NULL;
 		END CASE;
 		RETURN opcode_out;

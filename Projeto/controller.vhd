@@ -84,7 +84,7 @@ BEGIN
 					next_state <= s13;
 				ELSIF (IR_opcode = JUMP) THEN
 					next_state <= s15;
-				ELSIF (IR_opcode = JZERO) THEN
+				ELSIF (IR_opcode = BZERO) THEN
 					next_state <= s14;
 				ELSE
 					next_state <= s3;
