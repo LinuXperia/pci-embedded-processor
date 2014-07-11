@@ -28,8 +28,8 @@ TODO
 | AND endereço		| 0111				|
 | OR endereço		| 1000				|
 | XOR endereço		| 1001				|
-| BE endereço		| 1010				|
-| BNE endereço		| 1011				|
+| J endereço		| 1010				|
+| BE endereço		| 1011				|
 | BG endereço		| 1100				|
 | BL endereço		| 1101				|
 | WAIT				| 1110				|
