@@ -13,3 +13,13 @@ ENTITY io IS
 				IO_rw: IN STD_LOGIC; -- flag que indica se a operacao a ser realizada eh de leitura ou escrita
 				IO_bus: INOUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)); -- barramento de entrada/saida
 END ENTITY io;
+
+ARCHITECTURE processor_io OF io IS
+	SIGNAL iodr: STD_LOGIC_VECTOR(wordlen-1 DOWNTO 0); -- registrador de dados
+	SIGNAL ioar: UNSIGNED(wordlen-oplen-1 DOWNTO 0); -- registrador de enderecos
+BEGIN
+	-- Se o IO_valid = '1', manda o valor do resultado do iodr pro barramento. Caso contrario, manda Z.
+	IO_bus <= iodr 
+					WHEN IO_valid = '1' 
+						ELSE (others => 'Z');
+END ARCHITECTURE processor_io;
