@@ -1,36 +1,41 @@
-uPOLIEmbedded Processor em FPGA
+Embedded Processor 
 ======================
+
+------
+
+Simulações:
+
+ * PC: OK!
+ * IR: OK!
+ * ALU: OK!
+ * RAM: OK!
+ * UC: Pendente.
+ * CPU: Pendente.
+
+-------
 
 PCI 2014.1 - POLI/UPE
 
-> Inspiração: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) 
+> Based on: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) 
 
-### Conjunto de Instruções
+### Machine code instruction set
 
-|-------------------|-------------------|
-| Comando			| Opcode (Binary)	|
-|-------------------|-------------------|
-| LOAD endereço		| 0000				|
-| STORE endereço	| 0001				|
-| ADD endereço		| 0010				|
-| SUB endereço		| 0011				|
-| INC				| 0100				|
-| DEC				| 0101				|
-| NOT				| 0110				|
-| AND endereço		| 0111				|
-| OR endereço		| 1000				|
-| XOR endereço		| 1001				|
-| BE endereço		| 1010				|
-| BNE endereço		| 1011				|
-| BG endereço		| 1100				|
-| BL endereço		| 1101				|
-| WAIT				| 1110				|
-| NOP				| 1111				|
-|-------------------|-------------------|
+|Command 		| Opcode (Binary) 	|
+|---------------|-------------------|
+| LOAD arg 		| 	0000 			|
+| STORE arg 	| 	0001 			|
+| ADD arg	 	| 	0010 			|
+| NOT	 		| 	0011 			|
+| AND arg 		| 	0100 			|
+| OR arg	 	| 	0101 			|
+| XOR arg 		| 	0110 			|
+| INC 			| 	0111 			|
+| SUB arg 		| 	1000 			|
+| BRANCH arg 	| 	1001 			|
 
 ![Structural Model of the Microprocessor](/structural-model.png?raw=true "Structural Model of the Microprocessor")
 
-### Program Counter (PC)
+### PC
 
 O módulo do PC deve conter 6 'pinos':
 * Clock;
@@ -47,7 +52,7 @@ Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser coloc
 Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem de precedência. Isto é, se inc estiver em nível alto, não importa se load também está, deve ser realizado o incremento. Se inc estiver em nível baixo, verifica-se se load está em nível alto. Se estiver, carrega-se o valor do bus no PC. 
 
 
-### Instruction Register
+### IR
 
 O módulo do IR deve conter 7 'pinos':
 * Clock;
@@ -64,7 +69,7 @@ Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser coloc
 
 Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para o registrador interno e o opcode de saída deve ser decodificado assincronamente quando o valor no IR mudar.
 
-### Arithmetic Logic Unit (ALU)
+### ALU
 
 O módulo de ALU deve conter, também, 6 'pinos':
 * Clock;
@@ -80,20 +85,20 @@ Na borda de subida do clock, decodifica-se o valor do comando e realiza-se a ope
 
 Os comandos possíveis são:
 
-|-----------|-----------------------------------------------------------|
-| Comando	| Operação 													|
-|-----------|-----------------------------------------------------------|
-| 000 		| Carrega o valor do barramento no ACC (ACC = 0 + BUS) 		|
-| 001 		| Soma o valor do barramento ao ACC (ACC = ACC + BUS) 		|
-| 010 		| NOT do valor do barramento (ACC = not BUS) 				|
-| 011 		| OR do valor do barramento com o ACC (ACC = ACC or BUS) 	|
-| 100 		| AND do valor do barramento com o ACC (ACC = ACC and BUS) 	|
-| 101 		| XOR do valor do barramento com o ACC (ACC = ACC xor BUS) 	|
-| 110 		| Incrementa o ACC (ACC = ACC + 1) 							|
-| 111 		| Armazena o valor do ACC no barramento (BUS = ACC) 		|
-|-----------|-----------------------------------------------------------|
+| Comando 		| Operação |
+|-------------|----------|
+| 000 | Carrega o valor do barramento no ACC (ACC = 0 + BUS) |
+| 001 | Soma o valor do barramento ao ACC (ACC = ACC + BUS) |
+| 010 | NOT do valor do barramento (ACC = not BUS) |
+| 011 | OR do valor do barramento com o ACC (ACC = ACC or BUS) |
+| 100 | AND do valor do barramento com o ACC (ACC = ACC and BUS) |
+| 101 | XOR do valor do barramento com o ACC (ACC = ACC xor BUS) |
+| 110 | Incrementa o ACC (ACC = ACC + 1) |
+| 111 | Armazena o valor do ACC no barramento (BUS = ACC) |
 
-### Memória de Programa/Dados
+_Qual a necessidade do comando 111?_
+
+### Memória
 
 O módulo de memória deve conter 8 'pinos':
 * Clock;
@@ -111,7 +116,7 @@ O bloco de memória tem 3 partes:
 * Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.
  
 
-### Unidade de Controle (UC)
+### Unidade de Controle
 
 A função da Unidade de Controle é acessar o PC, pegar a instrução da memória, mover os dados quando necessário, configurando todos os sinais de controle no momento certo e com os valores corretos.
 Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o barramento global e saídas com todos sinais de controle:
