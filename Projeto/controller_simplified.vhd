@@ -27,6 +27,7 @@ ENTITY controller_simplified IS
 			-- ALU
 			ALU_zero: IN std_logic;
 			ALU_valid: OUT std_logic;
+			ALU_slt: IN std_logic;
 			ALU_enable: OUT std_logic;
 			ALU_cmd: OUT std_logic_vector(2 DOWNTO 0));
 END ENTITY controller_simplified;
