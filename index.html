@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>embedded-processor by nestortmj</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>embedded-processor</h1>
+        <h2>Embedded Processor em FPGA</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/nestortmj/pci-embedded-processor/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/nestortmj/pci-embedded-processor/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/nestortmj/pci-embedded-processor" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="embedded-processor-" class="anchor" href="#embedded-processor-"><span class="octicon octicon-link"></span></a>Embedded Processor </h1>
+
+<hr><p>Simulações:</p>
+
+<ul>
+<li>PC: OK!</li>
+<li>IR: OK!</li>
+<li>ALU: OK!</li>
+<li>RAM: OK!</li>
+<li>UC: Pendente.</li>
+<li>CPU: Pendente.</li>
+</ul><hr><p>PCI 2014.1 - POLI/UPE</p>
+
+<blockquote>
+<p>Based on: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) </p>
+</blockquote>
+
+<h3>
+<a name="machine-code-instruction-set" class="anchor" href="#machine-code-instruction-set"><span class="octicon octicon-link"></span></a>Machine code instruction set</h3>
+
+<table>
+<thead><tr>
+<th>Command</th>
+<th>Opcode (Binary)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>LOAD arg</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>STORE arg</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>ADD arg</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>AND arg</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>OR arg</td>
+<td>0101</td>
+</tr>
+<tr>
+<td>XOR arg</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>INC</td>
+<td>0111</td>
+</tr>
+<tr>
+<td>SUB arg</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>BRANCH arg</td>
+<td>1001</td>
+</tr>
+</tbody>
+</table><p><img src="/structural-model.png?raw=true" alt="Structural Model of the Microprocessor" title="Structural Model of the Microprocessor"></p>
+
+<h3>
+<a name="pc" class="anchor" href="#pc"><span class="octicon octicon-link"></span></a>PC</h3>
+
+<p>O módulo do PC deve conter 6 'pinos':</p>
+
+<ul>
+<li>Clock;</li>
+<li>Reset ativo em 0;</li>
+<li>Barramento de entrada e saída (PC_bus, barramento INOUT);</li>
+<li>Incrementar (PC_inc);</li>
+<li>Carregar (PC_load);</li>
+<li>Ler (PC_valid, manda o valor do PC pro PC_bus quando ativo, ou Z quando inativo).</li>
+</ul><p>Todos devem ser std logic, com exceção do PC_bus, que é std logic vector.</p>
+
+<p>Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser colocada em Z imediatamente. Se reset for para 0, o valor do PC deve ir para 0.</p>
+
+<p>Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem de precedência. Isto é, se inc estiver em nível alto, não importa se load também está, deve ser realizado o incremento. Se inc estiver em nível baixo, verifica-se se load está em nível alto. Se estiver, carrega-se o valor do bus no PC. </p>
+
+<h3>
+<a name="ir" class="anchor" href="#ir"><span class="octicon octicon-link"></span></a>IR</h3>
+
+<p>O módulo do IR deve conter 7 'pinos':</p>
+
+<ul>
+<li>Clock;</li>
+<li>Reset;</li>
+<li>IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);</li>
+<li>IR_valid (flag que indica se o IR está em operação);</li>
+<li>IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);</li>
+<li>IR_opcode (saída com o opcode decodificado);</li>
+<li>IR_bus (interface para o barramento interno);</li>
+</ul><p>A função do IR é decodificar o <em>opcode</em> em forma binária e então passá-lo para o bloco de controle.</p>
+
+<p>Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser colocada em Z imediatamente. Se reset for para 0, o valor do registrador interno deve ir para 0s.</p>
+
+<p>Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para o registrador interno e o opcode de saída deve ser decodificado assincronamente quando o valor no IR mudar.</p>
+
+<h3>
+<a name="alu" class="anchor" href="#alu"><span class="octicon octicon-link"></span></a>ALU</h3>
+
+<p>O módulo de ALU deve conter, também, 6 'pinos':</p>
+
+<ul>
+<li>Clock;</li>
+<li>Reset ativo em 0;</li>
+<li>Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);</li>
+<li>Comando (função) a ser realizado (ALU_cmd, com 3 bits, sinais de controle que indicam a função (de 8 possíveis) a ser realizada pela ALU);</li>
+<li>Ler (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);</li>
+<li>Zero (ALU_zero, fica em nível alto quando o resultado da ALU é todo zero).</li>
+</ul><p>A ALU possui, como sinal interno, um acumulador ACC do tamanho do barramento do sistema. É ele quem guarda o valor a ser enviado para o barramento quando o sinal ALU_valid está ativo, e é quando este é inteiramente zero que o ALU_zero é ativo. Ao ativar o sinal de reset (colocando-o em 0), reseta-se o valor do registrador interno (ACC) para 0.</p>
+
+<p>Na borda de subida do clock, decodifica-se o valor do comando e realiza-se a operação em cima do ACC.</p>
+
+<p>Os comandos possíveis são:</p>
+
+<table>
+<thead><tr>
+<th>Comando</th>
+<th>Operação</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>000</td>
+<td>Carrega o valor do barramento no ACC (ACC = 0 + BUS)</td>
+</tr>
+<tr>
+<td>001</td>
+<td>Soma o valor do barramento ao ACC (ACC = ACC + BUS)</td>
+</tr>
+<tr>
+<td>010</td>
+<td>NOT do valor do barramento (ACC = not BUS)</td>
+</tr>
+<tr>
+<td>011</td>
+<td>OR do valor do barramento com o ACC (ACC = ACC or BUS)</td>
+</tr>
+<tr>
+<td>100</td>
+<td>AND do valor do barramento com o ACC (ACC = ACC and BUS)</td>
+</tr>
+<tr>
+<td>101</td>
+<td>XOR do valor do barramento com o ACC (ACC = ACC xor BUS)</td>
+</tr>
+<tr>
+<td>110</td>
+<td>Incrementa o ACC (ACC = ACC + 1)</td>
+</tr>
+<tr>
+<td>111</td>
+<td>Armazena o valor do ACC no barramento (BUS = ACC)</td>
+</tr>
+</tbody>
+</table><p><em>Qual a necessidade do comando 111?</em></p>
+
+<h3>
+<a name="mem%C3%B3ria" class="anchor" href="#mem%C3%B3ria"><span class="octicon octicon-link"></span></a>Memória</h3>
+
+<p>O módulo de memória deve conter 8 'pinos':</p>
+
+<ul>
+<li>Clock;</li>
+<li>Reset ativo em 0;</li>
+<li>Ativação de carregamento do registrador MDR (MDR_load, MDR = Memory Data Register);</li>
+<li>Ativação de carregamento do registrador MAR (MAR_load, MAR = Memory Address Register);</li>
+<li>Ler (MEM_valid, manda o valor lido na memória (registrador MDR) para o MEM_bus quando ativo, ou Z quando inativo);</li>
+<li>Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);</li>
+<li>Flag de ativação da memória (MEM_en);</li>
+<li>Flag de indicação de escrita ou leituar (MEM_rw, onde '0' indica leitura e '1' escrita);</li>
+</ul><p>O bloco de memória tem 3 partes:</p>
+
+<ul>
+<li>Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);</li>
+<li>Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;</li>
+<li>Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.</li>
+</ul><h3>
+<a name="unidade-de-controle" class="anchor" href="#unidade-de-controle"><span class="octicon octicon-link"></span></a>Unidade de Controle</h3>
+
+<p>A função da Unidade de Controle é acessar o PC, pegar a instrução da memória, mover os dados quando necessário, configurando todos os sinais de controle no momento certo e com os valores corretos.
+Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o barramento global e saídas com todos sinais de controle:</p>
+
+<ul>
+<li>Clock;</li>
+<li>Reset ativo em 0;</li>
+<li>Opcode;</li>
+<li>IR_load;</li>
+<li>IR_valid;</li>
+<li>IR_address;</li>
+<li>PC_inc;</li>
+<li>PC_load;</li>
+<li>PC_valid;</li>
+<li>MDR_load;</li>
+<li>MDR_valid;</li>
+<li>MAR_load;</li>
+<li>MAR_valid;</li>
+<li>MEM_en;</li>
+<li>MEM_rw;</li>
+<li>ALU_valid;</li>
+<li>ALU_load;</li>
+<li>ALU_cmd;</li>
+<li>CONTROL_bus;</li>
+</ul><p>A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.</p>
+
+<p><img src="/controller-state-machine.png?raw=true" alt="Basic Processor Controller State Machine" title="Basic Processor Controller State Machine"></p>
+
+<p><em>Acreditamos que a imagem está repleta de erros. Segue uma tabela do que seriam os sinais corretamente ativos em cada estado.</em></p>
+
+<table>
+<thead><tr>
+<th>Estado</th>
+<th>Descrição</th>
+<th>Sinais Ativos</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>s0</td>
+<td>Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR.</td>
+<td>MAR_load, PC_valid, PC_inc</td>
+</tr>
+<tr>
+<td>s1</td>
+<td>Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada).</td>
+<td>MEM_en</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR</td>
+<td>MEM_valid, IR_load</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Envio do valor armazenado em IR para o barramento, carregando no MAR</td>
+<td>IR_valid, MAR_load</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>Se a instrução for de STORE, armazena o valor do acumulador no MDR</td>
+<td>ALU_valid, MDR_load</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>Escreve o valor armazenado no MDR na posição de memória armazenada na MAR</td>
+<td>MEM_en, MEM_rw</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>Se a instrução for diferente de STORE, carrega para MDR o valor da posição de memória armazenado na MAR</td>
+<td>MEM_en</td>
+</tr>
+</tbody>
+</table><p>Os estados s7, s8, s9 e s10 estão incorretos. Após o s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado na MDR para o barramento, e setando o comando da ALU para a operação correspondente. </p>
+
+<p>Isto é, para o estado de LOAD, ativa-se MDR_valid e define-se ALU_cmd &lt;= 000. Para ADD, ativa-se MDR_valid e define-se ALU_cmd &lt;= 001. Assim sucessivamente.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
