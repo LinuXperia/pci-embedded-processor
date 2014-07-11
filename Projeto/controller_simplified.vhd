@@ -35,7 +35,11 @@ END ENTITY controller_simplified;
 ARCHITECTURE RTL OF controller_simplified IS
 	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
 	SIGNAL current_state, next_state: states;
+	SIGNAL BRANCH_trigger: std_logic;
 BEGIN
+
+	BRANCH_trigger <= '1' WHEN ((IR_opcode = BZERO AND ALU_zero = '1') OR (IR_opcode = BLESS AND ALU_slt = '1') OR (IR_opcode = BGREATER AND ALU_zero = '0' AND ALU_slt = '0')) ELSE '0';
+	
 	-- Processo que gerencia a transicao do current_state para o next_state
 	-- e a configuracao de reset
 	state_sequence: PROCESS (clk, nrst) BEGIN
@@ -85,7 +89,7 @@ BEGIN
 					next_state <= s8;
 				ELSIF (IR_opcode = JUMP) THEN
 					next_state <= s10;
-				ELSIF (IR_opcode = JZERO) THEN
+				ELSIF (IR_opcode = BZERO OR IR_opcode = BGREATER OR IR_opcode = BLESS) THEN
 					next_state <= s9;
 				ELSE
 					next_state <= s3;
@@ -121,7 +125,7 @@ BEGIN
 				next_state <= s0;
 
 			WHEN s9 =>
-				IF (ALU_zero = '1') THEN
+				IF (BRANCH_trigger = '1') THEN
 					next_state <= s10;
 				ELSE
 					next_state <= s0;
