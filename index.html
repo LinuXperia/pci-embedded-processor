@@ -31,75 +31,40 @@
         <h1>
 <a name="%C2%B5pci" class="anchor" href="#%C2%B5pci"><span class="octicon octicon-link"></span></a>µPCI</h1>
 
-<hr><p>Simulações:</p>
-
-<ul>
-<li>PC: OK!</li>
-<li>IR: OK!</li>
-<li>ALU: OK!</li>
-<li>RAM: OK!</li>
-<li>UC: Pendente.</li>
-<li>CPU: Pendente.</li>
-</ul><hr><p>PCI 2014.1 - POLI/UPE</p>
-
 <blockquote>
-<p>Based on: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) </p>
+<p>Inspiração: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) </p>
 </blockquote>
 
-<h3>
-<a name="machine-code-instruction-set" class="anchor" href="#machine-code-instruction-set"><span class="octicon octicon-link"></span></a>Machine code instruction set</h3>
-
-<table>
-<thead><tr>
-<th>Command</th>
-<th>Opcode (Binary)</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>LOAD arg</td>
-<td>0000</td>
-</tr>
-<tr>
-<td>STORE arg</td>
-<td>0001</td>
-</tr>
-<tr>
-<td>ADD arg</td>
-<td>0010</td>
-</tr>
-<tr>
-<td>NOT</td>
-<td>0011</td>
-</tr>
-<tr>
-<td>AND arg</td>
-<td>0100</td>
-</tr>
-<tr>
-<td>OR arg</td>
-<td>0101</td>
-</tr>
-<tr>
-<td>XOR arg</td>
-<td>0110</td>
-</tr>
-<tr>
-<td>INC</td>
-<td>0111</td>
-</tr>
-<tr>
-<td>SUB arg</td>
-<td>1000</td>
-</tr>
-<tr>
-<td>BRANCH arg</td>
-<td>1001</td>
-</tr>
-</tbody>
-</table><p><img src="/structural-model.png?raw=true" alt="Structural Model of the Microprocessor" title="Structural Model of the Microprocessor"></p>
+<p>2014-1, Prototipação de Circuitos Integrados. POLI/UPE.</p>
 
 <h3>
-<a name="pc" class="anchor" href="#pc"><span class="octicon octicon-link"></span></a>PC</h3>
+<a name="conjunto-de-instru%C3%A7%C3%B5es" class="anchor" href="#conjunto-de-instru%C3%A7%C3%B5es"><span class="octicon octicon-link"></span></a>Conjunto de Instruções</h3>
+
+<p>|-------------------|-------------------|
+| Comando           | Opcode (Binary)   |
+|-------------------|-------------------|
+| LOAD endereço        | 0000              |
+| STORE endereço   | 0001              |
+| ADD endereço     | 0010              |
+| SUB endereço     | 0011              |
+| INC               | 0100              |
+| DEC               | 0101              |
+| NOT               | 0110              |
+| AND endereço     | 0111              |
+| OR endereço      | 1000              |
+| XOR endereço     | 1001              |
+| BE endereço      | 1010              |
+| BNE endereço     | 1011              |
+| BG endereço      | 1100              |
+| BL endereço      | 1101              |
+| WAIT              | 1110              |
+| NOP               | 1111              |
+|-------------------|-------------------|</p>
+
+<p><img src="/structural-model.png?raw=true" alt="Structural Model of the Microprocessor" title="Structural Model of the Microprocessor"></p>
+
+<h3>
+<a name="program-counter-pc" class="anchor" href="#program-counter-pc"><span class="octicon octicon-link"></span></a>Program Counter (PC)</h3>
 
 <p>O módulo do PC deve conter 6 'pinos':</p>
 
@@ -117,7 +82,7 @@
 <p>Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem de precedência. Isto é, se inc estiver em nível alto, não importa se load também está, deve ser realizado o incremento. Se inc estiver em nível baixo, verifica-se se load está em nível alto. Se estiver, carrega-se o valor do bus no PC. </p>
 
 <h3>
-<a name="ir" class="anchor" href="#ir"><span class="octicon octicon-link"></span></a>IR</h3>
+<a name="instruction-register" class="anchor" href="#instruction-register"><span class="octicon octicon-link"></span></a>Instruction Register</h3>
 
 <p>O módulo do IR deve conter 7 'pinos':</p>
 
@@ -136,7 +101,7 @@
 <p>Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para o registrador interno e o opcode de saída deve ser decodificado assincronamente quando o valor no IR mudar.</p>
 
 <h3>
-<a name="alu" class="anchor" href="#alu"><span class="octicon octicon-link"></span></a>ALU</h3>
+<a name="arithmetic-logic-unit-alu" class="anchor" href="#arithmetic-logic-unit-alu"><span class="octicon octicon-link"></span></a>Arithmetic Logic Unit (ALU)</h3>
 
 <p>O módulo de ALU deve conter, também, 6 'pinos':</p>
 
@@ -153,49 +118,21 @@
 
 <p>Os comandos possíveis são:</p>
 
-<table>
-<thead><tr>
-<th>Comando</th>
-<th>Operação</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>000</td>
-<td>Carrega o valor do barramento no ACC (ACC = 0 + BUS)</td>
-</tr>
-<tr>
-<td>001</td>
-<td>Soma o valor do barramento ao ACC (ACC = ACC + BUS)</td>
-</tr>
-<tr>
-<td>010</td>
-<td>NOT do valor do barramento (ACC = not BUS)</td>
-</tr>
-<tr>
-<td>011</td>
-<td>OR do valor do barramento com o ACC (ACC = ACC or BUS)</td>
-</tr>
-<tr>
-<td>100</td>
-<td>AND do valor do barramento com o ACC (ACC = ACC and BUS)</td>
-</tr>
-<tr>
-<td>101</td>
-<td>XOR do valor do barramento com o ACC (ACC = ACC xor BUS)</td>
-</tr>
-<tr>
-<td>110</td>
-<td>Incrementa o ACC (ACC = ACC + 1)</td>
-</tr>
-<tr>
-<td>111</td>
-<td>Armazena o valor do ACC no barramento (BUS = ACC)</td>
-</tr>
-</tbody>
-</table><p><em>Qual a necessidade do comando 111?</em></p>
+<p>|-----------|-----------------------------------------------------------|
+| Comando   | Operação                                                    |
+|-----------|-----------------------------------------------------------|
+| 000       | Carrega o valor do barramento no ACC (ACC = 0 + BUS)      |
+| 001       | Soma o valor do barramento ao ACC (ACC = ACC + BUS)       |
+| 010       | NOT do valor do barramento (ACC = not BUS)                |
+| 011       | OR do valor do barramento com o ACC (ACC = ACC or BUS)    |
+| 100       | AND do valor do barramento com o ACC (ACC = ACC and BUS)  |
+| 101       | XOR do valor do barramento com o ACC (ACC = ACC xor BUS)  |
+| 110       | Incrementa o ACC (ACC = ACC + 1)                          |
+| 111       | Armazena o valor do ACC no barramento (BUS = ACC)         |
+|-----------|-----------------------------------------------------------|</p>
 
 <h3>
-<a name="mem%C3%B3ria" class="anchor" href="#mem%C3%B3ria"><span class="octicon octicon-link"></span></a>Memória</h3>
+<a name="mem%C3%B3ria-de-programadados" class="anchor" href="#mem%C3%B3ria-de-programadados"><span class="octicon octicon-link"></span></a>Memória de Programa/Dados</h3>
 
 <p>O módulo de memória deve conter 8 'pinos':</p>
 
@@ -215,7 +152,7 @@
 <li>Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;</li>
 <li>Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.</li>
 </ul><h3>
-<a name="unidade-de-controle" class="anchor" href="#unidade-de-controle"><span class="octicon octicon-link"></span></a>Unidade de Controle</h3>
+<a name="unidade-de-controle-uc" class="anchor" href="#unidade-de-controle-uc"><span class="octicon octicon-link"></span></a>Unidade de Controle (UC)</h3>
 
 <p>A função da Unidade de Controle é acessar o PC, pegar a instrução da memória, mover os dados quando necessário, configurando todos os sinais de controle no momento certo e com os valores corretos.
 Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o barramento global e saídas com todos sinais de controle:</p>
