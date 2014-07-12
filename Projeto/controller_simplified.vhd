@@ -123,6 +123,11 @@ BEGIN
 				ALU_enable <= '1';
 				ALU_cmd <= cmdDecode(IR_opcode);
 				next_state <= s0;
+			
+			WHEN s8 =>
+				ALU_enable <= '1';
+				ALU_cmd <= cmdDecode(IR_opcode);
+				next_state <= s0;
 
 			WHEN s9 =>
 				IF (BRANCH_trigger = '1') THEN
