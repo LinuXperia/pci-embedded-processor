@@ -24,10 +24,10 @@ TODO
 | SUB endereço		| 0011				|
 | INC				| 0100				|
 | DEC				| 0101				|
-| NOT				| 0110				|
-| AND endereço		| 0111				|
-| OR endereço		| 1000				|
-| XOR endereço		| 1001				|
+| NOTT				| 0110				|
+| ANDD endereço		| 0111				|
+| ORR endereço		| 1000				|
+| XORR endereço		| 1001				|
 | J endereço		| 1010				|
 | BE endereço		| 1011				|
 | BG endereço		| 1100				|
