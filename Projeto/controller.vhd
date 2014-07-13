@@ -113,6 +113,13 @@ BEGIN
 			WHEN s2 =>
 				MEM_valid <= '1';
 				IR_load <= '1';
+				next_state <= s3;
+
+			WHEN s3 =>
+				IR_valid <= '1';
+				MAR_load <= '1';
+				IOAR_load <= '1';
+				
 				IF (IR_opcode = INC) THEN
 					next_state <= s7;
 				ELSIF (IR_opcode = JUMP) THEN
@@ -123,15 +130,7 @@ BEGIN
 					next_state <= s0;
 				ELSIF (IR_opcode = WAITT) THEN
 					next_state <= s10;
-				ELSE
-					next_state <= s3;
-				END IF;
-
-			WHEN s3 =>
-				IR_valid <= '1';
-				MAR_load <= '1';
-				IOAR_load <= '1';
-				If (IR_opcode = STORE) THEN
+				ELSIF (IR_opcode = STORE) THEN
 					next_state <= s4;
 				ELSE
 					next_state <= s6;
