@@ -23,3 +23,5 @@ load 28
 add 30
 add 31
 store 0x25
+3
+0xAF
