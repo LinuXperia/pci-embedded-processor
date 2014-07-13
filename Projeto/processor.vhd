@@ -61,7 +61,7 @@ BEGIN
 	-- Para visualizacao
 	nrst_out <= not nrst;
 	wake_out <= not nwake;
-	hex7 <= (OTHERS => '1');
+	hex7 <= "01100001";
 	hex5 <= (OTHERS => '1');
 	hex4 <= (OTHERS => '1');
 	hex3 <= (OTHERS => '1');
