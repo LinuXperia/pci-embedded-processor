@@ -60,4 +60,7 @@ with open(input_filename) as f:
 
         instruction = encoded_value[0]
 
+        if encoded_value[1] is False:
+            parameter = bin(int(parameter, 0))[2:]
+
         print instruction, parameter
