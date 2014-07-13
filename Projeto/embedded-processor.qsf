@@ -60,8 +60,8 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_location_assignment PIN_G26 -to nrst
 set_location_assignment PIN_D13 -to clk
-set_location_assignment PIN_W26 -to WAKE_SIGNAL
 set_location_assignment PIN_AD12 -to clk_out
 set_location_assignment PIN_AE22 -to nrst_out
 set_location_assignment PIN_AA20 -to wake_out
+set_location_assignment PIN_W26 -to nwake
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
