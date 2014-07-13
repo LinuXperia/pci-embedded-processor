@@ -7,6 +7,9 @@ USE work.processor_functions.all;
 ENTITY processor IS
 	PORT (clk, nrst, nwake: IN std_logic;
 			
+			-- Switches
+			switches: IN std_logic_vector(17 downto 0);
+			
 			-- Leds vermelhos
 			red_leds: OUT std_logic_vector(17 downto 0);
 			
@@ -69,6 +72,7 @@ BEGIN
 	
 	red_leds(17) <= clk_out;
 	red_leds(11 DOWNTO 0) <= CONTROL_bus;
+	red_leds(16 DOWNTO 13) <= IR_opcode_leds;
 	
 	hex7 <= "01100001";
 	hex5 <= PC_7seg(8 TO 15);
@@ -85,7 +89,7 @@ BEGIN
 	controller : entity work.controller port map(clk_out, nrst, CONTROL_bus, hex6, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_slt, ALU_enable, ALU_cmd, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, nwake, green_leds(8));
 	memory : entity work.memory port map(clk_out, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, CONTROL_bus);
 	alu : entity work.alu port map(clk_out, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
-	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus, red_leds(16 DOWNTO 13));
+	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus, IR_opcode_leds);
 	pc : entity work.pc port map(clk_out, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus, PC_7seg);
 	io : entity work.io port map(clk_out, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, CONTROL_bus);
 END ARCHITECTURE;
