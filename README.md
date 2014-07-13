@@ -14,6 +14,8 @@ O objetivo principal deste projeto é a construção de um µProcessador, que fo
 
 ![Structural Model of the Microprocessor](/structural-model.png "Structural Model of the Microprocessor")
 
+O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória. As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. 
+
 ### Conjunto de Instruções
 
 	 	Comando		| 	Opcode (Binário)	
@@ -53,13 +55,13 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 ### Instruction Register
 
-O módulo do IR deve conter 7 'pinos':
-* Clock;
-* Reset;
-* IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);
-* IR_valid (flag que indica se o IR está em operação);
-* IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);
-* IR_opcode (saída com o opcode decodificado);
+O módulo do IR deve conter 7 'pinos':  
+* Clock;  
+* Reset;  
+* IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);  
+* IR_valid (flag que indica se o IR está em operação);  
+* IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);  
+* IR_opcode (saída com o opcode decodificado);  
 * IR_bus (interface para o barramento interno);
 
 A função do IR é decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
@@ -70,12 +72,12 @@ Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para
 
 ### Arithmetic Logic Unit (ALU)
 
-O módulo de ALU deve conter, também, 6 'pinos':
-* Clock;
-* Reset ativo em 0;
-* Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);
-* Comando (função) a ser realizado (ALU_cmd, com 3 bits, sinais de controle que indicam a função (de 8 possíveis) a ser realizada pela ALU);
-* Ler (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);
+O módulo de ALU deve conter, também, 6 'pinos':  
+* Clock;  
+* Reset ativo em 0;  
+* Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);  
+* Comando (função) a ser realizado (ALU_cmd, com 3 bits, sinais de controle que indicam a função (de 8 possíveis) a ser realizada pela ALU);  
+* Ler (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);  
 * Zero (ALU_zero, fica em nível alto quando o resultado da ALU é todo zero).
 
 A ALU possui, como sinal interno, um acumulador ACC do tamanho do barramento do sistema. É ele quem guarda o valor a ser enviado para o barramento quando o sinal ALU_valid está ativo, e é quando este é inteiramente zero que o ALU_zero é ativo. Ao ativar o sinal de reset (colocando-o em 0), reseta-se o valor do registrador interno (ACC) para 0.
@@ -106,8 +108,8 @@ O módulo de memória deve conter 8 'pinos':
 * Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);  
 * Flag de ativação da memória (MEM_en);  
 * Flag de indicação de escrita ou leituar (MEM_rw, onde '0' indica leitura e '1' escrita);
-
-O bloco de memória tem 3 partes:
+  
+O bloco de memória tem 3 partes:  
 * Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);  
 * Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;  
 * Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.
@@ -140,21 +142,22 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 
 A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.
 
-![Basic Processor Controller State Machine](/controller-state-machine.png "Basic Processor Controller State Machine")
+![Basic Processor Controller State Machine](/controller-state-machine_atual.png "Basic Processor Controller State Machine")
 
-*Acreditamos que a imagem está repleta de erros. Segue uma tabela do que seriam os sinais corretamente ativos em cada estado.*
+	|	Estado	| Descrição 																																																					|		Sinais Ativos 			|
+	| 	s0 		| Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR.													 							| MAR_load, PC_valid, PC_inc	|
+	| 	s1 		| Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada). 						| MEM_en 						|
+	| 	s2 		| Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR 																																			| MEM_valid, IR_load 			|
+	|	s3 		| Envio do valor armazenado em IR para o barramento, carregando no MAR. Se a instrução for NOP, retorna ao estado inicial s0.																									| IR_valid, MAR_load 			|
+	| 	s4 		| Se a instrução for de STORE, armazena o valor do acumulador no MDR 																																							| ALU_valid, MDR_load 			|
+	| 	s5 		| Escreve o valor armazenado no MDR na posição de memória armazenada no MAR. Após isso, retorna ao estado inicial s0. 																											| MEM_en, MEM_rw 				|
+	| 	s6 		| Se a instrução for diferente LOAD, carrega para MDR o valor da posição de memória armazenado no MAR. 																															| MEM_en 						|
+	|	s7		| Habilita a memória para leitura e resgata o valor que está na posição indicada no MAR. Após isso, retorna ao estado inicial s0.																								| MEM_valid, ALU_enable, ALU_cmd|
+	|	s8		| Se, no estado S3, a instrução for BLESS, BGREATER ou BZERO, e o BRANCH_Trigger estiver ativo, é carregado no PC a instrução da posição de memória indicada pelo IR.															| -								|
+	|	s9		| Se, no estado S3, a instrução for JUMP, neste estado é carregado o valor do PC com a instrução que está na posição de memória indicada pelo IR. Após isso, retorna ao estado inicial s0.										| IR_valid, PC_load				|
+	|	s10		| Se, no estado S3, a instrução for WAIT, o processador espera até que seja recebido um sinal de WAKE para que ele retorne ao estado 0, continuando o fluxo de buscas de instruções. Após isso, retorna ao estado inicial s0.	| -								|
 
-	|	Estado	| Descrição 																																															|		Sinais Ativos 			|
-	| 	s0 		| Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR.													 	| MAR_load, PC_valid, PC_inc	|
-	| 	s1 		| Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada). | MEM_en 						|
-	| 	s2 		| Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR 																													| MEM_valid, IR_load 			|
-	|	s3 		| Envio do valor armazenado em IR para o barramento, carregando no MAR 																																	| IR_valid, MAR_load 			|
-	| 	s4 		| Se a instrução for de STORE, armazena o valor do acumulador no MDR 																																	| ALU_valid, MDR_load 			|
-	| 	s5 		| Escreve o valor armazenado no MDR na posição de memória armazenada na MAR 																															| MEM_en, MEM_rw 				|
-	| 	s6 		| Se a instrução for diferente de STORE, carrega para MDR o valor da posição de memória armazenado na MAR 																								| MEM_en 						|
-	|	s7		| Escreve 
-
-Os estados s7, s8, s9 e s10 estão incorretos. Após o s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado no MDR para o barramento, e setando o comando da ALU para a operação correspondente. 
+Após o estado s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado no MDR para o barramento, e setando o comando da ALU para a operação correspondente. 
 
 Isto é, para o estado de LOAD, ativa-se MDR_valid e define-se ALU_cmd <= 000. Para ADD, ativa-se MDR_valid e define-se ALU_cmd <= 001. Assim sucessivamente.
 
