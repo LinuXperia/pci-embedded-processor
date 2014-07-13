@@ -39,7 +39,7 @@ ENTITY controller IS
 			IO_rw: OUT STD_LOGIC;
 
 			-- WAKE
-			WAKE_SIGNAL: IN STD_LOGIC);
+			nwake: IN STD_LOGIC);
 			
 END ENTITY controller;
 ------------------------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ BEGIN
 				next_state <= s0;
 			
 			WHEN s11 =>
-				IF (WAKE_SIGNAL = '1') THEN
+				IF (nwake = '0') THEN
 					next_state <= s0;
 				END IF;
 				
