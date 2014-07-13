@@ -3,6 +3,8 @@ import re
 input_filename = './input.asm'
 output_filename = './output.txt'
 
+word_length = 12
+
 regexes = {
     'decimal_regex': '^([a-zA-Z]*)(\s(\d*))?$',
     'hexadecimal_regex': '^([a-zA-Z]*)(\s0x([a-fA-F0-9]*))?$'
@@ -62,5 +64,16 @@ with open(input_filename) as f:
 
         if encoded_value[1] is False:
             parameter = bin(int(parameter, 0))[2:]
+            if len(instruction) + len(parameter) > word_length:
+                raise ValueError('Word length must be ', word_length, 'bits.')
+
+        fill = '0'
+
+        if parameter is None:
+            fill *= (word_length - len(instruction))
+            parameter = fill
+        else:
+            fill *= (word_length - len(instruction) - len(parameter))
+            parameter = fill + parameter
 
         print instruction, parameter
