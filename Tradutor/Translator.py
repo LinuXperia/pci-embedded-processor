@@ -1,10 +1,5 @@
 import re
-import os
-
-input_filename = './input.asm'
-output_filename = './output.txt'
-
-word_length = 12
+import sys, getopt
 
 regexes = {
     'decimal_regex': '^([a-zA-Z]+)(\s(\d+))?$',
@@ -41,9 +36,9 @@ def fill_with_zeros(param, number):
     return result
 
 
-def translate(filename):
+def translate(input_file, word_length):
     result = []
-    with open(filename) as f:
+    with open(input_file) as f:
         for line in f:
             line = line.split('--')[0]  # ignore comments
             line = line.strip()  # ignore whitespaces
@@ -94,17 +89,47 @@ def translate(filename):
                 n = (word_length - len(instruction) - len(parameter))
                 parameter = fill_with_zeros(parameter, n)
 
-            print key, instruction, parameter
+            print instruction + parameter
             result.append(instruction + parameter)
     return result
 
-def main():
-    trans = translate(input_filename)
-    f = open(output_filename, 'w')
+
+def usage():
+    print 'Usage: Translator.py -n <word length> -i <inputfile> -o <outputfile>'
+
+
+def main(argv):
+
+    if len(argv) < 6:
+        usage()
+        sys.exit(2)
+
+    try:
+        opts, args = getopt.getopt(argv, "n:i:o:h")
+    except getopt.GetoptError:
+        usage()
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt == '-h':
+            usage()
+            sys.exit(2)
+        elif opt == '-i':
+            input_file = arg
+        elif opt == '-o':
+            output_file = arg
+        elif opt == '-n':
+            word_length = int(arg)
+        else:
+            usage()
+            sys.exit(2)
+
+    trans = translate(input_file, word_length)
+    f = open(output_file, 'w')
     for line in trans:
         f.write(line + '\n')
     f.close()
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
