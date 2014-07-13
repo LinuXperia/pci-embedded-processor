@@ -29,11 +29,19 @@ ENTITY controller_simplified IS
 			ALU_valid: OUT std_logic;
 			ALU_slt: IN std_logic;
 			ALU_enable: OUT std_logic;
-			ALU_cmd: OUT std_logic_vector(2 DOWNTO 0));
+			ALU_cmd: OUT std_logic_vector(2 DOWNTO 0);
+			
+			-- IO
+			IODR_load: OUT STD_LOGIC;
+			IOAR_load: OUT STD_LOGIC;
+			IO_valid: OUT STD_LOGIC;
+			IO_en: OUT STD_LOGIC;
+			IO_rw: OUT STD_LOGIC);
+			
 END ENTITY controller_simplified;
 ------------------------------------------------------------------------------------------------------------------
 ARCHITECTURE RTL OF controller_simplified IS
-	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
+	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s9, s10, s11);
 	SIGNAL current_state, next_state: states;
 	SIGNAL BRANCH_trigger: std_logic;
 BEGIN
@@ -70,6 +78,11 @@ BEGIN
 		ALU_valid <= '0';
 		ALU_enable <= '0';
 		ALU_cmd <= "000";
+		IODR_load <= '0';
+		IOAR_load <= '0';
+		IO_valid <= '0';
+		IO_en <= '0';
+		IO_rw <= '0';
 
 		CASE current_state IS
 			WHEN s0 =>
@@ -86,11 +99,15 @@ BEGIN
 				MEM_valid <= '1';
 				IR_load <= '1';
 				IF (IR_opcode = INC) THEN
-					next_state <= s8;
+					next_state <= s7;
 				ELSIF (IR_opcode = JUMP) THEN
 					next_state <= s10;
 				ELSIF (IR_opcode = BZERO OR IR_opcode = BGREATER OR IR_opcode = BLESS) THEN
 					next_state <= s9;
+				ELSIF (IR_opcode = NOP) THEN
+					next_state <= s0;
+				ELSIF (IR_opcode = WAITT) THEN
+					next_state <= s11;
 				ELSE
 					next_state <= s3;
 				END IF;
@@ -98,6 +115,7 @@ BEGIN
 			WHEN s3 =>
 				IR_valid <= '1';
 				MAR_load <= '1';
+				IOAR_load <= '1';
 				If (IR_opcode = STORE) THEN
 					next_state <= s4;
 				ELSE
@@ -107,24 +125,24 @@ BEGIN
 			WHEN s4 =>
 				ALU_valid <= '1';
 				MDR_load <= '1';
+				IODR_load <= '1';
 				next_state <= s5;
 
 			WHEN s5 =>
 				MEM_en <= '1';
 				MEM_rw <= '1';
+				IO_en <= '1';
+				IO_rw <= '1';
 				next_state <= s0;
 
 			WHEN s6 =>
 				MEM_en <= '1';
+				IO_en <= '1';
 				next_state <= s7;
 
 			WHEN s7 =>
 				MEM_valid <= '1';
-				ALU_enable <= '1';
-				ALU_cmd <= cmdDecode(IR_opcode);
-				next_state <= s0;
-			
-			WHEN s8 =>
+				IO_valid <= '1';
 				ALU_enable <= '1';
 				ALU_cmd <= cmdDecode(IR_opcode);
 				next_state <= s0;
@@ -139,6 +157,10 @@ BEGIN
 			WHEN s10 =>
 				PC_load <= '1';
 				IR_valid <= '1';
+				next_state <= s0;
+			
+			WHEN s11 =>
+				-- como fazer o wait?
 				next_state <= s0;
 				
 		END CASE;
