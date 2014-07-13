@@ -36,7 +36,10 @@ ENTITY controller IS
 			IOAR_load: OUT STD_LOGIC;
 			IO_valid: OUT STD_LOGIC;
 			IO_en: OUT STD_LOGIC;
-			IO_rw: OUT STD_LOGIC);
+			IO_rw: OUT STD_LOGIC;
+
+			-- WAKE
+			WAKE_SIGNAL: IN STD_LOGIC);
 			
 END ENTITY controller;
 ------------------------------------------------------------------------------------------------------------------
@@ -160,8 +163,9 @@ BEGIN
 				next_state <= s0;
 			
 			WHEN s11 =>
-				-- como fazer o wait?
-				next_state <= s0;
+				IF (WAKE_SIGNAL = '1')
+					next_state <= s0;
+				END IF;
 				
 		END CASE;
 	END PROCESS state_machine;
