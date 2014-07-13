@@ -41,7 +41,8 @@ ENTITY controller IS
 			IO_rw: OUT STD_LOGIC;
 
 			-- WAKE
-			nwake: IN STD_LOGIC);
+			nwake: IN STD_LOGIC;
+			waiting: OUT STD_LOGIC);
 			
 END ENTITY controller;
 ------------------------------------------------------------------------------------------------------------------
@@ -61,7 +62,11 @@ BEGIN
 	-- Gera a visualizacao 7seg 
 	state7seg: bcd_to_7seg PORT MAP(state_vector, state_7seg);
 	
+	-- Indicador de se o branch deve ser aceito
 	BRANCH_trigger <= '1' WHEN ((IR_opcode = BZERO AND ALU_zero = '1') OR (IR_opcode = BLESS AND ALU_slt = '1') OR (IR_opcode = BGREATER AND ALU_zero = '0' AND ALU_slt = '0')) ELSE '0';
+	
+	-- Esta em waiting?
+	waiting <= '1' WHEN current_state = s10 ELSE '0';
 	
 	-- Processo que gerencia a transicao do current_state para o next_state
 	-- e a configuracao de reset
