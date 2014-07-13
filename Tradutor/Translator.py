@@ -65,7 +65,7 @@ with open(input_filename) as f:
         if encoded_value[1] is False:
             parameter = bin(int(parameter, 0))[2:]
             if len(instruction) + len(parameter) > word_length:
-                raise ValueError('Word length must be ', word_length, 'bits.')
+                raise ValueError('Word length must be ', word_length, 'bits. On line: ', line)
 
         fill = '0'
 
