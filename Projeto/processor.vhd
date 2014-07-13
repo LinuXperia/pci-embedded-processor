@@ -9,7 +9,8 @@ ENTITY processor IS
 			nwake: IN std_logic;
 			clk_out: BUFFER std_logic;
 			nrst_out: OUT std_logic;
-			wake_out: OUT std_logic);
+			wake_out: OUT std_logic;
+			state_out: OUT std_logic_vector(0 TO 7));
 END ENTITY processor;
 
 ARCHITECTURE processor OF processor IS
@@ -56,7 +57,7 @@ BEGIN
 	clock_divisor : entity work.clock_divisor port map(clk, nrst, clk_out);
 	
 	-- Entidades internas
-	controller : entity work.controller port map(clk_out, nrst, CONTROL_bus, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_slt, ALU_enable, ALU_cmd, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, nwake);
+	controller : entity work.controller port map(clk_out, nrst, CONTROL_bus, state_out, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_slt, ALU_enable, ALU_cmd, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, nwake);
 	memory : entity work.memory port map(clk_out, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, CONTROL_bus);
 	alu : entity work.alu port map(clk_out, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
 	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus);

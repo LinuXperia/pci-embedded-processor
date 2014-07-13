@@ -1,11 +1,13 @@
 ---- Controller --------------------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
 USE work.processor_functions.all;
 ------------------------------------------------------------------------------------------------------------------
 ENTITY controller IS
 	PORT (clk, nrst: IN std_logic;
 			CONTROL_bus: INOUT std_logic_vector(n-1 DOWNTO 0);
+			state_7seg: OUT std_logic_vector(0 TO 7);
 
 			-- IR
 			IR_opcode: IN opcode;
@@ -44,11 +46,21 @@ ENTITY controller IS
 END ENTITY controller;
 ------------------------------------------------------------------------------------------------------------------
 ARCHITECTURE RTL OF controller IS
-	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s9, s10, s11);
+	TYPE states IS (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
 	SIGNAL current_state, next_state: states;
 	SIGNAL BRANCH_trigger: std_logic;
+	SIGNAL state_vector: STD_LOGIC_VECTOR(3 DOWNTO 0);
+	COMPONENT bcd_to_7seg IS
+		PORT (bcd: IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+				output: OUT STD_LOGIC_VECTOR (0 TO 7));
+	END COMPONENT;
 BEGIN
-
+	-- Converte o estado atual para um std_logic_vector com sua posicao na lista
+	state_vector <= std_logic_vector(to_unsigned(states'pos(current_state), 4));
+	
+	-- Gera a visualizacao 7seg 
+	state7seg: bcd_to_7seg PORT MAP(state_vector, state_7seg);
+	
 	BRANCH_trigger <= '1' WHEN ((IR_opcode = BZERO AND ALU_zero = '1') OR (IR_opcode = BLESS AND ALU_slt = '1') OR (IR_opcode = BGREATER AND ALU_zero = '0' AND ALU_slt = '0')) ELSE '0';
 	
 	-- Processo que gerencia a transicao do current_state para o next_state
@@ -104,13 +116,13 @@ BEGIN
 				IF (IR_opcode = INC) THEN
 					next_state <= s7;
 				ELSIF (IR_opcode = JUMP) THEN
-					next_state <= s10;
-				ELSIF (IR_opcode = BZERO OR IR_opcode = BGREATER OR IR_opcode = BLESS) THEN
 					next_state <= s9;
+				ELSIF (IR_opcode = BZERO OR IR_opcode = BGREATER OR IR_opcode = BLESS) THEN
+					next_state <= s8;
 				ELSIF (IR_opcode = NOP) THEN
 					next_state <= s0;
 				ELSIF (IR_opcode = WAITT) THEN
-					next_state <= s11;
+					next_state <= s10;
 				ELSE
 					next_state <= s3;
 				END IF;
@@ -150,19 +162,19 @@ BEGIN
 				ALU_cmd <= cmdDecode(IR_opcode);
 				next_state <= s0;
 
-			WHEN s9 =>
+			WHEN s8 =>
 				IF (BRANCH_trigger = '1') THEN
-					next_state <= s10;
+					next_state <= s9;
 				ELSE
 					next_state <= s0;
 				END IF;
 
-			WHEN s10 =>
+			WHEN s9 =>
 				PC_load <= '1';
 				IR_valid <= '1';
 				next_state <= s0;
 			
-			WHEN s11 =>
+			WHEN s10 =>
 				IF (nwake = '0') THEN
 					next_state <= s0;
 				END IF;
