@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Translator.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Translator.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Translator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="46" selection-start="3613" selection-end="3613" vertical-scroll-proportion="0.6" vertical-offset="1785" max-vertical-offset="2380">
+            <state line="126" column="46" selection-start="3613" selection-end="3613" vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="2380">
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -34,10 +34,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output.txt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="output.txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/output.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="6" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+            <state line="23" column="6" selection-start="305" selection-end="305" vertical-scroll-proportion="0.6571429" vertical-offset="0" max-vertical-offset="595">
               <folding />
             </state>
           </provider>
@@ -46,7 +46,7 @@
       <file leaf-file-name="input.asm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/input.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="5" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+            <state line="33" column="2" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
               <folding />
             </state>
           </provider>
@@ -63,9 +63,9 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/Properties.py" />
-        <option value="$PROJECT_DIR$/input.asm" />
         <option value="$PROJECT_DIR$/output.txt" />
         <option value="$PROJECT_DIR$/Translator.py" />
+        <option value="$PROJECT_DIR$/input.asm" />
       </list>
     </option>
   </component>
@@ -352,24 +352,31 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/input.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="5" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="6" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+        <state line="33" column="2" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Translator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="46" selection-start="3613" selection-end="3613" vertical-scroll-proportion="0.6" vertical-offset="1785" max-vertical-offset="2380">
+        <state line="126" column="46" selection-start="3613" selection-end="3613" vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="2380">
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/outp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="12" selection-start="155" selection-end="155" vertical-scroll-proportion="0.31428573" vertical-offset="0" max-vertical-offset="680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="6" selection-start="305" selection-end="305" vertical-scroll-proportion="0.6571429" vertical-offset="0" max-vertical-offset="595">
+          <folding />
         </state>
       </provider>
     </entry>
