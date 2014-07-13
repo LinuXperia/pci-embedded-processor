@@ -35,6 +35,7 @@ ARCHITECTURE processor OF processor IS
 	SIGNAL PC_inc: std_logic;
 	SIGNAL PC_load: std_logic;
 	SIGNAL PC_valid: std_logic;
+	SIGNAL PC_7seg: std_logic_vector(0 TO 15);
 
 	-- Memory
 	SIGNAL MDR_load: std_logic;
@@ -62,8 +63,8 @@ BEGIN
 	nrst_out <= not nrst;
 	wake_out <= not nwake;
 	hex7 <= "01100001";
-	hex5 <= (OTHERS => '1');
-	hex4 <= (OTHERS => '1');
+	hex5 <= PC_7seg(8 TO 15);
+	hex4 <= PC_7seg(0 TO 7);
 	hex3 <= (OTHERS => '1');
 	hex2 <= (OTHERS => '1');
 	hex1 <= (OTHERS => '1');
@@ -77,6 +78,6 @@ BEGIN
 	memory : entity work.memory port map(clk_out, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, CONTROL_bus);
 	alu : entity work.alu port map(clk_out, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
 	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus);
-	pc : entity work.pc port map(clk_out, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus);
+	pc : entity work.pc port map(clk_out, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus, PC_7seg);
 	io : entity work.io port map(clk_out, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, CONTROL_bus);
 END ARCHITECTURE;
