@@ -3,48 +3,45 @@
 
 > Inspiração: Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology) 
 
-Projeto final da cadeira Prototipação de Circuitos Integrados. POLI/UPE, 2014-1.
+Projeto final da disciplina Prototipação de Circuitos Integrados. POLI/UPE, 2014-1.
 
 ## Introdução
 
-TODO
+O objetivo principal deste projeto é a construção de um µProcessador, que foi feita tendo como base a descrição de um processador no documento "Design Recipes for FPGAs: Using Verilog and VHDL (Embedded Technology)". Como o comportamento do processador desenvolvido é semelhante ao de um processador comum (como o que encontramos em nossos computadores, smartphones, etc), também será possível escrever programas (dado o conjunto de instruções existentes no processador) para serem executados pelo FPGA, claro, após passá-los por um tradutor que os converterá de um código MIPS para linguagem de máquina em binário.
 
 ## Implementação
 ### Modelo Estrutural
 
-TODO
+![Structural Model of the Microprocessor](/structural-model.png "Structural Model of the Microprocessor")
 
 ### Conjunto de Instruções
 
-| Comando			| Opcode (Binário)	|
-|-------------------|-------------------|
-| LOAD endereço		| 0000				|
-| STORE endereço	| 0001				|
-| ADD endereço		| 0010				|
-| SUB endereço		| 0011				|
-| INC				| 0100				|
-| DEC				| 0101				|
-| NOTT				| 0110				|
-| ANDD endereço		| 0111				|
-| ORR endereço		| 1000				|
-| XORR endereço		| 1001				|
-| J endereço		| 1010				|
-| BE endereço		| 1011				|
-| BG endereço		| 1100				|
-| BL endereço		| 1101				|
-| WAIT				| 1110				|
-| NOP				| 1111				|
-
-![Structural Model of the Microprocessor](/structural-model.png?raw=true "Structural Model of the Microprocessor")
+	 	Comando		| 	Opcode (Binário)	
+	 LOAD endereço	| 		0000				  
+	 STORE endereço	| 		0001				  
+	 ADD endereço	| 		0010				  
+	 SUB endereço	| 		0011				  
+	 INC			| 		0100				  
+	 DEC			| 		0101				  
+	 NOTT			| 		0110				  
+	 ANDD endereço	| 		0111				  
+	 ORR endereço	| 		1000				  
+	 XORR endereço	| 		1001				  
+	 J endereço		| 		1010				  
+	 BE endereço	| 		1011				  
+	 BG endereço	| 		1100				  
+	 BL endereço	| 		1101				  
+	 WAITT			| 		1110				  
+	 NOP			| 		1111				
 
 ### Program Counter (PC)
 
-O módulo do PC deve conter 6 'pinos':
-* Clock;
-* Reset ativo em 0;
-* Barramento de entrada e saída (PC_bus, barramento INOUT);
-* Incrementar (PC_inc);
-* Carregar (PC_load);
+O módulo do PC deve conter 6 'pinos':  
+* Clock;  
+* Reset ativo em 0;  
+* Barramento de entrada e saída (PC_bus, barramento INOUT);  
+* Incrementar (PC_inc);  
+* Carregar (PC_load);  
 * Ler (PC_valid, manda o valor do PC pro PC_bus quando ativo, ou Z quando inativo).
 
 Todos devem ser std logic, com exceção do PC_bus, que é std logic vector.
@@ -87,33 +84,32 @@ Na borda de subida do clock, decodifica-se o valor do comando e realiza-se a ope
 
 Os comandos possíveis são:
 
-| Comando	| Operação 													|
-|-----------|-----------------------------------------------------------|
-| 0000 		| LOAD - Carrega o valor do barramento no ACC (ACC = 0 + BUS) 		|
-| 0001 		| ADD - Soma o valor do barramento ao ACC (ACC = ACC + BUS) 		|
-| 0010 		| NOT - Carrega no ACC a negação do valor do barramento (ACC = not BUS) 				|
-| 0011 		| OR - 'Ou' do valor do barramento com o ACC (ACC = ACC or BUS) 	|
-| 0100 		| AND - 'E' do valor do barramento com o ACC (ACC = ACC and BUS) 	|
-| 0101 		| XOR - 'Ou exclusivo' valor do barramento com o ACC (ACC = ACC xor BUS) 	|
-| 0110 		| INC - Incrementa o ACC (ACC = ACC + 1) 							|
-| 0111 		| SUB - Subtrai o valor do barramento do ACC (ACC = ACC - BUS) 		|
-| 1000		| DEC - Decrementa o ACC (ACC = ACC - 1)
+	| Comando	| 		Operação 														|
+	| 0000 		| LOAD - Carrega o valor do barramento no ACC (ACC = 0 + BUS) 			|
+	| 0001 		| ADD - Soma o valor do barramento ao ACC (ACC = ACC + BUS) 			|
+	| 0010 		| NOT - Carrega no ACC a negação do valor do barramento (ACC = not BUS)	|
+	| 0011 		| OR - 'Ou' do valor do barramento com o ACC (ACC = ACC or BUS) 		|
+	| 0100 		| AND - 'E' do valor do barramento com o ACC (ACC = ACC and BUS) 		|
+	| 0101 		| XOR - 'Ou exclusivo' valor do barramento com o ACC (ACC = ACC xor BUS)|
+	| 0110 		| INC - Incrementa o ACC (ACC = ACC + 1) 								|
+	| 0111 		| SUB - Subtrai o valor do barramento do ACC (ACC = ACC - BUS) 			|
+	| 1000		| DEC - Decrementa o ACC (ACC = ACC - 1)								|
 
 ### Memória de Programa/Dados
 
-O módulo de memória deve conter 8 'pinos':
-* Clock;
-* Reset ativo em 0;
-* Ativação de carregamento do registrador MDR (MDR_load, MDR = Memory Data Register);
-* Ativação de carregamento do registrador MAR (MAR_load, MAR = Memory Address Register);
-* Ler (MEM_valid, manda o valor lido na memória (registrador MDR) para o MEM_bus quando ativo, ou Z quando inativo);
-* Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);
-* Flag de ativação da memória (MEM_en);
+O módulo de memória deve conter 8 'pinos':  
+* Clock;  
+* Reset ativo em 0;  
+* Ativação de carregamento do registrador MDR (MDR_load, MDR = Memory Data Register);  
+* Ativação de carregamento do registrador MAR (MAR_load, MAR = Memory Address Register);  
+* Ler (MEM_valid, manda o valor lido na memória (registrador MDR) para o MEM_bus quando ativo, ou Z quando inativo);  
+* Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);  
+* Flag de ativação da memória (MEM_en);  
 * Flag de indicação de escrita ou leituar (MEM_rw, onde '0' indica leitura e '1' escrita);
 
 O bloco de memória tem 3 partes:
-* Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);
-* Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;
+* Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);  
+* Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;  
 * Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.
  
 
@@ -144,21 +140,21 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 
 A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.
 
-![Basic Processor Controller State Machine](/controller-state-machine.png?raw=true "Basic Processor Controller State Machine")
+![Basic Processor Controller State Machine](/controller-state-machine.png "Basic Processor Controller State Machine")
 
 *Acreditamos que a imagem está repleta de erros. Segue uma tabela do que seriam os sinais corretamente ativos em cada estado.*
 
-| Estado 		| Descrição | Sinais Ativos |
-|---|---|---|
-| s0 | Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR. | MAR_load, PC_valid, PC_inc |
-| s1 | Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada). | MEM_en |
-| s2 | Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR | MEM_valid, IR_load |
-| s3 | Envio do valor armazenado em IR para o barramento, carregando no MAR | IR_valid, MAR_load |
-| s4 | Se a instrução for de STORE, armazena o valor do acumulador no MDR | ALU_valid, MDR_load |
-| s5 | Escreve o valor armazenado no MDR na posição de memória armazenada na MAR | MEM_en, MEM_rw |
-| s6 | Se a instrução for diferente de STORE, carrega para MDR o valor da posição de memória armazenado na MAR | MEM_en |
+	|	Estado	| Descrição 																																															|		Sinais Ativos 			|
+	| 	s0 		| Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR.													 	| MAR_load, PC_valid, PC_inc	|
+	| 	s1 		| Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada). | MEM_en 						|
+	| 	s2 		| Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR 																													| MEM_valid, IR_load 			|
+	|	s3 		| Envio do valor armazenado em IR para o barramento, carregando no MAR 																																	| IR_valid, MAR_load 			|
+	| 	s4 		| Se a instrução for de STORE, armazena o valor do acumulador no MDR 																																	| ALU_valid, MDR_load 			|
+	| 	s5 		| Escreve o valor armazenado no MDR na posição de memória armazenada na MAR 																															| MEM_en, MEM_rw 				|
+	| 	s6 		| Se a instrução for diferente de STORE, carrega para MDR o valor da posição de memória armazenado na MAR 																								| MEM_en 						|
+	|	s7		| Escreve 
 
-Os estados s7, s8, s9 e s10 estão incorretos. Após o s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado na MDR para o barramento, e setando o comando da ALU para a operação correspondente. 
+Os estados s7, s8, s9 e s10 estão incorretos. Após o s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado no MDR para o barramento, e setando o comando da ALU para a operação correspondente. 
 
 Isto é, para o estado de LOAD, ativa-se MDR_valid e define-se ALU_cmd <= 000. Para ADD, ativa-se MDR_valid e define-se ALU_cmd <= 001. Assim sucessivamente.
 
