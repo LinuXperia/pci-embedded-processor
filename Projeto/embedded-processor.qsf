@@ -60,9 +60,6 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_location_assignment PIN_G26 -to nrst
 set_location_assignment PIN_D13 -to clk
-set_location_assignment PIN_AD12 -to clk_out
-set_location_assignment PIN_AE22 -to nrst_out
-set_location_assignment PIN_AA20 -to wake_out
 set_location_assignment PIN_W26 -to nwake
 set_global_assignment -name VHDL_FILE bcd_to_7seg.vhd
 set_location_assignment PIN_AF10 -to hex0[0]
@@ -121,4 +118,30 @@ set_location_assignment PIN_L6 -to hex7[3]
 set_location_assignment PIN_L7 -to hex7[4]
 set_location_assignment PIN_P9 -to hex7[5]
 set_location_assignment PIN_N9 -to hex7[6]
+set_location_assignment PIN_Y18 -to green_leds[7]
+set_location_assignment PIN_AA20 -to green_leds[6]
+set_location_assignment PIN_U17 -to green_leds[5]
+set_location_assignment PIN_U18 -to green_leds[4]
+set_location_assignment PIN_V18 -to green_leds[3]
+set_location_assignment PIN_W19 -to green_leds[2]
+set_location_assignment PIN_AF22 -to green_leds[1]
+set_location_assignment PIN_AE22 -to green_leds[0]
+set_location_assignment PIN_AD12 -to red_leds[17]
+set_location_assignment PIN_AE12 -to red_leds[16]
+set_location_assignment PIN_AE13 -to red_leds[15]
+set_location_assignment PIN_AF13 -to red_leds[14]
+set_location_assignment PIN_AE15 -to red_leds[13]
+set_location_assignment PIN_AD15 -to red_leds[12]
+set_location_assignment PIN_AC14 -to red_leds[11]
+set_location_assignment PIN_AA13 -to red_leds[10]
+set_location_assignment PIN_Y13 -to red_leds[9]
+set_location_assignment PIN_AA14 -to red_leds[8]
+set_location_assignment PIN_AC21 -to red_leds[7]
+set_location_assignment PIN_AD21 -to red_leds[6]
+set_location_assignment PIN_AD23 -to red_leds[5]
+set_location_assignment PIN_AD22 -to red_leds[4]
+set_location_assignment PIN_AC22 -to red_leds[3]
+set_location_assignment PIN_AB21 -to red_leds[2]
+set_location_assignment PIN_AF23 -to red_leds[1]
+set_location_assignment PIN_AE23 -to red_leds[0]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -27,12 +27,12 @@ BEGIN
 		VARIABLE contents: memory_array; -- conteudo da memoria
 		
 		-- Definicao do valor padrao da memoria (para simular ROM com programa)
-		CONSTANT program: memory_array := (0 => "000000000011",
-														1 => "001000000100",
-														2 => "000100000101",
-														3 => "000000001100",
-														4 => "000000000011",
-														5 => "000000000000" ,
+		CONSTANT program: memory_array := (0 => "111100000011",
+														1 => "111100000100",
+														2 => "111100000101",
+														3 => "111100001100",
+														4 => "111100000011",
+														5 => "101000000000" ,
 														OTHERS => (OTHERS => '0'));
 	BEGIN
 		-- De forma assincrona, se o reset ficar em nivel 0, reseta os registradores e conteudo da memoria
