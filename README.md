@@ -14,6 +14,8 @@ O objetivo principal deste projeto é a construção de um µProcessador, que fo
 
 ![Structural Model of the Microprocessor](/structural-model.png "Structural Model of the Microprocessor")
 
+O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória. As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. 
+
 ### Conjunto de Instruções
 
 	 	Comando		| 	Opcode (Binário)	
@@ -53,13 +55,13 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 ### Instruction Register
 
-O módulo do IR deve conter 7 'pinos':
-* Clock;
-* Reset;
-* IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);
-* IR_valid (flag que indica se o IR está em operação);
-* IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);
-* IR_opcode (saída com o opcode decodificado);
+O módulo do IR deve conter 7 'pinos':  
+* Clock;  
+* Reset;  
+* IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);  
+* IR_valid (flag que indica se o IR está em operação);  
+* IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);  
+* IR_opcode (saída com o opcode decodificado);  
 * IR_bus (interface para o barramento interno);
 
 A função do IR é decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
@@ -70,12 +72,12 @@ Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para
 
 ### Arithmetic Logic Unit (ALU)
 
-O módulo de ALU deve conter, também, 6 'pinos':
-* Clock;
-* Reset ativo em 0;
-* Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);
-* Comando (função) a ser realizado (ALU_cmd, com 3 bits, sinais de controle que indicam a função (de 8 possíveis) a ser realizada pela ALU);
-* Ler (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);
+O módulo de ALU deve conter, também, 6 'pinos':  
+* Clock;  
+* Reset ativo em 0;  
+* Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);  
+* Comando (função) a ser realizado (ALU_cmd, com 3 bits, sinais de controle que indicam a função (de 8 possíveis) a ser realizada pela ALU);  
+* Ler (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);  
 * Zero (ALU_zero, fica em nível alto quando o resultado da ALU é todo zero).
 
 A ALU possui, como sinal interno, um acumulador ACC do tamanho do barramento do sistema. É ele quem guarda o valor a ser enviado para o barramento quando o sinal ALU_valid está ativo, e é quando este é inteiramente zero que o ALU_zero é ativo. Ao ativar o sinal de reset (colocando-o em 0), reseta-se o valor do registrador interno (ACC) para 0.
@@ -106,8 +108,8 @@ O módulo de memória deve conter 8 'pinos':
 * Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);  
 * Flag de ativação da memória (MEM_en);  
 * Flag de indicação de escrita ou leituar (MEM_rw, onde '0' indica leitura e '1' escrita);
-
-O bloco de memória tem 3 partes:
+  
+O bloco de memória tem 3 partes:  
 * Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);  
 * Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;  
 * Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.
