@@ -11,6 +11,9 @@ END ENTITY processor;
 
 ARCHITECTURE processor OF processor IS
 	SIGNAL CONTROL_bus: std_logic_vector(n-1 DOWNTO 0);
+	
+	-- Clock Divisor
+	SIGNAL clk_out: std_logic;
 
 	-- IR
 	SIGNAL IR_opcode: opcode;
@@ -45,10 +48,11 @@ ARCHITECTURE processor OF processor IS
 	SIGNAL IO_rw: std_logic;
 	
 BEGIN
-	controller : entity work.controller port map(clk, nrst, CONTROL_bus, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_slt, ALU_enable, ALU_cmd, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, WAKE_SIGNAL);
-	memory : entity work.memory port map(clk, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, CONTROL_bus);
-	alu : entity work.alu port map(clk, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
-	ir : entity work.ir port map(clk, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus);
-	pc : entity work.pc port map(clk, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus);
-	io : entity work.io port map(clk, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw);
+	clock_divisor : entity work.clock_divisor port map(clk, nrst, clk_out);
+	controller : entity work.controller port map(clk_out, nrst, CONTROL_bus, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_slt, ALU_enable, ALU_cmd, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, WAKE_SIGNAL);
+	memory : entity work.memory port map(clk_out, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, CONTROL_bus);
+	alu : entity work.alu port map(clk_out, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
+	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus);
+	pc : entity work.pc port map(clk_out, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus);
+	io : entity work.io port map(clk_out, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, CONTROL_bus);
 END ARCHITECTURE;

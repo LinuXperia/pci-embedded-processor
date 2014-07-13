@@ -163,7 +163,7 @@ BEGIN
 				next_state <= s0;
 			
 			WHEN s11 =>
-				IF (WAKE_SIGNAL = '1')
+				IF (WAKE_SIGNAL = '1') THEN
 					next_state <= s0;
 				END IF;
 				
