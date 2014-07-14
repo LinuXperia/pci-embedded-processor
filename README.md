@@ -134,6 +134,15 @@ Desta forma, decidiu-se que ao realizar acesso a memória, o seguinte mapeamento
 
 ![MMIO](/Documentação/MMIO.png "MMIO")
 
+Assim, tanto o módulo de memória quanto a controladora de IO deverão ouvir constantemente pelas requisições, mas só deverão responder caso o endereço a ser operado esteja dentro dos seus limites.
+
+As entradas e saídas da controladora de IO são semelhantes a do módulo de Memória, isto é, possuem a mesma interface. A entidade pode ser visualizada na figura a seguir.
+
+![IO](/Documentação/IO.png "IO")
+
+Estão omitidas dessa imagem, entretanto, as conexões com os dispositivos de entrada e saída propriamente ditos, dado que isto depende de quais serão implementados.
+
+Para a apresentação deste projeto, optou-se pela criação de 3 dispositivos: duas saídas para displays de 7 segmentos e uma entrada a partir de um conjunto de switches. Assim, associou-se a cada dispositivo um endereço (129, 130 e 128, respectivamente), e fez-se o devido tratamento para que as operações de LOAD e STORE realizassem o acesso correto aos mesmos.
 
 ### Unidade de Controle (UC)
 
