@@ -10,7 +10,7 @@ PACKAGE processor_functions IS
 	CONSTANT seg_en: STD_LOGIC := '1';
 	CONSTANT wordlen: integer := 12;
 	CONSTANT oplen: integer := 4;
-	CONSTANT clk_frequency : integer := 6250000;
+	CONSTANT clk_frequency : integer := 1000000;
 	TYPE memory_array IS ARRAY (0 to 2**(n-oplen-1)) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 	CONSTANT reg_zero: unsigned (n-1 DOWNTO 0) := (OTHERS => '0');
 END PACKAGE processor_functions;
@@ -42,17 +42,18 @@ PACKAGE BODY processor_functions IS
 	END FUNCTION decode;
 
 	FUNCTION cmdDecode (op: opcode) RETURN STD_LOGIC_VECTOR IS
-		VARIABLE cmd_out: STD_LOGIC_VECTOR(2 DOWNTO 0);
+		VARIABLE cmd_out: STD_LOGIC_VECTOR(3 DOWNTO 0);
 	BEGIN
 		CASE op IS
-			WHEN LOAD => cmd_out := "000";
-			WHEN ADD => cmd_out := "001";
-			WHEN NOTT => cmd_out := "010";
-			WHEN ORR => cmd_out := "011";
-			WHEN ANDD => cmd_out := "100";
-			WHEN XORR => cmd_out := "101";
-			WHEN INC => cmd_out := "110";
-			WHEN SUB => cmd_out := "111";
+			WHEN LOAD => cmd_out := "0000";
+			WHEN ADD => cmd_out := "0001";
+			WHEN NOTT => cmd_out := "0010";
+			WHEN ORR => cmd_out := "0011";
+			WHEN ANDD => cmd_out := "0100";
+			WHEN XORR => cmd_out := "0101";
+			WHEN INC => cmd_out := "0110";
+			WHEN SUB => cmd_out := "0111";
+			WHEN DEC => cmd_out := "1000";
 			WHEN OTHERS => NULL;
 		END CASE;
 		RETURN cmd_out;

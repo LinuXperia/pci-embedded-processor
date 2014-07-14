@@ -31,7 +31,7 @@ ENTITY controller IS
 			ALU_valid: OUT std_logic;
 			ALU_slt: IN std_logic;
 			ALU_enable: OUT std_logic;
-			ALU_cmd: OUT std_logic_vector(2 DOWNTO 0);
+			ALU_cmd: OUT std_logic_vector(3 DOWNTO 0);
 			
 			-- IO
 			IODR_load: OUT STD_LOGIC;
@@ -98,7 +98,7 @@ BEGIN
 		MEM_rw <= '0';
 		ALU_valid <= '0';
 		ALU_enable <= '0';
-		ALU_cmd <= "000";
+		ALU_cmd <= "0000";
 		IODR_load <= '0';
 		IOAR_load <= '0';
 		IO_valid <= '0';

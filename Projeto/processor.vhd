@@ -56,7 +56,7 @@ ARCHITECTURE processor OF processor IS
 	SIGNAL ALU_slt: std_logic;
 	SIGNAL ALU_valid: std_logic;
 	SIGNAL ALU_enable: std_logic;
-	SIGNAL ALU_cmd: std_logic_vector(2 DOWNTO 0);
+	SIGNAL ALU_cmd: std_logic_vector(3 DOWNTO 0);
 	
 	-- IO
 	SIGNAL IODR_load: std_logic;
