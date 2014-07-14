@@ -11,6 +11,7 @@ PACKAGE processor_functions IS
 	CONSTANT wordlen: integer := 12;
 	CONSTANT oplen: integer := 4;
 	CONSTANT clk_frequency : integer := 1000000;
+	CONSTANT mem_limit: INTEGER := 128;
 	TYPE memory_array IS ARRAY (0 to 2**(n-oplen-1)) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 	CONSTANT reg_zero: unsigned (n-1 DOWNTO 0) := (OTHERS => '0');
 END PACKAGE processor_functions;

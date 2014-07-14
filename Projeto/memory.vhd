@@ -63,7 +63,7 @@ BEGIN
 				mar <= UNSIGNED(MEM_bus(n-oplen-1 DOWNTO 0)); -- Para carregar MAR, basta ler o endereco do que tem no BUS (desconsidera o OPCODE)
 			ELSIF MDR_load = '1' THEN
 				mdr <= MEM_bus; -- Para carregar MDR, basta ler direto do BUS
-			ELSIF MEM_en = '1' THEN
+			ELSIF MEM_en = '1' AND mar < mem_limit THEN
 				IF MEM_rw = '0' THEN
 					mdr <= contents(to_integer(mar)); -- Se for leitura, pega o conteudo do endereco salvo em MAR e manda para MDR
 				ELSE

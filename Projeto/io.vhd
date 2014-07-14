@@ -30,7 +30,7 @@ ARCHITECTURE processor_io OF io IS
 	SIGNAL bcd2: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL bcd3: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL bcd_en: STD_LOGIC;
-	constant mem_limit: INTEGER := 128;
+	
 	COMPONENT bcd_to_7seg IS
 		PORT (bcd: IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 				en: IN std_logic;
