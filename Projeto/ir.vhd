@@ -28,8 +28,9 @@ BEGIN
 	 
 	PROCESS (clk, nrst) IS
 	BEGIN
+		-- Se reset for para 0, o valor do registrador interno deve ir para 0s.
 		IF nrst = '0' THEN
-			IR_internal <= (OTHERS => '0'); -- Se reset for para 0, o valor do registrador interno deve ir para 0s.
+			IR_internal <= (OTHERS => '0'); 
 		ELSIF rising_edge(clk) THEN
 			IF IR_load = '1' THEN
 				IR_internal <= IR_bus; -- na borda de subida, o valor do barramento deve ser enviado para o registrador interno (modo load)

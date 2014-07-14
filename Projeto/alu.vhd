@@ -38,7 +38,7 @@ BEGIN
 		IF nrst = '0' THEN
 			ACC <= (others => '0');
 		-- Se teve uma borda de subida no clock, faz as outras coisas
-		ELSIF (clk'EVENT AND clk='1') THEN
+		ELSIF rising_edge(clk) THEN
 			IF ALU_enable = '1' THEN
 				-- Verifica o comando para poder decidir o que fazer
 				CASE ALU_cmd IS
