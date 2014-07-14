@@ -47,7 +47,7 @@ O módulo do PC deve conter 6 portas de entrada/saída. São elas:
 * Barramento de entrada e saída (PC_bus, barramento INOUT);
 * Sinal de incremento (PC_inc);
 * Carregar (PC_load);
-* Sinal de escrita no barramento (PC_valid, manda o valor do PC pro PC_bus quando ativo, ou Z quando inativo).
+* Permissão de escrita no barramento (PC_valid, manda o valor do PC pro PC_bus quando ativo, ou Z quando inativo).
 
 Todos devem ser do tipo STD LOGIC, com exceção do PC_bus, que é STD LOGIC VECTOR.
 
@@ -65,7 +65,7 @@ O módulo do IR deve conter 6 portas de entrada/saída. São elas:
 * Reset ativo em 0;
 * Barramento de entrada e saída (IR_bus, barramento INOUT);
 * Carregar (IR_load, flag para dizer se o IR está no modo load, carregando a instrução a ser executada pelo processador ou decodificada);
-* Sinal de escrita no barramento (IR_valid, flag que indica se o IR deve escrever seu conteúdo no barramento);
+* Permissão de escrita no barramento (IR_valid, flag que indica se o IR deve escrever seu conteúdo no barramento);
 * Opcode (IR_opcode, saída com o opcode decodificado);
 
 A função do IR é armazenar e decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
@@ -106,23 +106,26 @@ Os comandos possíveis são:
 | 0111 		| SUB - Subtrai o valor do barramento do ACC (ACC = ACC - BUS) 			|
 | 1000		| DEC - Decrementa o ACC (ACC = ACC - 1)								|
 
-### Memória de Programa/Dados
+### Memória de Instruções/Dados
+
+![Memory](/Documentação/Memory.png "Memory")
 
 O módulo de memória deve conter 8 'pinos':  
 * Clock;  
 * Reset ativo em 0;  
 * Ativação de carregamento do registrador MDR (MDR_load, MDR = Memory Data Register);  
 * Ativação de carregamento do registrador MAR (MAR_load, MAR = Memory Address Register);  
-* Ler (MEM_valid, manda o valor lido na memória (registrador MDR) para o MEM_bus quando ativo, ou Z quando inativo);  
+* Permissão de escrita no barramento (MEM_valid, manda o valor lido na memória (registrador MDR) para o MEM_bus quando ativo, ou Z quando inativo);  
 * Barramento de entrada e saída (MEM_bus, barramento INOUT, mesma idéia do PC_bus);  
 * Flag de ativação da memória (MEM_en);  
 * Flag de indicação de escrita ou leituar (MEM_rw, onde '0' indica leitura e '1' escrita);
   
-O bloco de memória tem 3 partes:  
+O módulo de memória é implementado em 3 partes:
 * Carregamento do endereço a ser acessado (vem do BUS e é salvo no MAR);  
 * Leitura ou escrita do dado presente no endereço indicado pelo MAR, utilizando o MDR;  
-* Carregamento dos dados padrões na memória (simulando ROM), toda vez que a mesma é resetada.
+* Carregamento dos dados padrões na memória, toda vez que a mesma é resetada.
  
+
 
 ### Unidade de Controle (UC)
 
