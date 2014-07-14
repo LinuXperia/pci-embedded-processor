@@ -16,6 +16,7 @@ ENTITY io IS
 				-- Switches
 				switches: IN std_logic_vector(17 downto 0);
 				
+				-- Displays
 				hex3: OUT std_logic_vector(0 TO 7);
 				hex2: OUT std_logic_vector(0 TO 7);
 				hex1: OUT std_logic_vector(0 TO 7);
@@ -59,20 +60,23 @@ BEGIN
 			bcd2 <= "0000";
 			bcd3 <= "0000";
 		-- Se teve uma borda de subida no clock, faz as outras coisas
-		ELSIF (clk'EVENT AND clk='1') THEN
+		ELSIF rising_edge(clk) THEN
 			IF IOAR_load = '1' THEN
 				ioar <= UNSIGNED(IO_bus(n-oplen-1 DOWNTO 0)); -- Para carregar IOAR, basta ler o endereco do que tem no BUS (desconsidera o OPCODE)
 			ELSIF IODR_load = '1' THEN
 				iodr <= IO_BUS; -- Para carregar IODR, basta ler direto do BUS
 			ELSIF IO_en = '1' THEN
 				IF IO_rw = '0' THEN
+				-- Porta '0' de IO é de leitura (switches)
 					IF to_integer(ioar) = mem_limit + 0 THEN
 						iodr <= switches(11 downto 0);
 					END IF;
 				ELSE
+					-- Porta '1' de IO é de saída.
 					IF ioar = mem_limit + 1 THEN
 						bcd0 <= iodr(3 downto 0);
 						bcd1 <= iodr(7 downto 4);
+					-- Porta '2' de IO é de saída.
 					ELSIF ioar = mem_limit + 2 THEN
 						bcd2 <= iodr(3 downto 0);
 						bcd3 <= iodr(7 downto 4);

@@ -18,7 +18,7 @@ ARCHITECTURE rtl OF clock_divisor IS
 				IF (nrst = '0') THEN
 					count := 0;
 					clk_out <= '0';
-				ELSIF (clk'EVENT AND clk = '1') THEN
+				ELSIF rising_edge(clk) THEN
 					count := count + 1;
 					IF (count = clk_frequency) THEN
 						clk_out <= NOT clk_out;

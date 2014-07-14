@@ -57,7 +57,7 @@ BEGIN
 			mar <= (OTHERS => '0');
 			contents := program;
 		-- Se teve uma borda de subida no clock, faz as outras coisas
-		ELSIF (clk'EVENT AND clk='1') THEN
+		ELSIF rising_edge(clk) THEN
 			-- A ordem de prioridade eh: Carregamento do MAR, Carregamento do MDR e leitura/escrita
 			IF MAR_load = '1' THEN
 				mar <= UNSIGNED(MEM_bus(n-oplen-1 DOWNTO 0)); -- Para carregar MAR, basta ler o endereco do que tem no BUS (desconsidera o OPCODE)

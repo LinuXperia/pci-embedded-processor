@@ -40,7 +40,7 @@ BEGIN
 		IF nrst = '0' THEN
 			counter <= 0;
 		-- Se teve uma borda de subida no clock, faz as outras coisas
-		ELSIF (clk'EVENT AND clk='1') THEN
+		ELSIF rising_edge(clk) THEN
 			-- A maior prioridade eh do incremento. Se esta em 1, incrementa o PC
 			IF PC_inc = '1' THEN
 				counter <= counter + 1;
