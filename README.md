@@ -62,7 +62,7 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 O módulo do IR deve conter 6 portas de entrada/saída. São elas:  
 * Clock;
-* Reset;
+* Reset ativo em 0;
 * Barramento de entrada e saída (IR_bus, barramento INOUT);
 * Carregar (IR_load, flag para dizer se o IR está no modo load, carregando a instrução a ser executada pelo processador ou decodificada);
 * Sinal de escrita no barramento (IR_valid, flag que indica se o IR deve escrever seu conteúdo no barramento);
