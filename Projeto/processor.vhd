@@ -35,7 +35,6 @@ ARCHITECTURE processor OF processor IS
 	SIGNAL IR_opcode: opcode;
 	SIGNAL IR_load: std_logic;
 	SIGNAL IR_valid: std_logic;
-	SIGNAL IR_address : std_logic;
 	SIGNAL IR_opcode_leds: std_logic_vector(3 DOWNTO 0);
 
 	-- PC
@@ -85,7 +84,7 @@ BEGIN
 	controller : entity work.controller port map(clk_out, nrst, CONTROL_bus, hex6, IR_opcode, IR_load, IR_valid, PC_inc, PC_load, PC_valid, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, ALU_zero, ALU_valid, ALU_slt, ALU_enable, ALU_cmd, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, nwake, green_leds(8));
 	memory : entity work.memory port map(clk_out, nrst, MDR_load, MAR_load, MEM_valid, MEM_en, MEM_rw, CONTROL_bus);
 	alu : entity work.alu port map(clk_out, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
-	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus, IR_opcode_leds);
+	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_opcode, CONTROL_bus, IR_opcode_leds);
 	pc : entity work.pc port map(clk_out, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus, PC_7seg);
 	io : entity work.io port map(clk_out, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, CONTROL_bus, switches, hex3, hex2, hex1, hex0);
 END ARCHITECTURE;
