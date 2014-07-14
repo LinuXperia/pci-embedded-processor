@@ -12,7 +12,7 @@ O objetivo principal deste projeto é a construção de um µProcessador, que fo
 ## Implementação
 ### Modelo Estrutural
 
-![Structural Model of the Microprocessor](/structural-model.png "Structural Model of the Microprocessor")
+![Structural Model of the Microprocessor](/Documentação/ModeloEstrutural.png "Structural Model of the Microprocessor")
 
 O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória. As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. 
 
@@ -144,7 +144,7 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 
 A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.
 
-![Basic Processor Controller State Machine](/controller-state-machine_atual.png "Basic Processor Controller State Machine")
+![Basic Processor Controller State Machine](/Documentação/UnidadeDeControle.png "Basic Processor Controller State Machine")
 
 | Estado	| Descrição 																																																					| Sinais Ativos 				|
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|
