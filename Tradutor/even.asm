@@ -13,7 +13,7 @@ store 22 -- salva resultado
 load 21 -- carrega contador
 dec
 store 21
-jump 3 -- itera
+jump 6 -- itera
 load 22 -- (EXIT) carrega resultado
 store 129 -- print
 jump 0 -- reinicia
