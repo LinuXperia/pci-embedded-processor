@@ -39,15 +39,17 @@ O modelo estrutural do processador implementado neste projeto segue o que está 
 
 ### Program Counter (PC)
 
-O módulo do PC deve conter 6 'pinos':  
-* Clock;  
-* Reset ativo em 0;  
-* Barramento de entrada e saída (PC_bus, barramento INOUT);  
-* Incrementar (PC_inc);  
-* Carregar (PC_load);  
-* Ler (PC_valid, manda o valor do PC pro PC_bus quando ativo, ou Z quando inativo).
+![PC](/Documentação/PC.png "PC")
 
-Todos devem ser std logic, com exceção do PC_bus, que é std logic vector.
+O módulo do PC deve conter 6 portas de entrada/saída. São elas:  
+* Clock;
+* Reset ativo em 0;
+* Barramento de entrada e saída (PC_bus, barramento INOUT);
+* Sinal de incremento (PC_inc);
+* Carregar (PC_load);
+* Sinal de escrita no barramento (PC_valid, manda o valor do PC pro PC_bus quando ativo, ou Z quando inativo).
+
+Todos devem ser do tipo STD LOGIC, com exceção do PC_bus, que é STD LOGIC VECTOR.
 
 Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser colocada em Z imediatamente. Se reset for para 0, o valor do PC deve ir para 0.
 
@@ -56,16 +58,17 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 ### Instruction Register
 
-O módulo do IR deve conter 7 'pinos':  
-* Clock;  
-* Reset;  
-* IR_load (flag para dizer se o IR está no modo load - carregar a instrução a ser executada pelo processador ou decodificada);  
-* IR_valid (flag que indica se o IR está em operação);  
-* IR_address (flag para dizer se o IR está address - carregar o endereço no barramento);  
-* IR_opcode (saída com o opcode decodificado);  
-* IR_bus (interface para o barramento interno);
+![IR](/Documentação/IR.png "IR")
 
-A função do IR é decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
+O módulo do IR deve conter 6 portas de entrada/saída. São elas:  
+* Clock;
+* Reset;
+* Barramento de entrada e saída (IR_bus, barramento INOUT);
+* Carregar (IR_load, flag para dizer se o IR está no modo load, carregando a instrução a ser executada pelo processador ou decodificada);
+* Sinal de escrita no barramento (IR_valid, flag que indica se o IR deve escrever seu conteúdo no barramento);
+* Opcode (IR_opcode, saída com o opcode decodificado);
+
+A função do IR é armazenar e decodificar o *opcode* em forma binária e então passá-lo para o bloco de controle.
 
 Parte assíncrona: se a flag de valid for para 0, a saída no BUS deve ser colocada em Z imediatamente. Se reset for para 0, o valor do registrador interno deve ir para 0s.
 
