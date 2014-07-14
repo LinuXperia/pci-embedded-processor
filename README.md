@@ -181,18 +181,16 @@ A Unidade de controle pode ser implementada por uma máquina de estado que contr
 
 | Estado	| Descrição 																																																					| Sinais Ativos 							|
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| s0 		| Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR.													 							| MAR_load, PC_valid, PC_inc				|
-| s1 		| Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada). 						| MEM_en 									|
-| s2 		| Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR 																																			| MEM_valid, IR_load 						|
+| s0 		| Busca de instrução: manda o valor do PC para o barramento e incrementa o PC. Além disso, carrega o endereço do barramento (valor do PC) no MAR, seguindo para s1.																| MAR_load, PC_valid, PC_inc				|
+| s1 		| Busca de instrução: ativa memória para R/W e configura para leitura (valor no endereço de memória que está em MAR é armazenado em MDR, isto é, carregamos a próxima linha de código a ser executada), seguindo para s2.		| MEM_en 									|
+| s2 		| Busca de instrução/Decodificação: Carregamento do que foi lido na memória para o IR, seguindo para s3.																														| MEM_valid, IR_load 						|
 | s3 		| Envio do valor armazenado em IR para o barramento, carregando no MAR. Se a instrução for NOP, retorna ao estado inicial s0.																									| IR_valid, MAR_load, IOAR_load				|
-| s4 		| Se a instrução for de STORE, armazena o valor do acumulador no MDR 																																							| ALU_valid, MDR_load, IODR_load			|
+| s4 		| Se a instrução for de STORE, armazena o valor do acumulador no MDR e segue para o s5.																																			| ALU_valid, MDR_load, IODR_load			|
 | s5 		| Escreve o valor armazenado no MDR na posição de memória armazenada no MAR. Após isso, retorna ao estado inicial s0. 																											| MEM_en, MEM_rw, IO_en, IO_rw				|
-| s6 		| Se a instrução for diferente LOAD, carrega para MDR o valor da posição de memória armazenado no MAR. 																															| MEM_en, IO_en 							|
-| s7		| Habilita a memória para leitura e resgata o valor que está na posição indicada no MAR. Após isso, retorna ao estado inicial s0.																								| MEM_valid, IO_valid, ALU_enable, ALU_cmd	|
-| s8		| Se, no estado S3, a instrução for BLESS, BGREATER ou BZERO, e o BRANCH_Trigger estiver ativo, é carregado no PC a instrução da posição de memória indicada pelo IR.															| -											|
-| s9		| Se, no estado S3, a instrução for JUMP, neste estado é carregado o valor do PC com a instrução que está na posição de memória indicada pelo IR. Após isso, retorna ao estado inicial s0.										| IR_valid, PC_load							|
+| s6 		| Carrega para MDR o valor da posição de memória armazenado no MAR e segue para o estado s7. 																																	| MEM_en, IO_en 							|
+| s7		| Habilita a memória para escrita no barramento e resgata o valor que está no MDR. Ativa, também, a ALU com a operação a ser realizada. Após isso, retorna ao estado inicial s0.												| MEM_valid, IO_valid, ALU_enable, ALU_cmd	|
+| s8		| Se, no estado S3, a instrução for BLESS, BGREATER ou BZERO, e o BRANCH_Trigger estiver ativo, se segue para o estado s9, caso contrário, retorna-se ao s0.																	| -											|
+| s9		| Realiza o JUMP, carregando no PC a instrução da posição de memória indicada pelo IR. Após isso, retorna ao estado inicial s0.										| IR_valid, PC_load											|											|
 | s10		| Se, no estado S3, a instrução for WAIT, o processador espera até que seja recebido um sinal de WAKE para que ele retorne ao estado 0, continuando o fluxo de buscas de instruções. Após isso, retorna ao estado inicial s0.	| WAITING									|
 
-Após o estado s6, cria-se um novo estado para cada operação possível que depende da ALU, ativando o flag que envia o valor armazenado no MDR para o barramento, e setando o comando da ALU para a operação correspondente. 
-
-Isto é, para o estado de LOAD, ativa-se MDR_valid e define-se ALU_cmd <= 000. Para ADD, ativa-se MDR_valid e define-se ALU_cmd <= 001. Assim sucessivamente.
+Percebe-se a utilização da função cmdDecode, onde é realizada a conversão do opcode da instrução a ser realizada para o comando a ser executado pela ALU.
