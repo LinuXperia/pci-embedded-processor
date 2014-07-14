@@ -3,32 +3,32 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
     <title>µPCI by nestortmj</title>
   </head>
 
   <body>
-
     <header>
-      <div class="container">
+      <div class="inner">
         <h1>µPCI</h1>
         <h2>Implementação em VHDL de um microcontrolador simplificado</h2>
-
-        <section id="downloads">
-          <a href="https://github.com/nestortmj/pci-embedded-processor/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/nestortmj/pci-embedded-processor/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/nestortmj/pci-embedded-processor" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+        <a href="https://github.com/nestortmj/pci-embedded-processor" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
 
-    <div class="container">
-      <section id="main_content">
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a name="%C2%B5pci" class="anchor" href="#%C2%B5pci"><span class="octicon octicon-link"></span></a>µPCI</h1>
 
 <blockquote>
@@ -48,9 +48,11 @@
 <h3>
 <a name="modelo-estrutural" class="anchor" href="#modelo-estrutural"><span class="octicon octicon-link"></span></a>Modelo Estrutural</h3>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/ModeloEstrutural.png" alt="Structural Model of the Microprocessor" title="Structural Model of the Microprocessor"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/ModeloEstrutural.png" alt="Structural Model of the Microprocessor" title="Structural Model of the Microprocessor"></p>
 
-<p>O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória. As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. </p>
+<p>O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória.</p>
+
+<p>As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. Nota-se que, além destas, há ainda uma entidade top-level chamada "processor", onde há a instanciação destas como componentes e a conexão dos respectivos sinais.</p>
 
 <h3>
 <a name="conjunto-de-instru%C3%A7%C3%B5es" class="anchor" href="#conjunto-de-instru%C3%A7%C3%B5es"><span class="octicon octicon-link"></span></a>Conjunto de Instruções</h3>
@@ -86,7 +88,7 @@
 <td>0101</td>
 </tr>
 <tr>
-<td>NOTT</td>
+<td>NOTT endereço</td>
 <td>0110</td>
 </tr>
 <tr>
@@ -129,7 +131,7 @@
 </table><h3>
 <a name="program-counter-pc" class="anchor" href="#program-counter-pc"><span class="octicon octicon-link"></span></a>Program Counter (PC)</h3>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/PC.png" alt="PC" title="PC"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/PC.png" alt="PC" title="PC"></p>
 
 <p>O módulo do PC deve conter 6 portas de entrada/saída. São elas:  </p>
 
@@ -149,7 +151,7 @@
 <h3>
 <a name="instruction-register" class="anchor" href="#instruction-register"><span class="octicon octicon-link"></span></a>Instruction Register</h3>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/IR.png" alt="IR" title="IR"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/IR.png" alt="IR" title="IR"></p>
 
 <p>O módulo do IR deve conter 6 portas de entrada/saída. São elas:  </p>
 
@@ -169,7 +171,7 @@
 <h3>
 <a name="arithmetic-logic-unit-alu" class="anchor" href="#arithmetic-logic-unit-alu"><span class="octicon octicon-link"></span></a>Arithmetic Logic Unit (ALU)</h3>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/ALU.png" alt="ALU" title="ALU"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/ALU.png" alt="ALU" title="ALU"></p>
 
 <p>O módulo de ALU (que compreende, na verdade, a ALU propriamente dita e o registrador ACC) contém 7 portas de entrada/saída. São elas:  </p>
 
@@ -234,7 +236,7 @@
 </table><h3>
 <a name="mem%C3%B3ria-de-instru%C3%A7%C3%B5esdados" class="anchor" href="#mem%C3%B3ria-de-instru%C3%A7%C3%B5esdados"><span class="octicon octicon-link"></span></a>Memória de Instruções/Dados</h3>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/Memory.png" alt="Memory" title="Memory"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/Memory.png" alt="Memory" title="Memory"></p>
 
 <p>O módulo de memória deve conter 8 'pinos':  </p>
 
@@ -269,13 +271,13 @@
 
 <p>Desta forma, decidiu-se que ao realizar acesso a memória, o seguinte mapeamento seria feito:</p>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/MMIO.png" alt="MMIO" title="MMIO"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/MMIO.png" alt="MMIO" title="MMIO"></p>
 
 <p>Assim, tanto o módulo de memória quanto a controladora de IO deverão ouvir constantemente pelas requisições, mas só deverão responder caso o endereço a ser operado esteja dentro dos seus limites.</p>
 
 <p>As entradas e saídas da controladora de IO são semelhantes a do módulo de Memória, isto é, possuem a mesma interface. A entidade pode ser visualizada na figura a seguir.</p>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/IO.png" alt="IO" title="IO"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/IO.png" alt="IO" title="IO"></p>
 
 <p>Estão omitidas dessa imagem, entretanto, as conexões com os dispositivos de entrada e saída propriamente ditos, dado que isto depende de quais serão implementados.</p>
 
@@ -315,7 +317,7 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 <li>WAKE_signal (novo sinal, de entrada, que serve para sair do estado de WAIT)</li>
 </ul><p>A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.</p>
 
-<p><img src="/Documenta%C3%A7%C3%A3o/UnidadeDeControle.png" alt="Basic Processor Controller State Machine" title="Basic Processor Controller State Machine"></p>
+<p><img src="/pci-embedded-processor/Documenta%C3%A7%C3%A3o/UnidadeDeControle.png" alt="Basic Processor Controller State Machine" title="Basic Processor Controller State Machine"></p>
 
 <table>
 <thead><tr>
@@ -381,9 +383,34 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 </tr>
 </tbody>
 </table><p>Percebe-se a utilização da função cmdDecode, onde é realizada a conversão do opcode da instrução a ser realizada para o comando a ser executado pela ALU.</p>
-      </section>
+
+<h3>
+<a name="dificuldades" class="anchor" href="#dificuldades"><span class="octicon octicon-link"></span></a>Dificuldades</h3>
+
+<ul>
+<li>A utilização de memória com sinal de reset não pôde ser inferida para memória RAM pelo sintetizador do Quartus II. Assim, tivemos que reduzir a quantidade de bits para que fosse possível gerar uma memória com uma quantidade menor e mais viável de componentes.</li>
+<li>Visualização de sinais internos -- que não são portas da top-level entity -- é complicada: não é possível fazer mapeamento diretamente para leds e switches. A solução mais provável seria a utilização de SignalProbes, mas que só está disponível na versão paga do Quartus II.</li>
+<li>Descrição do IO como Memory Mapped foi, a princípio, complicada.</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/nestortmj/pci-embedded-processor/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/nestortmj/pci-embedded-processor/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/nestortmj/pci-embedded-processor"></a> is maintained by <a href="https://github.com/nestortmj">nestortmj</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    
+  
   </body>
 </html>
