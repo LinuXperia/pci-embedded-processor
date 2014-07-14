@@ -19,6 +19,7 @@ ARCHITECTURE rtl OF pc IS
 	SIGNAL counter_vector: STD_LOGIC_VECTOR(n-1  DOWNTO 0);
 	COMPONENT bcd_to_7seg IS
 		PORT (bcd: IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+				en: IN STD_LOGIC;
 				output: OUT STD_LOGIC_VECTOR (0 TO 7));
 	END COMPONENT;
 BEGIN
@@ -30,8 +31,8 @@ BEGIN
 	counter_vector <= STD_LOGIC_VECTOR(to_unsigned(counter, PC_bus'length));
 	
 	-- Gera a visualizacao 7seg 
-	counter7seg_0: bcd_to_7seg PORT MAP(counter_vector(3 DOWNTO 0), PC_7seg(0 TO 7));
-	counter7seg_1: bcd_to_7seg PORT MAP(counter_vector(7 DOWNTO 4), PC_7seg(8 TO 15));
+	counter7seg_0: bcd_to_7seg PORT MAP(counter_vector(3 DOWNTO 0), seg_en, PC_7seg(0 TO 7));
+	counter7seg_1: bcd_to_7seg PORT MAP(counter_vector(7 DOWNTO 4), seg_en, PC_7seg(8 TO 15));
 	
 	PROCESS (clk, nrst) IS
 	BEGIN

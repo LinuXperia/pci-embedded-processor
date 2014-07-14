@@ -7,6 +7,7 @@ PACKAGE processor_functions IS
 	FUNCTION decode (word: STD_LOGIC_VECTOR) RETURN opcode;
 	FUNCTION cmdDecode (op: opcode) RETURN STD_LOGIC_VECTOR;
 	CONSTANT n: integer := 12;
+	CONSTANT seg_en: STD_LOGIC := '1';
 	CONSTANT wordlen: integer := 12;
 	CONSTANT oplen: integer := 4;
 	CONSTANT clk_frequency : integer := 6250000;

@@ -53,6 +53,7 @@ ARCHITECTURE RTL OF controller IS
 	SIGNAL state_vector: STD_LOGIC_VECTOR(3 DOWNTO 0);
 	COMPONENT bcd_to_7seg IS
 		PORT (bcd: IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+				en: IN std_logic;
 				output: OUT STD_LOGIC_VECTOR (0 TO 7));
 	END COMPONENT;
 BEGIN
@@ -60,7 +61,7 @@ BEGIN
 	state_vector <= std_logic_vector(to_unsigned(states'pos(current_state), 4));
 	
 	-- Gera a visualizacao 7seg 
-	state7seg: bcd_to_7seg PORT MAP(state_vector, state_7seg);
+	state7seg: bcd_to_7seg PORT MAP(state_vector, seg_en, state_7seg);
 	
 	-- Indicador de se o branch deve ser aceito
 	BRANCH_trigger <= '1' WHEN ((IR_opcode = BZERO AND ALU_zero = '1') OR (IR_opcode = BLESS AND ALU_slt = '1') OR (IR_opcode = BGREATER AND ALU_zero = '0' AND ALU_slt = '0')) ELSE '0';
@@ -71,7 +72,7 @@ BEGIN
 	-- Processo que gerencia a transicao do current_state para o next_state
 	-- e a configuracao de reset
 	state_sequence: PROCESS (clk, nrst) BEGIN
-		IF nrst = '0' THEN -- reset assÃƒÆ’Ã‚Â­ncrono
+		IF nrst = '0' THEN -- reset assi­ncrono
 			current_state <= s0;
 		ELSE
 			IF (clk'EVENT AND clk='1') THEN -- mudanca de estado eh sincrona
