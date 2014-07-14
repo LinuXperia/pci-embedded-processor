@@ -20,19 +20,20 @@ ARCHITECTURE rtl OF memory IS
 BEGIN
 	-- Se o MEM_valid = '1', manda o valor do resultado do MDR pro barramento. Caso contrario, manda Z.
 	MEM_bus <= mdr 
-					WHEN MEM_valid = '1' 
+					WHEN MEM_valid = '1' AND mar(7) = '0'  
 						ELSE (others => 'Z');
 						
 	PROCESS (clk, nrst) IS
 		VARIABLE contents: memory_array; -- conteudo da memoria
 		
 		-- Definicao do valor padrao da memoria (para simular ROM com programa)
-		CONSTANT program: memory_array := (0 => "111100000011",
-														1 => "111100000100",
-														2 => "111100000101",
-														3 => "111100001100",
-														4 => "111000000011",
-														5 => "101000000000" ,
+		CONSTANT program: memory_array := (0 => "000010000000",
+														1 => "001000000110",
+														2 => "000110000001",
+														3 => "000110000010",
+														4 => "101000000000",
+														5 => "000000000100",
+														6 => "000000000010",
 														OTHERS => (OTHERS => '0'));
 	BEGIN
 		-- De forma assincrona, se o reset ficar em nivel 0, reseta os registradores e conteudo da memoria

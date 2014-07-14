@@ -77,10 +77,6 @@ BEGIN
 	hex7 <= "01100001";
 	hex5 <= PC_7seg(8 TO 15);
 	hex4 <= PC_7seg(0 TO 7);
-	hex3 <= (OTHERS => '1');
-	hex2 <= (OTHERS => '1');
-	hex1 <= (OTHERS => '1');
-	hex0 <= (OTHERS => '1');
 	
 	-- Divisor de clock
 	clock_divisor : entity work.clock_divisor port map(clk, nrst, clk_out);
@@ -91,5 +87,5 @@ BEGIN
 	alu : entity work.alu port map(clk_out, nrst, ALU_cmd, ALU_zero, ALU_slt, ALU_valid, ALU_enable, CONTROL_bus);
 	ir : entity work.ir port map(clk_out, nrst, IR_load, IR_valid, IR_address, IR_opcode, CONTROL_bus, IR_opcode_leds);
 	pc : entity work.pc port map(clk_out, nrst, PC_inc, PC_load, PC_valid, CONTROL_bus, PC_7seg);
-	io : entity work.io port map(clk_out, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, CONTROL_bus);
+	io : entity work.io port map(clk_out, nrst, IODR_load, IOAR_load, IO_valid, IO_en, IO_rw, CONTROL_bus, switches, hex3, hex2, hex1, hex0);
 END ARCHITECTURE;
