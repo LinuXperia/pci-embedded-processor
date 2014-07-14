@@ -41,7 +41,7 @@ ENTITY controller IS
 			IO_rw: OUT STD_LOGIC;
 
 			-- WAKE
-			nwake: IN STD_LOGIC;
+			WAKE_signal: IN STD_LOGIC;
 			waiting: OUT STD_LOGIC);
 			
 END ENTITY controller;
@@ -75,7 +75,7 @@ BEGIN
 		IF nrst = '0' THEN -- reset assi­ncrono
 			current_state <= s0;
 		ELSE
-			IF (clk'EVENT AND clk='1') THEN -- mudanca de estado eh sincrona
+			IF rising_edge(clk) THEN -- mudanca de estado eh sincrona
 				current_state <= next_state;
 			END IF;
 		END IF;
@@ -180,7 +180,7 @@ BEGIN
 				next_state <= s0;
 			
 			WHEN s10 =>
-				IF (nwake = '0') THEN
+				IF (WAKE_signal = '0') THEN
 					next_state <= s0;
 				END IF;
 				
