@@ -43,6 +43,9 @@ def translate(input_file, word_length):
             line = line.split('--')[0]  # ignore comments
             line = line.strip()  # ignore whitespaces
 
+            if len(line) == 0:
+                continue
+
             numeric_type = ''
             instruction = ''
             parameter = ''
