@@ -52,19 +52,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="multiply.asm" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="multiply.asm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/multiply.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="6" selection-start="396" selection-end="396" vertical-scroll-proportion="0.4" vertical-offset="0" max-vertical-offset="595">
+            <state line="14" column="6" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="even.asm" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="even.asm" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/even.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+            <state line="18" column="6" selection-start="525" selection-end="525" vertical-scroll-proportion="0.51428574" vertical-offset="0" max-vertical-offset="595">
               <folding />
             </state>
           </provider>
@@ -85,8 +85,8 @@
         <option value="$PROJECT_DIR$/input.asm" />
         <option value="$PROJECT_DIR$/Translator.py" />
         <option value="$PROJECT_DIR$/input2.asm" />
-        <option value="$PROJECT_DIR$/even.asm" />
         <option value="$PROJECT_DIR$/multiply.asm" />
+        <option value="$PROJECT_DIR$/even.asm" />
       </list>
     </option>
   </component>
@@ -401,16 +401,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/even.asm">
+    <entry file="file://$PROJECT_DIR$/multiply.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+        <state line="14" column="6" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/multiply.asm">
+    <entry file="file://$PROJECT_DIR$/even.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="6" selection-start="396" selection-end="396" vertical-scroll-proportion="0.4" vertical-offset="0" max-vertical-offset="595">
+        <state line="18" column="6" selection-start="525" selection-end="525" vertical-scroll-proportion="0.51428574" vertical-offset="0" max-vertical-offset="595">
           <folding />
         </state>
       </provider>
