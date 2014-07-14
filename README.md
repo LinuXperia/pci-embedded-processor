@@ -12,9 +12,9 @@ O objetivo principal deste projeto é a construção de um µProcessador, que fo
 ## Implementação
 ### Modelo Estrutural
 
-![Structural Model of the Microprocessor](/Documentação/ModeloEstrutural.png "Structural Model of the Microprocessor")
+![Structural Model of the Microprocessor](/pci-embedded-processor/Documentação/ModeloEstrutural.png "Structural Model of the Microprocessor")
 
-O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória. As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. 
+O modelo estrutural do processador implementado neste projeto segue o que está mostrado na imagem acima. Possui uma Unidade de Controle, um contador de programa, um acumulador, um registrador de dados, um de endereços e um de instruções, uma memória interna e um barramento que passam dados e endereços de memória. As seções abaixo descrevem, com mais detalhes, como foram implementados cada componente. Nota-se que, além destas, há ainda uma entidade top-level chamada "processor", onde há a instanciação destas como componentes e a conexão dos respectivos sinais.
 
 ### Conjunto de Instruções
 
@@ -39,7 +39,7 @@ O modelo estrutural do processador implementado neste projeto segue o que está 
 
 ### Program Counter (PC)
 
-![PC](/Documentação/PC.png "PC")
+![PC](/pci-embedded-processor/Documentação/PC.png "PC")
 
 O módulo do PC deve conter 6 portas de entrada/saída. São elas:  
 * Clock;
@@ -58,7 +58,7 @@ Parte síncrona: na borda de subida, verifica-se as flags inc e load, em ordem d
 
 ### Instruction Register
 
-![IR](/Documentação/IR.png "IR")
+![IR](/pci-embedded-processor/Documentação/IR.png "IR")
 
 O módulo do IR deve conter 6 portas de entrada/saída. São elas:  
 * Clock;
@@ -76,7 +76,7 @@ Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para
 
 ### Arithmetic Logic Unit (ALU)
 
-![ALU](/Documentação/ALU.png "ALU")
+![ALU](/pci-embedded-processor/Documentação/ALU.png "ALU")
 
 O módulo de ALU (que compreende, na verdade, a ALU propriamente dita e o registrador ACC) contém 7 portas de entrada/saída. São elas:  
 
@@ -108,7 +108,7 @@ Os comandos possíveis são:
 
 ### Memória de Instruções/Dados
 
-![Memory](/Documentação/Memory.png "Memory")
+![Memory](/pci-embedded-processor/Documentação/Memory.png "Memory")
 
 O módulo de memória deve conter 8 'pinos':  
 * Clock;  
@@ -132,13 +132,13 @@ A implementação do IO é feita com inspiração em Memory Mapped I/O, onde pod
 
 Desta forma, decidiu-se que ao realizar acesso a memória, o seguinte mapeamento seria feito:
 
-![MMIO](/Documentação/MMIO.png "MMIO")
+![MMIO](/pci-embedded-processor/Documentação/MMIO.png "MMIO")
 
 Assim, tanto o módulo de memória quanto a controladora de IO deverão ouvir constantemente pelas requisições, mas só deverão responder caso o endereço a ser operado esteja dentro dos seus limites.
 
 As entradas e saídas da controladora de IO são semelhantes a do módulo de Memória, isto é, possuem a mesma interface. A entidade pode ser visualizada na figura a seguir.
 
-![IO](/Documentação/IO.png "IO")
+![IO](/pci-embedded-processor/Documentação/IO.png "IO")
 
 Estão omitidas dessa imagem, entretanto, as conexões com os dispositivos de entrada e saída propriamente ditos, dado que isto depende de quais serão implementados.
 
@@ -177,7 +177,7 @@ Dessa forma, a Unidade de Controle deve ter um clock e reset, conexão com o bar
 
 A Unidade de controle pode ser implementada por uma máquina de estado que controla o fluxo de sinais no processador. O diagrama da máquina de estado pode ser conferido na imagem abaixo.
 
-![Basic Processor Controller State Machine](/Documentação/UnidadeDeControle.png "Basic Processor Controller State Machine")
+![Basic Processor Controller State Machine](/pci-embedded-processor/Documentação/UnidadeDeControle.png "Basic Processor Controller State Machine")
 
 | Estado	| Descrição 																																																					| Sinais Ativos 							|
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
@@ -194,3 +194,9 @@ A Unidade de controle pode ser implementada por uma máquina de estado que contr
 | s10		| Se, no estado S3, a instrução for WAIT, o processador espera até que seja recebido um sinal de WAKE para que ele retorne ao estado 0, continuando o fluxo de buscas de instruções. Após isso, retorna ao estado inicial s0.	| WAITING									|
 
 Percebe-se a utilização da função cmdDecode, onde é realizada a conversão do opcode da instrução a ser realizada para o comando a ser executado pela ALU.
+
+### Dificuldades
+
+* A utilização de memória com sinal de reset não pôde ser inferida para memória RAM pelo sintetizador do Quartus II. Assim, tivemos que reduzir a quantidade de bits para que fosse possível gerar uma memória com uma quantidade menor e mais viável de componentes.
+* Visualização de sinais internos -- que não são portas da top-level entity -- é complicada: não é possível fazer mapeamento diretamente para leds e switches. A solução mais provável seria a utilização de SignalProbes, mas que só está disponível na versão paga do Quartus II.
+* Descrição do IO como Memory Mapped foi, a princípio, complicada.
