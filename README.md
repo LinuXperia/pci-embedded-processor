@@ -28,7 +28,7 @@ As seções abaixo descrevem, com mais detalhes, como foram implementados cada c
 | SUB endereço		| 0011				|
 | INC				| 0100				|
 | DEC				| 0101				|
-| NOTT				| 0110				|
+| NOTT endereco		| 0110				|
 | ANDD endereço		| 0111				|
 | ORR endereço		| 1000				|
 | XORR endereço		| 1001				|
