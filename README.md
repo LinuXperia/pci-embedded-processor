@@ -126,6 +126,14 @@ O módulo de memória é implementado em 3 partes:
 * Carregamento dos dados padrões na memória, toda vez que a mesma é resetada.
  
 
+### Controladora de IO
+
+A implementação do IO é feita com inspiração em Memory Mapped I/O, onde pode-se ler mais sobre na página da Wikipedia: http://en.wikipedia.org/wiki/Memory-mapped_I/O. 
+
+Desta forma, decidiu-se que ao realizar acesso a memória, o seguinte mapeamento seria feito:
+
+![MMIO](/Documentação/MMIO.png "MMIO")
+
 
 ### Unidade de Controle (UC)
 
