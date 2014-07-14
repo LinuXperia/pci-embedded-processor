@@ -76,15 +76,19 @@ Parte síncrona: na borda de subida, o valor do barramento deve ser enviado para
 
 ### Arithmetic Logic Unit (ALU)
 
-O módulo de ALU deve conter, também, 6 'pinos':  
-* Clock;  
-* Reset ativo em 0;  
-* Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);  
-* Comando (função) a ser realizado (ALU_cmd, com 3 bits, sinais de controle que indicam a função (de 8 possíveis) a ser realizada pela ALU);  
-* Ler (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);  
-* Zero (ALU_zero, fica em nível alto quando o resultado da ALU é todo zero).
+![ALU](/Documentação/ALU.png "ALU")
 
-A ALU possui, como sinal interno, um acumulador ACC do tamanho do barramento do sistema. É ele quem guarda o valor a ser enviado para o barramento quando o sinal ALU_valid está ativo, e é quando este é inteiramente zero que o ALU_zero é ativo. Ao ativar o sinal de reset (colocando-o em 0), reseta-se o valor do registrador interno (ACC) para 0.
+O módulo de ALU (que compreende, na verdade, a ALU propriamente dita e o registrador ACC) contém 7 portas de entrada/saída. São elas:  
+
+* Clock;
+* Reset ativo em 0;
+* Barramento de entrada e saída (ALU_bus, barramento INOUT, mesma idéia do PC_bus);
+* Comando (função) a ser realizado (ALU_cmd, com 4 bits, sinais de controle que indicam a função a ser realizada pela ALU);
+* Sinal de escrita no barramento (ALU_valid, manda o valor da ALU pro ALU_bus quando ativo, ou Z quando inativo);  
+* ACC é zero (ALU_zero, fica em nível alto quando o valor armazenado no ACC é igual a zero).
+* ACC é menor que zero (ALU_slt), fica em nível alto quando o valor armazenado no ACC é menor que zero).
+
+Como dito, a ALU possui, internamente, um acumulador ACC do tamanho do barramento do sistema. É ele quem guarda o valor a ser enviado para o barramento quando o sinal ALU_valid está ativo, e é quando este é inteiramente zero que o ALU_zero é ativo. Ao ativar o sinal de reset (colocando-o em 0), reseta-se o valor do registrador interno (ACC) para 0.
 
 Na borda de subida do clock, decodifica-se o valor do comando e realiza-se a operação em cima do ACC.
 
